@@ -6,7 +6,7 @@
 //  Copyright © 2017 GunGraveKoga. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <ObjFW/ObjFW.h>
 
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
