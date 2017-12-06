@@ -7,13 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		140755401FD73434007BF8B0 /* GFWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 1407553F1FD73434007BF8B0 /* GFWindow.m */; };
-		140755431FD73453007BF8B0 /* GFEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 140755421FD73453007BF8B0 /* GFEvent.m */; };
+		140755401FD73434007BF8B0 /* GlfwWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 1407553F1FD73434007BF8B0 /* GlfwWindow.m */; };
+		140755431FD73453007BF8B0 /* GlfwEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 140755421FD73453007BF8B0 /* GlfwEvent.m */; };
 		140755451FD734DB007BF8B0 /* sokol_imp.m in Sources */ = {isa = PBXBuildFile; fileRef = 140755441FD734DB007BF8B0 /* sokol_imp.m */; };
-		140755491FD75ED9007BF8B0 /* GFEventHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 140755481FD75ED9007BF8B0 /* GFEventHandler.m */; };
 		EDF8C8F11FD70E16002CF9DC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EDF8C8F01FD70E16002CF9DC /* main.m */; };
 		EDF8C8F91FD70F08002CF9DC /* ObjFW.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF8C8F81FD70F08002CF9DC /* ObjFW.framework */; };
-		EDF8C8FC1FD70F2C002CF9DC /* GFApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = EDF8C8FB1FD70F2C002CF9DC /* GFApplication.m */; };
+		EDF8C8FC1FD70F2C002CF9DC /* GlfwApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = EDF8C8FB1FD70F2C002CF9DC /* GlfwApplication.m */; };
+		EDF8C9001FD7EB3F002CF9DC /* GlfwWindowManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EDF8C8FF1FD7EB3F002CF9DC /* GlfwWindowManager.m */; };
+		EDF8C9071FD8326A002CF9DC /* GlfwGeometry.m in Sources */ = {isa = PBXBuildFile; fileRef = EDF8C9061FD8326A002CF9DC /* GlfwGeometry.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -29,20 +30,21 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		1407553E1FD73434007BF8B0 /* GFWindow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GFWindow.h; sourceTree = "<group>"; };
-		1407553F1FD73434007BF8B0 /* GFWindow.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GFWindow.m; sourceTree = "<group>"; };
-		140755411FD73453007BF8B0 /* GFEvent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GFEvent.h; sourceTree = "<group>"; };
-		140755421FD73453007BF8B0 /* GFEvent.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GFEvent.m; sourceTree = "<group>"; };
+		1407553E1FD73434007BF8B0 /* GlfwWindow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GlfwWindow.h; sourceTree = "<group>"; };
+		1407553F1FD73434007BF8B0 /* GlfwWindow.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GlfwWindow.m; sourceTree = "<group>"; };
+		140755411FD73453007BF8B0 /* GlfwEvent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GlfwEvent.h; sourceTree = "<group>"; };
+		140755421FD73453007BF8B0 /* GlfwEvent.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GlfwEvent.m; sourceTree = "<group>"; };
 		140755441FD734DB007BF8B0 /* sokol_imp.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = sokol_imp.m; sourceTree = "<group>"; };
-		140755461FD74A38007BF8B0 /* GFGeometry.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GFGeometry.h; sourceTree = "<group>"; };
-		140755471FD75ED9007BF8B0 /* GFEventHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GFEventHandler.h; sourceTree = "<group>"; };
-		140755481FD75ED9007BF8B0 /* GFEventHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GFEventHandler.m; sourceTree = "<group>"; };
+		140755461FD74A38007BF8B0 /* GlfwGeometry.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GlfwGeometry.h; sourceTree = "<group>"; };
 		EDF8C8ED1FD70E16002CF9DC /* ObjGLFW */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ObjGLFW; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDF8C8F01FD70E16002CF9DC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		EDF8C8F81FD70F08002CF9DC /* ObjFW.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ObjFW.framework; path = ../../../Library/Frameworks/ObjFW.framework; sourceTree = "<group>"; };
-		EDF8C8FA1FD70F2C002CF9DC /* GFApplication.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GFApplication.h; sourceTree = "<group>"; };
-		EDF8C8FB1FD70F2C002CF9DC /* GFApplication.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GFApplication.m; sourceTree = "<group>"; };
+		EDF8C8FA1FD70F2C002CF9DC /* GlfwApplication.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GlfwApplication.h; sourceTree = "<group>"; };
+		EDF8C8FB1FD70F2C002CF9DC /* GlfwApplication.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GlfwApplication.m; sourceTree = "<group>"; };
 		EDF8C8FD1FD713BF002CF9DC /* sokol_time.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sokol_time.h; sourceTree = "<group>"; };
+		EDF8C8FE1FD7EB3F002CF9DC /* GlfwWindowManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GlfwWindowManager.h; sourceTree = "<group>"; };
+		EDF8C8FF1FD7EB3F002CF9DC /* GlfwWindowManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GlfwWindowManager.m; sourceTree = "<group>"; };
+		EDF8C9061FD8326A002CF9DC /* GlfwGeometry.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GlfwGeometry.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,15 +81,16 @@
 			children = (
 				EDF8C8FD1FD713BF002CF9DC /* sokol_time.h */,
 				EDF8C8F01FD70E16002CF9DC /* main.m */,
-				140755461FD74A38007BF8B0 /* GFGeometry.h */,
-				EDF8C8FA1FD70F2C002CF9DC /* GFApplication.h */,
-				EDF8C8FB1FD70F2C002CF9DC /* GFApplication.m */,
-				140755471FD75ED9007BF8B0 /* GFEventHandler.h */,
-				140755481FD75ED9007BF8B0 /* GFEventHandler.m */,
-				1407553E1FD73434007BF8B0 /* GFWindow.h */,
-				1407553F1FD73434007BF8B0 /* GFWindow.m */,
-				140755411FD73453007BF8B0 /* GFEvent.h */,
-				140755421FD73453007BF8B0 /* GFEvent.m */,
+				140755461FD74A38007BF8B0 /* GlfwGeometry.h */,
+				EDF8C9061FD8326A002CF9DC /* GlfwGeometry.m */,
+				EDF8C8FA1FD70F2C002CF9DC /* GlfwApplication.h */,
+				EDF8C8FB1FD70F2C002CF9DC /* GlfwApplication.m */,
+				EDF8C8FE1FD7EB3F002CF9DC /* GlfwWindowManager.h */,
+				EDF8C8FF1FD7EB3F002CF9DC /* GlfwWindowManager.m */,
+				1407553E1FD73434007BF8B0 /* GlfwWindow.h */,
+				1407553F1FD73434007BF8B0 /* GlfwWindow.m */,
+				140755411FD73453007BF8B0 /* GlfwEvent.h */,
+				140755421FD73453007BF8B0 /* GlfwEvent.m */,
 				140755441FD734DB007BF8B0 /* sokol_imp.m */,
 			);
 			path = ObjGLFW;
@@ -158,12 +161,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EDF8C9001FD7EB3F002CF9DC /* GlfwWindowManager.m in Sources */,
 				EDF8C8F11FD70E16002CF9DC /* main.m in Sources */,
-				EDF8C8FC1FD70F2C002CF9DC /* GFApplication.m in Sources */,
-				140755491FD75ED9007BF8B0 /* GFEventHandler.m in Sources */,
+				EDF8C8FC1FD70F2C002CF9DC /* GlfwApplication.m in Sources */,
+				EDF8C9071FD8326A002CF9DC /* GlfwGeometry.m in Sources */,
 				140755451FD734DB007BF8B0 /* sokol_imp.m in Sources */,
-				140755401FD73434007BF8B0 /* GFWindow.m in Sources */,
-				140755431FD73453007BF8B0 /* GFEvent.m in Sources */,
+				140755401FD73434007BF8B0 /* GlfwWindow.m in Sources */,
+				140755431FD73453007BF8B0 /* GlfwEvent.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
