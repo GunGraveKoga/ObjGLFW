@@ -7,6 +7,9 @@
 //
 
 #import "GFApplication.h"
+#import "GFEventHandler.h"
+#import "GFWindow.h"
+#import "GFEvent.h"
 
 #if defined(OF_WINDOWS)
 # include <windows.h>
@@ -14,6 +17,9 @@
 extern int _CRT_glob;
 extern void __wgetmainargs(int *, wchar_t ***, wchar_t ***, int, int *);
 #endif
+
+#include <GLFW/glfw3.h>
+#include "sokol_time.h"
 
 @interface OFApplication ()
 - (instancetype)of_init OF_METHOD_FAMILY(init);
@@ -45,6 +51,8 @@ int
 glfw_application_main(int *argc, char **argv[],
                     id <OFApplicationDelegate> delegate) {
     
+    stm_setup();
+    glfwInit();
     
 #ifdef OF_WINDOWS
     wchar_t **wargv, **wenvp;
@@ -109,8 +117,66 @@ glfw_application_main(int *argc, char **argv[],
 }
 #endif
 
-- (void)glfw_run {
+- (instancetype)of_init {
+    self = [super of_init];
     
+    _eventHandler = [[GFEventHandler alloc] init];
+    
+    return self;
+}
+
+- (void)glfw_run {
+    void *pool = objc_autoreleasePoolPush();
+    OFRunLoop *runLoop;
+    
+#ifdef OF_HAVE_THREADS
+    [OFThread of_createMainThread];
+    runLoop = [OFRunLoop currentRunLoop];
+#else
+    runLoop = [[[OFRunLoop alloc] init] autorelease];
+#endif
+    
+    [OFRunLoop of_setMainRunLoop: runLoop];
+    
+    objc_autoreleasePoolPop(pool);
+    
+    pool = objc_autoreleasePoolPush();
+    [_delegate applicationDidFinishLaunching];
+    objc_autoreleasePoolPop(pool);
+    
+    _isActive = true;
+    
+    GLFWmonitor *mainMonitor = glfwGetPrimaryMonitor();
+    const GLFWvidmode *vmode = glfwGetVideoMode(mainMonitor);
+    
+    double expectedLooptTime = (1000 / vmode->refreshRate); //expected loop time in ms
+    uint64_t currentTime = 0;
+    
+    while (_isActive) {
+        pool = objc_autoreleasePoolPush();
+        uint64_t elapsedTime = stm_laptime(&currentTime);
+        
+        glfwPollEvents();
+        
+        /*
+         * processing events
+         */
+        
+        
+        /*
+         * draw
+         */
+        
+        elapsedTime = stm_laptime(&currentTime);
+        
+        double runloopTimeInterval = expectedLooptTime - stm_ms(elapsedTime);
+        
+        [runLoop runUntilDate:[OFDate dateWithTimeIntervalSinceNow:runloopTimeInterval * 1000]];
+        
+        objc_autoreleasePoolPop(pool);
+
+        
+    }
 }
 
 @end

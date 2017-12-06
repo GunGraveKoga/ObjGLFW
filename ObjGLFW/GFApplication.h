@@ -22,7 +22,15 @@ OF_ASSUME_NONNULL_BEGIN
 # define OF_HAVE_SANDBOX
 #endif
 
+@class GFEventHandler;
+
 @interface GFApplication : OFApplication
+{
+    bool _isActive;
+    GFEventHandler *_eventHandler;
+}
+
+@property (nonatomic, readonly, retain) GFEventHandler *eventHandler;
 
 @end
 
