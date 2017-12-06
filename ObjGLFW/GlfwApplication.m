@@ -49,7 +49,7 @@ extern void __wgetmainargs(int *, wchar_t ***, wchar_t ***, int, int *);
 - (instancetype)glfw_init;
 @end
 
-static GlfwApplication *GFApp = nil;
+static GlfwApplication *GlfwApp = nil;
 
 int
 glfw_application_main(int *argc, char **argv[],
@@ -65,20 +65,20 @@ glfw_application_main(int *argc, char **argv[],
     
     [[OFLocalization alloc] init];
     
-    GFApp = [[GlfwApplication alloc] of_init];
+    GlfwApp = [[GlfwApplication alloc] of_init];
     
-    [GFApp of_setArgumentCount: argc
+    [GlfwApp of_setArgumentCount: argc
              andArgumentValues: argv];
     
 #ifdef OF_WINDOWS
     __wgetmainargs(&wargc, &wargv, &wenvp, _CRT_glob, &si);
-    [GFApp of_setArgumentCount: wargc
+    [GlfwApp of_setArgumentCount: wargc
          andWideArgumentValues: wargv];
 #endif
     
-    [GFApp setDelegate: delegate];
+    [GlfwApp setDelegate: delegate];
     
-    [GFApp glfw_run];
+    [GlfwApp glfw_run];
     
     [delegate release];
     
@@ -101,25 +101,25 @@ glfw_application_main(int *argc, char **argv[],
 }
 
 + (OFApplication *)sharedApplication {
-    return GFApp;
+    return GlfwApp;
 }
 
 + (OFString *)programName {
-    return [GFApp programName];
+    return [GlfwApp programName];
 }
 
 + (OFArray<OFString *> *)arguments {
-    return [GFApp arguments];
+    return [GlfwApp arguments];
 }
 
 + (OFDictionary<OFString *,OFString *> *)environment {
-    return [GFApp environment];
+    return [GlfwApp environment];
 }
 
 #ifdef OF_HAVE_SANDBOX
 + (void)activateSandbox:(OFSandbox *)sandbox
 {
-    [GFApp activateSandbox: sandbox];
+    [GlfwApp activateSandbox: sandbox];
 }
 #endif
 

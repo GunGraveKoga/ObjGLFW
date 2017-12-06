@@ -14,7 +14,6 @@
 		EDF8C8F91FD70F08002CF9DC /* ObjFW.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF8C8F81FD70F08002CF9DC /* ObjFW.framework */; };
 		EDF8C8FC1FD70F2C002CF9DC /* GlfwApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = EDF8C8FB1FD70F2C002CF9DC /* GlfwApplication.m */; };
 		EDF8C9001FD7EB3F002CF9DC /* GlfwWindowManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EDF8C8FF1FD7EB3F002CF9DC /* GlfwWindowManager.m */; };
-		EDF8C9071FD8326A002CF9DC /* GlfwGeometry.m in Sources */ = {isa = PBXBuildFile; fileRef = EDF8C9061FD8326A002CF9DC /* GlfwGeometry.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -44,7 +43,6 @@
 		EDF8C8FD1FD713BF002CF9DC /* sokol_time.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sokol_time.h; sourceTree = "<group>"; };
 		EDF8C8FE1FD7EB3F002CF9DC /* GlfwWindowManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GlfwWindowManager.h; sourceTree = "<group>"; };
 		EDF8C8FF1FD7EB3F002CF9DC /* GlfwWindowManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GlfwWindowManager.m; sourceTree = "<group>"; };
-		EDF8C9061FD8326A002CF9DC /* GlfwGeometry.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GlfwGeometry.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,7 +80,6 @@
 				EDF8C8FD1FD713BF002CF9DC /* sokol_time.h */,
 				EDF8C8F01FD70E16002CF9DC /* main.m */,
 				140755461FD74A38007BF8B0 /* GlfwGeometry.h */,
-				EDF8C9061FD8326A002CF9DC /* GlfwGeometry.m */,
 				EDF8C8FA1FD70F2C002CF9DC /* GlfwApplication.h */,
 				EDF8C8FB1FD70F2C002CF9DC /* GlfwApplication.m */,
 				EDF8C8FE1FD7EB3F002CF9DC /* GlfwWindowManager.h */,
@@ -164,7 +161,6 @@
 				EDF8C9001FD7EB3F002CF9DC /* GlfwWindowManager.m in Sources */,
 				EDF8C8F11FD70E16002CF9DC /* main.m in Sources */,
 				EDF8C8FC1FD70F2C002CF9DC /* GlfwApplication.m in Sources */,
-				EDF8C9071FD8326A002CF9DC /* GlfwGeometry.m in Sources */,
 				140755451FD734DB007BF8B0 /* sokol_imp.m in Sources */,
 				140755401FD73434007BF8B0 /* GlfwWindow.m in Sources */,
 				140755431FD73453007BF8B0 /* GlfwEvent.m in Sources */,

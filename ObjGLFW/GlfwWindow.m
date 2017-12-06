@@ -1,22 +1,22 @@
 //
-//  GFWindow.m
+//  GlfwWindow.m
 //  ObjGLFW
 //
 //  Created by Юрий Вовк on 05.12.2017.
 //  Copyright © 2017 GunGraveKoga. All rights reserved.
 //
 
-#import "GFWindow.h"
-#import "GFEventHandler.h"
-#import "GFApplication.h"
+#import "GlfwWindow.h"
+#import "GlfwApplication.h"
+#import "GlfwWindowManager.h"
 
-@interface GFWindow ()
+@interface GlfwWindow ()
 
 @end
 
-@implementation GFWindow
+@implementation GlfwWindow
 
-- (instancetype)initWithRect:(GFRect)windowRectangle title:(OFString *)windowTitle hints:(OFDictionary<OFNumber *,OFNumber *> *)windowHints
+- (instancetype)initWithRect:(GlfwRect)windowRectangle title:(OFString *)windowTitle hints:(OFDictionary<OFNumber *,OFNumber *> *)windowHints
 {
     self = [super init];
     
@@ -24,8 +24,8 @@
         
         _visible = true;
         _iconified = false;
-        _maxSize = GFSizeNew(-1, -1);
-        _minSize = GFSizeNew(-1, -1);
+        _maxSize = GlfwSizeNew(-1, -1);
+        _minSize = GlfwSizeNew(-1, -1);
         
         for (OFNumber *hint in windowHints) {
             OFNumber *hintValue = [windowHints objectForKey:hint];
@@ -42,8 +42,8 @@
                 _iconified = true;
         }
         
-        GFSize windowSize = windowRectangle.size;
-        GFPoint windowPos = windowRectangle.origin;
+        GlfwSize windowSize = windowRectangle.size;
+        GlfwPoint windowPos = windowRectangle.origin;
         
         if ((windowPos.x != 0) && (windowPos.y != 0)) {
             glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
@@ -75,8 +75,6 @@
         
         glfwSetWindowUserPointer(_windowHandle, (__bridge void *)self);
         
-        [[(GFApplication *)[GFApplication sharedApplication] eventHandler] attachWindow:self];
-        
     }
     @catch (id e) {
         [self release];
@@ -106,86 +104,71 @@
     }
 }
 
-- (GFRect)frame {
+- (GlfwRect)frame {
     int xpos, ypos, width, height;
     
     glfwGetWindowPos(_windowHandle, &xpos, &ypos);
     glfwGetWindowSize(_windowHandle, &width, &height);
     
-    return GFRectNew(xpos, ypos, width, height);
+    return GlfwRectNew(xpos, ypos, width, height);
 }
 
-- (void)setFrame:(GFRect)frame {
+- (void)setFrame:(GlfwRect)frame {
     glfwSetWindowPos(_windowHandle, frame.origin.x, frame.origin.y);
     glfwSetWindowSize(_windowHandle, frame.size.width, frame.size.height);
 }
 
-- (GFSize)size {
+- (GlfwSize)size {
     int width, height;
     glfwGetWindowSize(_windowHandle, &width, &height);
     
-    return GFSizeNew(width, height);
+    return GlfwSizeNew(width, height);
 }
 
-- (void)setSize:(GFSize)size {
+- (void)setSize:(GlfwSize)size {
     glfwSetWindowSize(_windowHandle, size.width, size.height);
 }
 
-- (GFPoint)pos {
+- (GlfwPoint)pos {
     int xpos, ypos;
     glfwGetWindowPos(_windowHandle, &xpos, &ypos);
     
-    return GFPointNew(xpos, ypos);
+    return GlfwPointNew(xpos, ypos);
 }
 
-- (void)setPos:(GFPoint)pos {
+- (void)setPos:(GlfwPoint)pos {
     glfwSetWindowPos(_windowHandle, pos.x, pos.y);
 }
 
-- (GFSize)minSize {
+- (GlfwSize)minSize {
     return _minSize;
 }
 
-- (void)setMinSize:(GFSize)minSize {
+- (void)setMinSize:(GlfwSize)minSize {
     glfwSetWindowSizeLimits(_windowHandle, minSize.width, minSize.height, GLFW_DONT_CARE, GLFW_DONT_CARE);
     _minSize = minSize;
 }
 
-- (GFSize)maxSize {
+- (GlfwSize)maxSize {
     return _maxSize;
 }
 
-- (void)setMaxSize:(GFSize)maxSize {
+- (void)setMaxSize:(GlfwSize)maxSize {
     glfwSetWindowSizeLimits(_windowHandle, GLFW_DONT_CARE, GLFW_DONT_CARE, maxSize.width, maxSize.height);
     _maxSize = maxSize;
 }
 
-- (GFSize)contentSize {
+- (GlfwSize)contentSize {
     int width, height;
     glfwGetFramebufferSize(_windowHandle, &width, &height);
     
-    return GFSizeNew(width, height);
+    return GlfwSizeNew(width, height);
 }
 
-- (void)setContentSize:(GFSize)contentSize {
+- (void)setContentSize:(GlfwSize)contentSize {
     int left, top, right, bottom;
     glfwGetWindowFrameSize(_windowHandle, &left, &top, &right, &bottom);
     glfwSetWindowSize(_windowHandle, (left + contentSize.width + right), (top + contentSize.height + bottom));
-}
-
-- (void)close {
-    
-    if (_active) {
-        if (_visible)
-            glfwHideWindow(_windowHandle);
-        
-        [[(GFApplication *)[GFApplication sharedApplication] eventHandler] detachWindow:self];
-        
-        glfwSetWindowUserPointer(_windowHandle, NULL);
-        glfwDestroyWindow(_windowHandle);
-        
-        _active = false;
-    }
 }
 
 - (bool)visible {
@@ -231,7 +214,6 @@
 }
 
 - (void)dealloc {
-    [self close];
     
     [_windowTitle release];
     
