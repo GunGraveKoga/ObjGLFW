@@ -172,10 +172,11 @@ glfw_application_main(int *argc, char **argv[],
         elapsedTime = stm_laptime(&currentTime);
         
         double runloopTimeInterval = expectedLooptTime - stm_ms(elapsedTime);
+        OFDate *runloopDedline = [OFDate dateWithTimeIntervalSinceNow:runloopTimeInterval];
         
-        [runLoop runUntilDate:[OFDate dateWithTimeIntervalSinceNow:runloopTimeInterval * 1000]];
+        [runLoop runUntilDate:runloopDedline];
         
-        objc_autoreleasePoolPop(pool);
+       objc_autoreleasePoolPop(pool);
 
         
     }

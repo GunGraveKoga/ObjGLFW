@@ -25,9 +25,9 @@
     return [[[self alloc] initWithType:type location:location modifierFlags:0 timestamp:timestamp window:window character:0 characterModifiers:0 key:0 scanCode:0 mouseButton:mouseButton mouseModifiers:mouseButtonModifiers deltaX:deltaX deltaY:deltaY size:GlfwSizeZero() pos:GlfwPointZero() paths:nil] autorelease];
 }
 
-+ (instancetype)keyEventWithType:(GlfwEventType)type timestamp:(double)timestamp window:(GlfwRawWindow *)window scanCode:(int)scanCode modifiers:(int)mods
++ (instancetype)keyEventWithType:(GlfwEventType)type timestamp:(double)timestamp window:(GlfwRawWindow *)window key:(int)key scanCode:(int)scanCode modifiers:(int)mods
 {
-    return [[[self alloc] initWithType:type location:of_point(0, 0) modifierFlags:mods timestamp:timestamp window:window character:0 characterModifiers:0 key:0 scanCode:scanCode mouseButton:0 mouseModifiers:0 deltaX:0 deltaY:0 size:GlfwSizeZero() pos:GlfwPointZero() paths:nil] autorelease];
+    return [[[self alloc] initWithType:type location:of_point(0, 0) modifierFlags:mods timestamp:timestamp window:window character:0 characterModifiers:0 key:key scanCode:scanCode mouseButton:0 mouseModifiers:0 deltaX:0 deltaY:0 size:GlfwSizeZero() pos:GlfwPointZero() paths:nil] autorelease];
 }
 
 + (instancetype)enterExitEventWithType:(GlfwEventType)type timestamp:(double)timestamp window:(GlfwRawWindow *)window

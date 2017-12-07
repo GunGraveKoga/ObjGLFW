@@ -13,7 +13,7 @@
 
 @class GlfwEvent;
 
-@interface GlfwRawWindow : OFObject
+@interface GlfwRawWindow : OFObject <OFCopying>
 {
     GLFWwindow *_windowHandle;
     OFString *_windowTitle;

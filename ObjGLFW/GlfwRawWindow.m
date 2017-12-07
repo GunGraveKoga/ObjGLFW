@@ -410,6 +410,10 @@
     }
 }
 
+- (id)copy {
+    return [self retain];
+}
+
 - (void)dealloc {
     if (_windowHandle) {
         [self _destroy];
