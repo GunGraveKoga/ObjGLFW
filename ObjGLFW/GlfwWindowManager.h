@@ -8,8 +8,12 @@
 
 #import <ObjFW/ObjFW.h>
 
+#include <GLFW/glfw3.h>
+
 @class GlfwRawWindow;
 @class GlfwEvent;
+
+OF_ASSUME_NONNULL_BEGIN
 
 @interface GlfwWindowManager : OFObject
 {
@@ -27,4 +31,10 @@
 - (void)attachWindow:(GlfwRawWindow *)window;
 - (void)detachWindow:(GlfwRawWindow *)window;
 
+- (void)fetchEvent:(GlfwEvent *)event;
+- (GlfwRawWindow * _Nullable)findWindow:(GLFWwindow *)windowHandle;
+- (void)drainEvents;
+
 @end
+
+OF_ASSUME_NONNULL_END
