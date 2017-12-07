@@ -14,18 +14,6 @@
 
 @end
 
-#if defined(OF_HAVE_THREADS)
-#define LOCK() do { \
-                    [_lock lock]; \
-                } while (0)
-#define UNLOCK() do { \
-                        [_lock unlock]; \
-                    } while (0)
-#else
-#define LOCK() do { ; } while (0)
-#define UNLOCK() do { ; } while (0)
-#endif
-
 @implementation GlfwRawWindow
 
 @synthesize windowHandle = _windowHandle;
