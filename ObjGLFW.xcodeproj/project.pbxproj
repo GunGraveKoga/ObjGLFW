@@ -35,6 +35,8 @@
 		140755421FD73453007BF8B0 /* GlfwEvent.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GlfwEvent.m; sourceTree = "<group>"; };
 		140755441FD734DB007BF8B0 /* sokol_imp.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = sokol_imp.m; sourceTree = "<group>"; };
 		140755461FD74A38007BF8B0 /* GlfwGeometry.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GlfwGeometry.h; sourceTree = "<group>"; };
+		1407554A1FD89271007BF8B0 /* GlfwEventHandling.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GlfwEventHandling.h; sourceTree = "<group>"; };
+		1407554B1FD8929A007BF8B0 /* GlfwDrawing.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GlfwDrawing.h; sourceTree = "<group>"; };
 		EDF8C8ED1FD70E16002CF9DC /* ObjGLFW */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ObjGLFW; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDF8C8F01FD70E16002CF9DC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		EDF8C8F81FD70F08002CF9DC /* ObjFW.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ObjFW.framework; path = ../../../Library/Frameworks/ObjFW.framework; sourceTree = "<group>"; };
@@ -82,6 +84,8 @@
 				140755461FD74A38007BF8B0 /* GlfwGeometry.h */,
 				EDF8C8FA1FD70F2C002CF9DC /* GlfwApplication.h */,
 				EDF8C8FB1FD70F2C002CF9DC /* GlfwApplication.m */,
+				1407554A1FD89271007BF8B0 /* GlfwEventHandling.h */,
+				1407554B1FD8929A007BF8B0 /* GlfwDrawing.h */,
 				EDF8C8FE1FD7EB3F002CF9DC /* GlfwWindowManager.h */,
 				EDF8C8FF1FD7EB3F002CF9DC /* GlfwWindowManager.m */,
 				1407553E1FD73434007BF8B0 /* GlfwWindow.h */,
