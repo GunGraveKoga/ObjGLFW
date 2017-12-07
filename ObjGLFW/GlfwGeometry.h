@@ -29,10 +29,18 @@ OF_INLINE GlfwPoint GlfwPointNew(int x, int y) {
     return point;
 }
 
+OF_INLINE GlfwPoint GlfwPointZero(void) {
+    return GlfwPointNew(0, 0);
+}
+
 OF_INLINE GlfwSize GlfwSizeNew(int width, int height) {
     GlfwSize size = {width, height};
     
     return size;
+}
+
+OF_INLINE GlfwSize GlfwSizeZero(void) {
+    return GlfwSizeNew(0, 0);
 }
 
 OF_INLINE GlfwRect GlfwRectNew(int x, int y, int width, int height) {
@@ -41,4 +49,8 @@ OF_INLINE GlfwRect GlfwRectNew(int x, int y, int width, int height) {
     rect.size = GlfwSizeNew(width, height);
     
     return rect;
+}
+
+OF_INLINE GlfwRect GlfwRectZero(void) {
+    return GlfwRectNew(0, 0, 0, 0);
 }
