@@ -90,4 +90,40 @@
     return OF_ORDERED_SAME;
 }
 
+- (OFString *)description {
+    
+    OFString *typeName;
+    
+    switch (_type) {
+        case GlfwLeftMouseDown: typeName = @"GlfwLeftMouseDown"; break;
+        case GlfwLeftMouseUp: typeName = @"GlfwLeftMouseUp"; break;
+        case GlfwRightMouseDown: typeName = @"GlfwRightMouseDown"; break;
+        case GlfwRightMouseUp: typeName = @"GlfwRightMouseUp"; break;
+        case GlfwMouseMiddleDown: typeName = @"GlfwMouseMiddleDown"; break;
+        case GlfwMouseMiddleUp: typeName = @"GlfwMouseMiddleUp"; break;
+        case GlfwMouseOtherDown: typeName = @"GlfwMouseOtherDown"; break;
+        case GlfwMouseOtherUp: typeName = @"GlfwMouseOtherUp"; break;
+        case GlfwMouseMoved: typeName = @"GlfwMouseMoved"; break;
+        case GlfwMouseEntered: typeName = @"GlfwMouseEntered"; break;
+        case GlfwMouseExited: typeName = @"GlfwMouseExited"; break;
+        case GlfwKeyDown: typeName = @"GlfwKeyDown"; break;
+        case GlfwKeyUp: typeName = @"GlfwKeyUp"; break;
+        case GlfwScrollWheel: typeName = @"GlfwScrollWheel"; break;
+        case GlfwWindowMoved: typeName = @"GlfwWindowMoved"; break;
+        case GlfwWindowResized: typeName = @"GlfwWindowResized"; break;
+        case GlfwWindowFramebuferResized: typeName = @"GlfwWindowFramebuferResized"; break;
+        case GlfwWindowShouldRefresh: typeName = @"GlfwWindowShouldRefresh"; break;
+        case GlfwWindowShouldClose: typeName = @"GlfwWindowShouldClose"; break;
+        case GlfwWindowFocused: typeName = @"GlfwWindowFocused"; break;
+        case GlfwWindowIconified: typeName = @"GlfwWindowIconified"; break;
+        case GlfwCharacter: typeName = @"GlfwCharacter"; break;
+        case GlfwModifiedCharacter: typeName = @"GlfwModifiedCharacter"; break;
+        case GlfwFilesDrop: typeName = @"GlfwFilesDrop"; break;
+            default:
+            OF_UNREACHABLE;
+    }
+    
+    return [OFString stringWithFormat:@"%@::%@", [super description], typeName];
+}
+
 @end
