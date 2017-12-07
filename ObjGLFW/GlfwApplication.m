@@ -162,16 +162,12 @@ glfw_application_main(int *argc, char **argv[],
         pool = objc_autoreleasePoolPush();
         uint64_t elapsedTime = stm_laptime(&currentTime);
         
+        [_windowManager drawAllWindows];
+        
         glfwPollEvents();
         
-        /*
-         * processing events
-         */
-        
-        
-        /*
-         * draw
-         */
+        [_windowManager dispatchEvents];
+        [_windowManager drainEvents];
         
         elapsedTime = stm_laptime(&currentTime);
         
