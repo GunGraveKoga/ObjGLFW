@@ -33,7 +33,9 @@ OF_ASSUME_NONNULL_BEGIN
 
 - (void)fetchEvent:(GlfwEvent *)event;
 - (GlfwRawWindow * _Nullable)findWindow:(GLFWwindow *)windowHandle;
+- (void)dispatchEvents;
 - (void)drainEvents;
+- (void)drawAllWindows;
 
 @end
 

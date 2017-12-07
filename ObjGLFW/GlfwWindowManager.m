@@ -182,11 +182,71 @@ OF_INLINE bool onMainThread(void) {
 }
 
 - (void)fetchEvent:(GlfwEvent *)event {
+#if defined(OF_HAVE_THREADS)
+    [_lock lock];
+#endif
+    [_eventsQueue insertObject:event];
+#if defined(OF_HAVE_THREADS)
+    [_lock unlock];
+#endif
+}
+
+- (void)dispatchEvents {
+#if defined(OF_HAVE_THREADS)
+    [_lock lock];
+#endif
     
+    for (GlfwEvent *event in _eventsQueue) {
+        void *pool = objc_autoreleasePoolPush();
+        
+        GlfwRawWindow *window = [event window];
+        
+        if (![window shouldClose]) {
+            [window sendEvent:event];
+        }
+        
+        objc_autoreleasePoolPop(pool);
+    }
+    
+#if defined(OF_HAVE_THREADS)
+    [_lock unlock];
+#endif
 }
 
 - (void)drainEvents {
+#if defined(OF_HAVE_THREADS)
+    [_lock lock];
+#endif
+    [_eventsQueue removeAllObjects];
+#if defined(OF_HAVE_THREADS)
+    [_lock unlock];
+#endif
+}
+
+- (void)drawAllWindows {
+#if defined(OF_HAVE_THREADS)
+    [_lock lock];
+#endif
     
+    OFMapTableEnumerator *enumerator = [_managedWindows objectEnumerator];
+    void **objectPtr;
+    GlfwRawWindow *window;
+    
+    while ((objectPtr = [enumerator nextObject]) != NULL) {
+        void *pool = objc_autoreleasePoolPush();
+        
+        window = (id)(*objectPtr);
+        
+        if (![window shouldClose] && [window isVisible] && ![window isIconified]) {
+            [window draw];
+        }
+        
+        objc_autoreleasePoolPop(pool);
+    }
+    
+#if defined(OF_HAVE_THREADS)
+    [_lock unlock];
+#endif
 }
 
 @end
