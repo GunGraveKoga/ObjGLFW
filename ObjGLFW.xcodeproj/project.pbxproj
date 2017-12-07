@@ -7,13 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		140755401FD73434007BF8B0 /* GlfwWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 1407553F1FD73434007BF8B0 /* GlfwWindow.m */; };
+		140755401FD73434007BF8B0 /* GlfwRawWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 1407553F1FD73434007BF8B0 /* GlfwRawWindow.m */; };
 		140755431FD73453007BF8B0 /* GlfwEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 140755421FD73453007BF8B0 /* GlfwEvent.m */; };
 		140755451FD734DB007BF8B0 /* sokol_imp.m in Sources */ = {isa = PBXBuildFile; fileRef = 140755441FD734DB007BF8B0 /* sokol_imp.m */; };
 		EDF8C8F11FD70E16002CF9DC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EDF8C8F01FD70E16002CF9DC /* main.m */; };
 		EDF8C8F91FD70F08002CF9DC /* ObjFW.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF8C8F81FD70F08002CF9DC /* ObjFW.framework */; };
 		EDF8C8FC1FD70F2C002CF9DC /* GlfwApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = EDF8C8FB1FD70F2C002CF9DC /* GlfwApplication.m */; };
 		EDF8C9001FD7EB3F002CF9DC /* GlfwWindowManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EDF8C8FF1FD7EB3F002CF9DC /* GlfwWindowManager.m */; };
+		EDF8C90A1FD947FC002CF9DC /* GlfwWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = EDF8C9091FD947FC002CF9DC /* GlfwWindow.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -29,8 +30,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		1407553E1FD73434007BF8B0 /* GlfwWindow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GlfwWindow.h; sourceTree = "<group>"; };
-		1407553F1FD73434007BF8B0 /* GlfwWindow.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GlfwWindow.m; sourceTree = "<group>"; };
+		1407553E1FD73434007BF8B0 /* GlfwRawWindow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GlfwRawWindow.h; sourceTree = "<group>"; };
+		1407553F1FD73434007BF8B0 /* GlfwRawWindow.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GlfwRawWindow.m; sourceTree = "<group>"; };
 		140755411FD73453007BF8B0 /* GlfwEvent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GlfwEvent.h; sourceTree = "<group>"; };
 		140755421FD73453007BF8B0 /* GlfwEvent.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GlfwEvent.m; sourceTree = "<group>"; };
 		140755441FD734DB007BF8B0 /* sokol_imp.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = sokol_imp.m; sourceTree = "<group>"; };
@@ -45,6 +46,8 @@
 		EDF8C8FD1FD713BF002CF9DC /* sokol_time.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sokol_time.h; sourceTree = "<group>"; };
 		EDF8C8FE1FD7EB3F002CF9DC /* GlfwWindowManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GlfwWindowManager.h; sourceTree = "<group>"; };
 		EDF8C8FF1FD7EB3F002CF9DC /* GlfwWindowManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GlfwWindowManager.m; sourceTree = "<group>"; };
+		EDF8C9081FD947FC002CF9DC /* GlfwWindow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GlfwWindow.h; sourceTree = "<group>"; };
+		EDF8C9091FD947FC002CF9DC /* GlfwWindow.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GlfwWindow.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,8 +91,10 @@
 				1407554B1FD8929A007BF8B0 /* GlfwDrawing.h */,
 				EDF8C8FE1FD7EB3F002CF9DC /* GlfwWindowManager.h */,
 				EDF8C8FF1FD7EB3F002CF9DC /* GlfwWindowManager.m */,
-				1407553E1FD73434007BF8B0 /* GlfwWindow.h */,
-				1407553F1FD73434007BF8B0 /* GlfwWindow.m */,
+				1407553E1FD73434007BF8B0 /* GlfwRawWindow.h */,
+				1407553F1FD73434007BF8B0 /* GlfwRawWindow.m */,
+				EDF8C9081FD947FC002CF9DC /* GlfwWindow.h */,
+				EDF8C9091FD947FC002CF9DC /* GlfwWindow.m */,
 				140755411FD73453007BF8B0 /* GlfwEvent.h */,
 				140755421FD73453007BF8B0 /* GlfwEvent.m */,
 				140755441FD734DB007BF8B0 /* sokol_imp.m */,
@@ -162,11 +167,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EDF8C90A1FD947FC002CF9DC /* GlfwWindow.m in Sources */,
 				EDF8C9001FD7EB3F002CF9DC /* GlfwWindowManager.m in Sources */,
 				EDF8C8F11FD70E16002CF9DC /* main.m in Sources */,
 				EDF8C8FC1FD70F2C002CF9DC /* GlfwApplication.m in Sources */,
 				140755451FD734DB007BF8B0 /* sokol_imp.m in Sources */,
-				140755401FD73434007BF8B0 /* GlfwWindow.m in Sources */,
+				140755401FD73434007BF8B0 /* GlfwRawWindow.m in Sources */,
 				140755431FD73453007BF8B0 /* GlfwEvent.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

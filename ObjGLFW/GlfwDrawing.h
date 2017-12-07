@@ -8,7 +8,7 @@
 
 #import <ObjFW/OFObject.h>
 
-@protocol GlfwDrawing <OFObject>
+@protocol GlfwDrawing <OFObject, OFComparing>
 
 @required
 - (void)draw;

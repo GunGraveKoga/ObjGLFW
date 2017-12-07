@@ -51,7 +51,7 @@ OF_INLINE GlfwEventMask GlfwEventMaskFromType(GlfwEventType type) {
     return (1 << type);
 }
 
-@class GlfwWindow;
+@class GlfwRawWindow;
 
 @interface GlfwEvent : OFObject
 {
@@ -62,15 +62,15 @@ OF_INLINE GlfwEventMask GlfwEventMaskFromType(GlfwEventType type) {
 @property (nonatomic, readonly) double timestamp;
 @property (nonatomic, readonly) GlfwEventType type;
 @property (nonatomic, readonly) of_point_t mouseLoaction;
-@property (nonatomic, readonly, retain) GlfwWindow *window;
+@property (nonatomic, readonly, retain) GlfwRawWindow *window;
 
 + (instancetype)enterExitEventWithType:(GlfwEventType)type
                              timestamp:(double)timestamp
-                                window:(GlfwWindow *)window;
+                                window:(GlfwRawWindow *)window;
 
 + (instancetype)keyEventWithType:(GlfwEventType)type
                        timestamp:(double)timestamp
-                          window:(GlfwWindow *)window
+                          window:(GlfwRawWindow *)window
                         scanCode:(int)scanCode
                        modifiers:(int)mods;
 
@@ -78,7 +78,7 @@ OF_INLINE GlfwEventMask GlfwEventMaskFromType(GlfwEventType type) {
                     location:(of_point_t)location
                modifierFlags:(int)flags
                    timestamp:(double)timestamp
-                      window:(GlfwWindow *)window
+                      window:(GlfwRawWindow *)window
                    character:(of_unichar_t)character
  charactersIgnoringModifiers:(int)mods
                     scanCode:(int)scanCode

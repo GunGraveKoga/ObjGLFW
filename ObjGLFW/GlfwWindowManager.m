@@ -7,7 +7,7 @@
 //
 
 #import "GlfwWindowManager.h"
-#import "GlfwWindow.h"
+#import "GlfwRawWindow.h"
 #import "GlfwApplication.h"
 
 #include "sokol_time.h"
@@ -83,31 +83,33 @@ OF_INLINE bool onMainThread(void) {
  * All windows should be attached/detached asynchronously after event processing
  */
 
-- (void)attachWindow:(GlfwWindow *)window {
+- (void)attachWindow:(GlfwRawWindow *)window {
 #if defined(OF_HAVE_THREADS)
     if ( [_lock tryLock] ) {
 #endif
       
-        GLFWwindow *handle = [window windowHandle];
-        glfwSetWindowUserPointer(handle, (void *)self);
-        
-        glfwSetWindowPosCallback(handle, &windowPositionCallback);
-        glfwSetWindowSizeCallback(handle, &windowSizeCallback);
-        glfwSetWindowCloseCallback(handle, &windowCloseCallback);
-        glfwSetWindowRefreshCallback(handle, &windowRefreshCallback);
-        glfwSetWindowFocusCallback(handle, &windowFocusCallback);
-        glfwSetWindowIconifyCallback(handle, &windowIconifyCallback);
-        glfwSetFramebufferSizeCallback(handle, &windowFramebufferSizeCallback);
-        glfwSetCharCallback(handle, &inputCharCallback);
-        glfwSetCharModsCallback(handle, &inputCharModCallback);
-        glfwSetCursorEnterCallback(handle, &inputCursorEnterCallback);
-        glfwSetCursorPosCallback(handle, &inputCursorPositionCallback);
-        glfwSetDropCallback(handle, &inputDropCallback);
-        glfwSetKeyCallback(handle, &inputKeyCallback);
-        glfwSetMouseButtonCallback(handle, &inputMouseButtonCallback);
-        glfwSetScrollCallback(handle, &inputScrollCallback);
-        
-        [_managedWindows setObject:(void *)window forKey:handle];
+        if ([window isOpen] && ![window shouldClose]) {
+            GLFWwindow *handle = [window windowHandle];
+            glfwSetWindowUserPointer(handle, (void *)self);
+            
+            glfwSetWindowPosCallback(handle, &windowPositionCallback);
+            glfwSetWindowSizeCallback(handle, &windowSizeCallback);
+            glfwSetWindowCloseCallback(handle, &windowCloseCallback);
+            glfwSetWindowRefreshCallback(handle, &windowRefreshCallback);
+            glfwSetWindowFocusCallback(handle, &windowFocusCallback);
+            glfwSetWindowIconifyCallback(handle, &windowIconifyCallback);
+            glfwSetFramebufferSizeCallback(handle, &windowFramebufferSizeCallback);
+            glfwSetCharCallback(handle, &inputCharCallback);
+            glfwSetCharModsCallback(handle, &inputCharModCallback);
+            glfwSetCursorEnterCallback(handle, &inputCursorEnterCallback);
+            glfwSetCursorPosCallback(handle, &inputCursorPositionCallback);
+            glfwSetDropCallback(handle, &inputDropCallback);
+            glfwSetKeyCallback(handle, &inputKeyCallback);
+            glfwSetMouseButtonCallback(handle, &inputMouseButtonCallback);
+            glfwSetScrollCallback(handle, &inputScrollCallback);
+            
+            [_managedWindows setObject:(void *)window forKey:handle];
+        }
         
 #if defined(OF_HAVE_THREADS)
         [_lock unlock];
@@ -118,7 +120,7 @@ OF_INLINE bool onMainThread(void) {
 #endif
 }
 
-- (void)detachWindow:(GlfwWindow *)window {
+- (void)detachWindow:(GlfwRawWindow *)window {
 #if defined(OF_HAVE_THREADS)
     if ( [_lock tryLock] ) {
 #endif

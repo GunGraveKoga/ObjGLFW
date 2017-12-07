@@ -8,7 +8,7 @@
 
 #import <ObjFW/ObjFW.h>
 
-@class GlfwWindow;
+@class GlfwRawWindow;
 @class GlfwEvent;
 
 @interface GlfwWindowManager : OFObject
@@ -24,7 +24,7 @@
 
 + (instancetype)defaultManager;
 
-- (void)attachWindow:(GlfwWindow *)window;
-- (void)detachWindow:(GlfwWindow *)window;
+- (void)attachWindow:(GlfwRawWindow *)window;
+- (void)detachWindow:(GlfwRawWindow *)window;
 
 @end

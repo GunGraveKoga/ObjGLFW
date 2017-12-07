@@ -8,7 +8,7 @@
 
 #import "GlfwApplication.h"
 #import "GlfwWindowManager.h"
-#import "GlfwWindow.h"
+#import "GlfwRawWindow.h"
 #import "GlfwEvent.h"
 
 #if defined(OF_WINDOWS)

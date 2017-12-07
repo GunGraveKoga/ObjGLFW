@@ -9,6 +9,6 @@
 #import <ObjFW/OFObject.h>
 #import "GlfwEvent.h"
 
-@protocol GlfwEventHandling <OFObject>
+@protocol GlfwEventHandling <OFObject, OFComparing>
 
 @end
