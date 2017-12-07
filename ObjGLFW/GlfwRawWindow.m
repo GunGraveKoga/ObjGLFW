@@ -381,6 +381,14 @@
     }
 }
 
+- (void)requestWindowAttention {
+    @synchronized (self) {
+        if (_windowHandle) {
+            glfwRequestWindowAttention(_windowHandle);
+        }
+    }
+}
+
 - (void)_destroy {
     glfwDestroyWindow(_windowHandle);
     

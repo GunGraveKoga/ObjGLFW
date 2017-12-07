@@ -46,6 +46,7 @@
 
 
 - (bool)isOpen;
+- (void)requestWindowAttention;
 - (void)destroy;
 - (void)draw;
 - (void)sendEvent:(GlfwEvent *)event;
