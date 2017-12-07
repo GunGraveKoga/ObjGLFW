@@ -9,6 +9,12 @@
 #import <ObjFW/OFObject.h>
 #import "GlfwEvent.h"
 
+@class GlfwWindow;
+
 @protocol GlfwEventHandling <OFObject, OFComparing>
+
+@required
+- (GlfwEventMask)handledEventsMask;
+- (void)handleEvent:(GlfwEvent *)event fromWindow:(GlfwWindow *)window;
 
 @end

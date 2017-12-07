@@ -101,7 +101,7 @@
             for (id<GlfwDrawing> drawble in _drawables) {
                 void *pool = objc_autoreleasePoolPush();
                 
-                [drawble draw];
+                [drawble drawInWindow:self];
                 
                 objc_autoreleasePoolPop(pool);
             }
@@ -110,7 +110,21 @@
 }
 
 - (void)sendEvent:(GlfwEvent *)event {
-    
+    @synchronized (self) {
+        if (_windowHandle) {
+            
+            for (id<GlfwEventHandling> eventHandler in _eventHandlers) {
+                void *pool = objc_autoreleasePoolPush();
+                
+                if ([event isMatchEventMask:[eventHandler handledEventsMask]]) {
+                    [eventHandler handleEvent:event fromWindow:self];
+                }
+                
+                objc_autoreleasePoolPop(pool);
+                
+            }
+        }
+    }
 }
 
 - (void)dealloc {

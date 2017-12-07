@@ -7,10 +7,13 @@
 //
 
 #import <ObjFW/OFObject.h>
+#import "GlfwGeometry.h"
+
+@class GlfwWindow;
 
 @protocol GlfwDrawing <OFObject, OFComparing>
 
 @required
-- (void)draw;
+- (void)drawInWindow:(GlfwWindow *)window;
 
 @end
