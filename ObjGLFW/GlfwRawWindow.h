@@ -50,6 +50,8 @@
 - (void)destroy;
 - (void)draw;
 - (void)sendEvent:(GlfwEvent *)event;
+- (void)makeContextCurrent;
+- (void)doneContext;
 - (void)swapBuffers;
 
 @end

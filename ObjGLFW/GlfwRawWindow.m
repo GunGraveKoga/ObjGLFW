@@ -25,8 +25,8 @@
     @try {
         
         bool visible = true;
-        _maxSize = GlfwSizeNew(-1, -1);
-        _minSize = GlfwSizeNew(-1, -1);
+        _maxSize = GlfwSizeNull();
+        _minSize = GlfwSizeNull();
         
         for (OFNumber *hint in windowHints) {
             OFNumber *hintValue = [windowHints objectForKey:hint];
@@ -401,6 +401,18 @@
     OF_UNRECOGNIZED_SELECTOR;
 }
 
+- (void)makeContextCurrent {
+    @synchronized(self) {
+        if (_windowHandle) {
+            glfwMakeContextCurrent(_windowHandle);
+        }
+    }
+}
+
+- (void)doneContext {
+    
+}
+
 - (void)swapBuffers {
     @synchronized (self) {
         if (_windowHandle) {
@@ -414,12 +426,22 @@
     return [self retain];
 }
 
+- (bool)isEqual:(id)object {
+    if (![((id<OFObject>)object) isMemberOfClass:[self class]])
+        return false;
+    
+    GlfwRawWindow *other = (GlfwRawWindow *)object;
+    
+    return (self->_windowHandle == other->_windowHandle);
+}
+
 - (void)dealloc {
     if (_windowHandle) {
         [self _destroy];
     }
     
     [_windowTitle release];
+    [_lock release];
     
     [super dealloc];
 }
