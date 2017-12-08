@@ -67,12 +67,18 @@ OF_INLINE bool onMainThread(void) {
     return ([OFThread currentThread] == [OFThread mainThread]);
 }
 
+static GlfwWindowManager *defaultManager = nil;
+
 @implementation GlfwWindowManager
 
++ (void)initialize {
+    if (self == [GlfwWindowManager class]) {
+        defaultManager = [[GlfwWindowManager alloc] glfw_init];
+    }
+}
+
 + (instancetype)defaultManager {
-    GlfwApplication *app = (id)[GlfwApplication sharedApplication];
-    
-    return [app windowManager];
+    return defaultManager;
 }
 
 - (instancetype)glfw_init {
@@ -172,7 +178,7 @@ OF_INLINE bool onMainThread(void) {
     [_lock lock];
 #endif
     
-    window = [_managedWindows objectForKey:window];
+    window = [_managedWindows objectForKey:windowHandle];
     
 #if defined(OF_HAVE_THREADS)
     [_lock unlock];
