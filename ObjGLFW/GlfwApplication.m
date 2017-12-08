@@ -21,6 +21,16 @@ extern void __wgetmainargs(int *, wchar_t ***, wchar_t ***, int, int *);
 #include <GLFW/glfw3.h>
 #include "sokol_time.h"
 
+void _glfwInit(void) {
+    stm_setup();
+    
+    glfwInit();
+}
+
+void _glfwTerminate(void) {
+    glfwTerminate();
+}
+
 @interface OFApplication ()
 - (instancetype)of_init OF_METHOD_FAMILY(init);
 - (void)of_setArgumentCount: (int *)argc
@@ -55,8 +65,6 @@ int
 glfw_application_main(int *argc, char **argv[],
                     id <OFApplicationDelegate> delegate) {
     
-    stm_setup();
-    glfwInit();
     
 #ifdef OF_WINDOWS
     wchar_t **wargv, **wenvp;
@@ -81,8 +89,6 @@ glfw_application_main(int *argc, char **argv[],
     [GlfwApp glfw_run];
     
     [delegate release];
-    
-    glfwTerminate();
     
     return 0;
 }
@@ -126,13 +132,13 @@ glfw_application_main(int *argc, char **argv[],
 - (instancetype)of_init {
     self = [super of_init];
     
-    _windowManager = [[GlfwWindowManager alloc] glfw_init];
+    _windowManager = [GlfwWindowManager defaultManager];
     
     return self;
 }
 
 - (void)glfw_run {
-    void *pool = objc_autoreleasePoolPush();
+    OFAutoreleasePool *pool = [[OFAutoreleasePool alloc] init];
     OFRunLoop *runLoop;
     
 #ifdef OF_HAVE_THREADS
@@ -144,22 +150,26 @@ glfw_application_main(int *argc, char **argv[],
     
     [OFRunLoop of_setMainRunLoop: runLoop];
     
-    objc_autoreleasePoolPop(pool);
+    [pool releaseObjects];
     
-    pool = objc_autoreleasePoolPush();
+    _glfwInit();
+    
     [_delegate applicationDidFinishLaunching];
-    objc_autoreleasePoolPop(pool);
+#if defined(OF_MACOS)
+    glfwPollEvents();
+#else
+    [pool releaseObjects];
+#endif
     
     _isActive = true;
     
     GLFWmonitor *mainMonitor = glfwGetPrimaryMonitor();
     const GLFWvidmode *vmode = glfwGetVideoMode(mainMonitor);
     
-    double expectedLooptTime = (1000 / vmode->refreshRate); //expected loop time in ms
+    double expectedLooptTime = (1.0 / vmode->refreshRate); //expected loop time in ms
     uint64_t currentTime = 0;
     
     while (_isActive) {
-        pool = objc_autoreleasePoolPush();
         uint64_t elapsedTime = stm_laptime(&currentTime);
         
         [_windowManager drawAllWindows];
@@ -168,18 +178,20 @@ glfw_application_main(int *argc, char **argv[],
         
         [_windowManager dispatchEvents];
         [_windowManager drainEvents];
-        
+#if !defined(OF_MACOS)
+        [pool releaseObjects];
+#endif
         elapsedTime = stm_laptime(&currentTime);
         
         double runloopTimeInterval = expectedLooptTime - stm_ms(elapsedTime);
         OFDate *runloopDedline = [OFDate dateWithTimeIntervalSinceNow:runloopTimeInterval];
         
         [runLoop runUntilDate:runloopDedline];
-        
-       objc_autoreleasePoolPop(pool);
 
-        
     }
+    _glfwTerminate();
+    
+    [pool drain];
 }
 
 @end
