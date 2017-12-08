@@ -66,6 +66,15 @@ enum {
     GlfwModifiedCharacterMask = (1 << GlfwModifiedCharacter),
     GlfwFilesDropMask = (1 << GlfwFilesDrop),
     GlfwAnyEventMask = 0xffffffffU,
+    GlfwKeyEventMask = (GlfwKeyUpMask | GlfwKeyDownMask),
+    GlfwMouseEventMask = (GlfwMouseMovedMask | GlfwMouseEnteredMask | GlfwMouseExitedMask
+                          | GlfwLeftMouseUpMask | GlfwLeftMouseDownMask | GlfwRightMouseUpMask
+                          | GlfwRightMouseDownMask | GlfwMouseMiddleUpMask | GlfwMouseMiddleDownMask
+                          | GlfwMouseOtherUpMask | GlfwMouseOtherDownMask | GlfwScrollWheelMask),
+    GlfwCharacterEventMask = (GlfwCharacterMask | GlfwModifiedCharacterMask),
+    GlfwWindowEventMask = (GlfwWindowMovedMask | GlfwWindowResizedMask | GlfwWindowFramebuferResizedMask
+                           | GlfwWindowShouldRefreshMask | GlfwWindowShouldCloseMask | GlfwWindowFocusedMask
+                           | GlfwWindowIconifiedMask)
 };
 typedef unsigned long long GlfwEventMask;
 
@@ -81,91 +90,187 @@ OF_ASSUME_NONNULL_BEGIN
 {
     double _timestamp;
     GlfwEventType _type;
-    of_point_t _mouseLocation;
     GlfwRawWindow *_window;
-    int _modifierFlags;
-    of_unichar_t _character;
-    int _characterModifiers;
-    int _key;
-    int _scanCode;
-    int _mouseButton;
-    int _mouseModifiers;
-    double _deltaX, _deltaY;
-    GlfwSize _size;
-    GlfwPoint _pos;
-    OFArray OF_GENERIC(OFString *) *_paths;
+    
+    union _event_data_u {
+        struct {
+            bool repeat;
+            of_point_t pos;
+            int button;
+            int modifiers;
+            double deltaX;
+            double deltaY;
+        } mouse;
+        struct {
+            bool repeat;
+            int glfwKey;
+            int scancode;
+            int modifiers;
+        } key;
+        struct {
+            of_unichar_t character;
+            int modifiers;
+        } character;
+        struct {
+            GlfwPoint pos;
+            GlfwSize size;
+            GlfwSize contentSize;
+        } window;
+        
+    } _event_data;
 }
 
 @property (nonatomic, readonly) double timestamp;
 @property (nonatomic, readonly) GlfwEventType type;
-@property (nonatomic, readonly) of_point_t mouseLoaction;
 @property (nonatomic, readonly, retain) GlfwRawWindow *window;
-@property (nonatomic, readonly) int modifierFlags;
-@property (nonatomic, readonly) of_unichar_t character;
-@property (nonatomic, readonly) int characterModifiers;
-@property (nonatomic, readonly) int key;
-@property (nonatomic, readonly) int scanCode;
-@property (nonatomic, readonly) int mouseButton;
-@property (nonatomic, readonly) int mouseModifiers;
-@property (nonatomic, readonly) double deltaX;
-@property (nonatomic, readonly) double deltaY;
-@property (nonatomic, readonly) GlfwPoint pos;
-@property (nonatomic, readonly) GlfwSize size;
-@property (nonatomic, readonly, nullable, copy) OFArray OF_GENERIC(OFString *) *paths;
 
-+ (instancetype)enterExitEventWithType:(GlfwEventType)type
-                             timestamp:(double)timestamp
-                                window:(GlfwRawWindow *)window;
 
-+ (instancetype)keyEventWithType:(GlfwEventType)type
-                       timestamp:(double)timestamp
-                          window:(GlfwRawWindow *)window
-                             key:(int)key
-                        scanCode:(int)scanCode
-                       modifiers:(int)mods;
+@property (nonatomic, assign, readonly) int glfwKey;
+@property (nonatomic, assign, readonly) int systemScancode;
 
-+ (instancetype)mouseEventWithType:(GlfwEventType)type
-                         timestamp:(double)timestamp
-                            window:(GlfwRawWindow *)window
-                          location:(of_point_t)location
-                            button:(int)mouseButton
-                         modifiers:(int)mouseButtonModifiers
-                            deltaX:(double)deltaX
-                            deltaY:(double)deltaY;
+@property (nonatomic, assign, readonly) of_point_t location;
+@property (nonatomic, assign, readonly) of_point_t locationInWindow;
+@property (nonatomic, assign, readonly) of_point_t currentLocation;
+@property (nonatomic, assign, readonly) of_point_t currentLocationInWindow;
+@property (nonatomic, assign, readonly) int glfwMouseButton;
+@property (nonatomic, assign, readonly) double deltaX;
+@property (nonatomic, assign, readonly) double deltaY;
 
-+ (instancetype)characterEventWithType:(GlfwEventType)type
-                             timestamp:(double)timestamp
-                                window:(GlfwRawWindow *)window
-                             character:(of_unichar_t)character
-           characterModifiers:(int)mods;
+@property (nonatomic, assign, readonly) of_unichar_t character;
 
-+ (instancetype)otherEventWithType:(GlfwEventType)type
-                         timestamp:(double)timestamp
-                            window:(GlfwRawWindow *)window
-                              size:(GlfwSize)size
-                               pos:(GlfwPoint)pos
-                             paths:(OFArray OF_GENERIC(OFString *) * _Nullable)paths;
+@property (nonatomic, assign, readonly) int modifiersFlags;
+
+@property (nonatomic, assign, readonly) GlfwPoint windowPosition;
+@property (nonatomic, assign, readonly) GlfwSize windowSize;
+@property (nonatomic, assign, readonly) GlfwSize windowContentSize;
+
+@property (nonatomic, copy, readonly) OFArray OF_GENERIC(OFString *) *droppedFilesPaths;
+
 
 - (instancetype)init OF_UNAVAILABLE;
 
-- (instancetype)initWithType:(GlfwEventType)type
+- (instancetype)initWithType:(GlfwEventType)eventType
+                   timestamp:(double)timestamp
+                    window:(GlfwRawWindow *)window OF_DESIGNATED_INITIALIZER;
+
+- (bool)isMatchEventMask:(GlfwEventMask)mask;
+
+@end
+
+@interface GlfwKeyEvent : GlfwEvent
+
++ (instancetype)keyEventWithType:(GlfwEventType)eventType
+                       timestamp:(double)timestamp
+                          window:(GlfwRawWindow *)window
+                         glfwKey:(int)glfwKey
+                       modifiers:(int)modifiersFlags
+                  systemScancode:(int)systemScancode;
+
+- (instancetype)initWithType:(GlfwEventType)eventType
+                   timestamp:(double)timestamp
+                      window:(GlfwRawWindow *)window
+                     glfwKey:(int)glfwKey
+                   modifiers:(int)modifiersFlags
+              systemScancode:(int)systemScancode;
+
+@end
+
+@interface GlfwMouseEvent : GlfwEvent
+
+
++ (instancetype)enterExitEventWithType:(GlfwEventType)eventType
+                              timestamp:(double)timestamp
+                                 window:(GlfwRawWindow *)window;
+
++ (instancetype)mouseMoveEventWithTimestamp:(double)timestamp
+                               window:(GlfwRawWindow *)window
+                             loaction:(of_point_t)location;
+
++ (instancetype)scrollWheelEventWithType:(GlfwEventType)eventType
+                               timestamp:(double)timestamp
+                                  window:(GlfwRawWindow *)window
+                                  deltaX:(double)deltaX
+                                  deltaY:(double)deltaY;
+
++ (instancetype)mouseButtonEventWithType:(GlfwEventType)eventType
+                               timestamp:(double)timestamp
+                                  window:(GlfwRawWindow *)window
+                             mouseButton:(int)mouseButton
+                          modifiersFlags:(int)modifiersFlags;
+
+- (instancetype)initWithType:(GlfwEventType)eventType
+                   timestamp:(double)timestamp
+                      window:(GlfwRawWindow *)window
+                 mouseButton:(int)mouseButton
+              modifiersFlags:(int)modifiersFlags
                     location:(of_point_t)location
-               modifierFlags:(int)flags
+                      deltaX:(double)deltaX
+                      deltaY:(double)delraY;
+
+@end
+
+@interface GlfwCharacterEvent : GlfwEvent
+
++ (instancetype)characterEventWithType:(GlfwEventType)eventType
+                             timestamp:(double)timestamp
+                                window:(GlfwRawWindow *)window
+                             character:(of_unichar_t)character
+                        modifiersFlags:(int)modifiersFlags;
+
++ (instancetype)characterEventWithType:(GlfwEventType)eventType
+                             timestamp:(double)timestamp
+                                window:(GlfwRawWindow *)window
+                             character:(of_unichar_t)character;
+
+- (instancetype)initWithType:(GlfwEventType)eventType
                    timestamp:(double)timestamp
                       window:(GlfwRawWindow *)window
                    character:(of_unichar_t)character
-          characterModifiers:(int)mods
-                         key:(int)key
-                    scanCode:(int)scanCode
-                 mouseButton:(int)mouseButton
-              mouseModifiers:(int)mouseButtonModifiers
-                      deltaX:(double)deltaX
-                      deltaY:(double)deltaY
-                        size:(GlfwSize)size
-                        pos:(GlfwPoint)pos
-                       paths:(OFArray OF_GENERIC(OFString *) * _Nullable)paths OF_DESIGNATED_INITIALIZER;
+              modifiersFlags:(int)modifiersFlags;
 
-- (bool)isMatchEventMask:(GlfwEventMask)mask;
+@end
+
+
+@interface GlfwWindowEvent : GlfwEvent
+
++ (instancetype)windowMovedEventWithTimestamp:(double)timestamp
+                                  window:(GlfwRawWindow *)window
+                                    windowPos:(GlfwPoint)newPos;
+
++ (instancetype)windowResizedEventWithTimestamp:(double)timestamp
+                                         window:(GlfwRawWindow *)window
+                                     windowSize:(GlfwSize)newSize;
+
++ (instancetype)windowFramebuferResizedEventWithTimestamp:(double)timestamp
+                                                   window:(GlfwRawWindow *)window
+                                              contentSize:(GlfwSize)newContentSize;
+
++ (instancetype)otherWindowEventWithType:(GlfwEventType)eventType
+                               timestamp:(double)timestamp
+                                  window:(GlfwRawWindow *)window;
+
+- (instancetype)initWithType:(GlfwEventType)eventType
+                   timestamp:(double)timestamp
+                      window:(GlfwRawWindow *)window
+                   windowPos:(GlfwPoint)newPos
+                  windowSize:(GlfwSize)newSize
+                 contentSize:(GlfwSize)newContentSize;
+
+@end
+
+@interface GlfwFileDropEvent : GlfwEvent
+{
+    OFArray OF_GENERIC(OFString *) *_filesPaths;
+}
+
++ (instancetype)fileDropEventWithTimestamp:(double)timestamp
+                                    window:(GlfwRawWindow *)window
+                              droppedFiles:(OFArray OF_GENERIC(OFString *) *)filesPaths;
+
+- (instancetype)initWithType:(GlfwEventType)eventType
+                   timestamp:(double)timestamp
+                      window:(GlfwRawWindow *)window
+                droppedFiles:(OFArray OF_GENERIC(OFString *) *)filesPaths;
 
 @end
 
