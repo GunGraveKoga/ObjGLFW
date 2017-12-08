@@ -166,11 +166,11 @@ glfw_application_main(int *argc, char **argv[],
     GLFWmonitor *mainMonitor = glfwGetPrimaryMonitor();
     const GLFWvidmode *vmode = glfwGetVideoMode(mainMonitor);
     
-    double expectedLooptTime = (1.0 / vmode->refreshRate); //expected loop time in ms
+    const double expectedLooptTime = (1.0 / vmode->refreshRate); //expected loop time in ms
     uint64_t currentTime = 0;
     
     while (_isActive) {
-        uint64_t elapsedTime = stm_laptime(&currentTime);
+        stm_laptime(&currentTime);
         
         [_windowManager drawAllWindows];
         
@@ -181,7 +181,7 @@ glfw_application_main(int *argc, char **argv[],
 #if !defined(OF_MACOS)
         [pool releaseObjects];
 #endif
-        elapsedTime = stm_laptime(&currentTime);
+        uint64_t elapsedTime = stm_laptime(&currentTime);
         
         double runloopTimeInterval = expectedLooptTime - stm_ms(elapsedTime);
         OFDate *runloopDedline = [OFDate dateWithTimeIntervalSinceNow:runloopTimeInterval];
