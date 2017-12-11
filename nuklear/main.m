@@ -382,6 +382,8 @@ GLFW_APPLICATION_DELEGATE(AppDelegate);
 - (void)handleEvent:(GlfwEvent *)event fromWindow:(GlfwWindow *)window {
     nk_input_begin(&ctx);
     
+    of_log(@"%@", event);
+    
     if ([event isMatchEventMask:GlfwCharacterEventMask]) {
         nk_input_unicode(&ctx, ((GlfwCharacterEvent *)event).character);
     }

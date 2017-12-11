@@ -83,7 +83,7 @@ static GlfwWindowManager *defaultManager = nil;
 
 - (instancetype)glfw_init {
     self = [super init];
-    _eventsQueue = [[OFSortedList alloc] init];
+    _eventsQueue = [[GlfwEventsQueue alloc] init];
     _managedWindows = [[OFMapTable alloc]
                        initWithKeyFunctions:_keyMapFunctions objectFunctions:_windowMapFunctions];
 #if defined(OF_HAVE_THREADS)
@@ -202,16 +202,18 @@ static GlfwWindowManager *defaultManager = nil;
     [_lock lock];
 #endif
     
-    for (GlfwEvent *event in _eventsQueue) {
+    of_list_object_t *eventObject = [_eventsQueue firstListObject];
+    
+    while (eventObject != NULL) {
         void *pool = objc_autoreleasePoolPush();
         
-        GlfwRawWindow *window = [event window];
+        GlfwEvent *event = (GlfwEvent *)(eventObject->object);
         
-        if (![window shouldClose] && [window isVisibleForUser]) {
-            [window sendEvent:event];
-        }
+        [[event window] sendEvent:event];
         
         objc_autoreleasePoolPop(pool);
+        
+        eventObject = eventObject->next;
     }
     
 #if defined(OF_HAVE_THREADS)
@@ -253,6 +255,27 @@ static GlfwWindowManager *defaultManager = nil;
 #if defined(OF_HAVE_THREADS)
     [_lock unlock];
 #endif
+}
+
+@end
+
+@implementation GlfwEventsQueue
+
+- (void)removeAllObjects {
+    of_list_object_t *iter, *next;
+    
+    _mutations++;
+    
+    for (iter = _firstListObject; iter != NULL; iter = next) {
+        next = iter->next;
+        
+        [iter->object release];
+        [self freeMemory: iter];
+    }
+    
+    _firstListObject = _lastListObject = NULL;
+    
+    _count = 0;
 }
 
 @end

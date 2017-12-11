@@ -15,10 +15,14 @@
 
 OF_ASSUME_NONNULL_BEGIN
 
+@interface GlfwEventsQueue OF_GENERIC(ObjectType): OFSortedList
+
+@end
+
 @interface GlfwWindowManager : OFObject
 {
     OFMapTable *_managedWindows;
-    OFSortedList OF_GENERIC(GlfwEvent *) *_eventsQueue;
+    GlfwEventsQueue OF_GENERIC(GlfwEvent *) *_eventsQueue;
 #if defined(OF_HAVE_THREADS)
     OFMutex *_lock;
 #endif
