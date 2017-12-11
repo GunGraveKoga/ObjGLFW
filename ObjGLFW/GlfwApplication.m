@@ -21,8 +21,16 @@ extern void __wgetmainargs(int *, wchar_t ***, wchar_t ***, int, int *);
 #include <GLFW/glfw3.h>
 #include "sokol_time.h"
 
+static const char *_glfwVersionString = NULL;
+
+static void _glfwErrorCallbaack(int err, const char *description) {
+    of_log(@"%s: Error - %d %s!", _glfwVersionString, err, description);
+}
+
 void _glfwInit(void) {
     stm_setup();
+    _glfwVersionString = glfwGetVersionString();
+    glfwSetErrorCallback(&_glfwErrorCallbaack);
     
     glfwInit();
 }
