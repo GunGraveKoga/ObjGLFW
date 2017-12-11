@@ -184,9 +184,9 @@ OF_INLINE bool OFRectangleContainPoint(of_rectangle_t rect, of_point_t point) {
     return [[[self alloc] initWithType:GlfwMouseMoved timestamp:timestamp window:window mouseButton:0 modifiersFlags:0 location:location deltaX:NAN deltaY:NAN] autorelease];
 }
 
-+ (instancetype)scrollWheelEventWithType:(GlfwEventType)eventType timestamp:(double)timestamp window:(GlfwRawWindow *)window deltaX:(double)deltaX deltaY:(double)deltaY
++ (instancetype)scrollWheelEventWithTimestamp:(double)timestamp window:(GlfwRawWindow *)window deltaX:(double)deltaX deltaY:(double)deltaY
 {
-    return [[[self alloc] initWithType:eventType timestamp:timestamp window:window mouseButton:NAN modifiersFlags:NAN location:of_point_null() deltaX:deltaX deltaY:deltaY] autorelease];
+    return [[[self alloc] initWithType:GlfwScrollWheel timestamp:timestamp window:window mouseButton:NAN modifiersFlags:NAN location:of_point_null() deltaX:deltaX deltaY:deltaY] autorelease];
 }
 
 + (instancetype)mouseButtonEventWithType:(GlfwEventType)eventType timestamp:(double)timestamp window:(GlfwRawWindow *)window mouseButton:(int)mouseButton modifiersFlags:(int)modifiersFlags
@@ -280,14 +280,14 @@ OF_INLINE bool OFRectangleContainPoint(of_rectangle_t rect, of_point_t point) {
 
 @implementation GlfwCharacterEvent
 
-+ (instancetype)characterEventWithType:(GlfwEventType)eventType timestamp:(double)timestamp window:(GlfwRawWindow *)window character:(of_unichar_t)character modifiersFlags:(int)modifiersFlags
++ (instancetype)characterEventWithTimestamp:(double)timestamp window:(GlfwRawWindow *)window character:(of_unichar_t)character modifiersFlags:(int)modifiersFlags
 {
-    return [[[self alloc] initWithType:eventType timestamp:timestamp window:window character:character modifiersFlags:modifiersFlags] autorelease];
+    return [[[self alloc] initWithType:GlfwModifiedCharacter timestamp:timestamp window:window character:character modifiersFlags:modifiersFlags] autorelease];
 }
 
-+ (instancetype)characterEventWithType:(GlfwEventType)eventType timestamp:(double)timestamp window:(GlfwRawWindow *)window character:(of_unichar_t)character
++ (instancetype)characterEventWithTimestamp:(double)timestamp window:(GlfwRawWindow *)window character:(of_unichar_t)character
 {
-    return [[[self alloc] initWithType:eventType timestamp:timestamp window:window character:character modifiersFlags:NAN] autorelease];
+    return [[[self alloc] initWithType:GlfwCharacter timestamp:timestamp window:window character:character modifiersFlags:NAN] autorelease];
 }
 
 - (instancetype)initWithType:(GlfwEventType)eventType timestamp:(double)timestamp window:(GlfwRawWindow *)window character:(of_unichar_t)character modifiersFlags:(int)modifiersFlags

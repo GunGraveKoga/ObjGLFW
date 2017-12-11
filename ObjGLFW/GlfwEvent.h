@@ -186,8 +186,7 @@ OF_ASSUME_NONNULL_BEGIN
                                window:(GlfwRawWindow *)window
                              loaction:(of_point_t)location;
 
-+ (instancetype)scrollWheelEventWithType:(GlfwEventType)eventType
-                               timestamp:(double)timestamp
++ (instancetype)scrollWheelEventWithTimestamp:(double)timestamp
                                   window:(GlfwRawWindow *)window
                                   deltaX:(double)deltaX
                                   deltaY:(double)deltaY;
@@ -211,14 +210,12 @@ OF_ASSUME_NONNULL_BEGIN
 
 @interface GlfwCharacterEvent : GlfwEvent
 
-+ (instancetype)characterEventWithType:(GlfwEventType)eventType
-                             timestamp:(double)timestamp
++ (instancetype)characterEventWithTimestamp:(double)timestamp
                                 window:(GlfwRawWindow *)window
                              character:(of_unichar_t)character
                         modifiersFlags:(int)modifiersFlags;
 
-+ (instancetype)characterEventWithType:(GlfwEventType)eventType
-                             timestamp:(double)timestamp
++ (instancetype)characterEventWithTimestamp:(double)timestamp
                                 window:(GlfwRawWindow *)window
                              character:(of_unichar_t)character;
 

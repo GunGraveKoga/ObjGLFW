@@ -262,7 +262,7 @@ static void windowPositionCallback(GLFWwindow *glfwWindow, int x, int y) {
     GlfwWindowManager *wm = (GlfwWindowManager *)glfwGetWindowUserPointer(glfwWindow);
     GlfwRawWindow *window = [wm findWindow:glfwWindow];
     
-    [wm fetchEvent:[GlfwEvent otherEventWithType:GlfwWindowMoved timestamp:stm_ms(now) window:window size:GlfwSizeZero() pos:GlfwPointNew(x, y) paths:nil]];
+    [wm fetchEvent:[GlfwWindowEvent windowMovedEventWithTimestamp:stm_ms(now) window:window windowPos:GlfwPointNew(x, y)]];
     
 }
 
@@ -271,7 +271,7 @@ static void windowSizeCallback(GLFWwindow *glfwWindow, int width, int height) {
     GlfwWindowManager *wm = (GlfwWindowManager *)glfwGetWindowUserPointer(glfwWindow);
     GlfwRawWindow *window = [wm findWindow:glfwWindow];
     
-    [wm fetchEvent:[GlfwEvent otherEventWithType:GlfwWindowResized timestamp:stm_ms(now) window:window size:GlfwSizeNew(width, height) pos:GlfwPointZero() paths:nil]];
+    [wm fetchEvent:[GlfwWindowEvent windowResizedEventWithTimestamp:stm_ms(now) window:window windowSize:GlfwSizeNew(width, height)]];
 }
 
 static void windowCloseCallback(GLFWwindow *glfwWindow) {
@@ -279,7 +279,7 @@ static void windowCloseCallback(GLFWwindow *glfwWindow) {
     GlfwWindowManager *wm = (GlfwWindowManager *)glfwGetWindowUserPointer(glfwWindow);
     GlfwRawWindow *window = [wm findWindow:glfwWindow];
     
-    [wm fetchEvent:[GlfwEvent otherEventWithType:GlfwWindowShouldClose timestamp:stm_ms(now) window:window size:GlfwSizeZero() pos:GlfwPointZero() paths:nil]];
+    [wm fetchEvent:[GlfwWindowEvent otherWindowEventWithType:GlfwWindowShouldClose timestamp:stm_ms(now) window:window]];
 }
 
 static void windowRefreshCallback(GLFWwindow *glfwWindow) {
@@ -287,7 +287,7 @@ static void windowRefreshCallback(GLFWwindow *glfwWindow) {
     GlfwWindowManager *wm = (GlfwWindowManager *)glfwGetWindowUserPointer(glfwWindow);
     GlfwRawWindow *window = [wm findWindow:glfwWindow];
     
-    [wm fetchEvent:[GlfwEvent otherEventWithType:GlfwWindowShouldRefresh timestamp:stm_ms(now) window:window size:GlfwSizeZero() pos:GlfwPointZero() paths:nil]];
+    [wm fetchEvent:[GlfwWindowEvent otherWindowEventWithType:GlfwWindowShouldRefresh timestamp:stm_ms(now) window:window]];
 }
 
 static void windowFocusCallback(GLFWwindow *glfwWindow, int hasFocus) {
@@ -295,7 +295,7 @@ static void windowFocusCallback(GLFWwindow *glfwWindow, int hasFocus) {
     GlfwWindowManager *wm = (GlfwWindowManager *)glfwGetWindowUserPointer(glfwWindow);
     GlfwRawWindow *window = [wm findWindow:glfwWindow];
     
-    [wm fetchEvent:[GlfwEvent otherEventWithType:GlfwWindowFocused timestamp:stm_ms(now) window:window size:GlfwSizeZero() pos:GlfwPointZero() paths:nil]];
+    [wm fetchEvent:[GlfwWindowEvent otherWindowEventWithType:GlfwWindowFocused timestamp:stm_ms(now) window:window]];
 }
 
 static void windowIconifyCallback(GLFWwindow *glfwWindow, int toIconify) {
@@ -303,7 +303,7 @@ static void windowIconifyCallback(GLFWwindow *glfwWindow, int toIconify) {
     GlfwWindowManager *wm = (GlfwWindowManager *)glfwGetWindowUserPointer(glfwWindow);
     GlfwRawWindow *window = [wm findWindow:glfwWindow];
     
-    [wm fetchEvent:[GlfwEvent otherEventWithType:GlfwWindowIconified timestamp:stm_ms(now) window:window size:GlfwSizeZero() pos:GlfwPointZero() paths:nil]];
+    [wm fetchEvent:[GlfwWindowEvent otherWindowEventWithType:GlfwWindowIconified timestamp:stm_ms(now) window:window]];
 }
 
 static void windowFramebufferSizeCallback(GLFWwindow *glfwWindow, int width, int height) {
@@ -311,7 +311,7 @@ static void windowFramebufferSizeCallback(GLFWwindow *glfwWindow, int width, int
     GlfwWindowManager *wm = (GlfwWindowManager *)glfwGetWindowUserPointer(glfwWindow);
     GlfwRawWindow *window = [wm findWindow:glfwWindow];
     
-    [wm fetchEvent:[GlfwEvent otherEventWithType:GlfwWindowFramebuferResized timestamp:stm_ms(now) window:window size:GlfwSizeNew(width, height) pos:GlfwPointZero() paths:nil]];
+    [wm fetchEvent:[GlfwWindowEvent windowFramebuferResizedEventWithTimestamp:stm_ms(now) window:window contentSize:GlfwSizeNew(width, height)]];
 }
 
 static void inputMouseButtonCallback(GLFWwindow *glfwWindow, int button, int action, int mods) {
@@ -335,7 +335,7 @@ static void inputMouseButtonCallback(GLFWwindow *glfwWindow, int button, int act
             break;
     }
     
-    [wm fetchEvent:[GlfwEvent mouseEventWithType:mouseEventType timestamp:stm_ms(now) window:window location:of_point(0, 0) button:button modifiers:mods deltaX:0 deltaY:0]];
+    [wm fetchEvent:[GlfwMouseEvent mouseButtonEventWithType:mouseEventType timestamp:stm_ms(now) window:window mouseButton:button modifiersFlags:mods]];
 }
 
 static void inputCursorPositionCallback(GLFWwindow *glfwWindow, double x, double y) {
@@ -343,7 +343,7 @@ static void inputCursorPositionCallback(GLFWwindow *glfwWindow, double x, double
     GlfwWindowManager *wm = (GlfwWindowManager *)glfwGetWindowUserPointer(glfwWindow);
     GlfwRawWindow *window = [wm findWindow:glfwWindow];
     
-    [wm fetchEvent:[GlfwEvent mouseEventWithType:GlfwMouseMoved timestamp:stm_ms(now) window:window location:of_point(x, y) button:0 modifiers:0 deltaX:0 deltaY:0]];
+    [wm fetchEvent:[GlfwMouseEvent mouseMoveEventWithTimestamp:stm_ms(now) window:window loaction:of_point(x, y)]];
 }
 
 static void inputCursorEnterCallback(GLFWwindow *glfwWindow, int enter) {
@@ -353,7 +353,7 @@ static void inputCursorEnterCallback(GLFWwindow *glfwWindow, int enter) {
     
     GlfwEventType cursorEnterType = (enter == GLFW_TRUE) ? GlfwMouseEntered : GlfwMouseExited;
     
-    [wm fetchEvent:[GlfwEvent enterExitEventWithType:cursorEnterType timestamp:stm_ms(now) window:window]];
+    [wm fetchEvent:[GlfwMouseEvent enterExitEventWithType:cursorEnterType timestamp:stm_ms(now) window:window]];
 }
 
 static void inputScrollCallback(GLFWwindow *glfwWindow, double xOffset, double yOffset) {
@@ -361,7 +361,7 @@ static void inputScrollCallback(GLFWwindow *glfwWindow, double xOffset, double y
     GlfwWindowManager *wm = (GlfwWindowManager *)glfwGetWindowUserPointer(glfwWindow);
     GlfwRawWindow *window = [wm findWindow:glfwWindow];
     
-    [wm fetchEvent:[GlfwEvent mouseEventWithType:GlfwScrollWheel timestamp:stm_ms(now) window:window location:of_point(0, 0) button:0 modifiers:0 deltaX:xOffset deltaY:yOffset]];
+    [wm fetchEvent:[GlfwMouseEvent scrollWheelEventWithTimestamp:stm_ms(now) window:window deltaX:xOffset deltaY:yOffset]];
 }
 
 static void inputKeyCallback(GLFWwindow *glfwWindow, int key, int scancode, int action, int mods) {
@@ -371,7 +371,7 @@ static void inputKeyCallback(GLFWwindow *glfwWindow, int key, int scancode, int 
     
     GlfwEventType keyEventType = (action == GLFW_RELEASE) ? GlfwKeyUp : GlfwKeyDown;
     
-    [wm fetchEvent:[GlfwEvent keyEventWithType:keyEventType timestamp:stm_ms(now) window:window key:key scanCode:scancode modifiers:mods]];
+    [wm fetchEvent:[GlfwKeyEvent keyEventWithType:keyEventType timestamp:stm_ms(now) window:window glfwKey:key modifiers:mods systemScancode:scancode]];
 }
 
 static void inputCharCallback(GLFWwindow *glfwWindow, unsigned int codepoint) {
@@ -379,7 +379,7 @@ static void inputCharCallback(GLFWwindow *glfwWindow, unsigned int codepoint) {
     GlfwWindowManager *wm = (GlfwWindowManager *)glfwGetWindowUserPointer(glfwWindow);
     GlfwRawWindow *window = [wm findWindow:glfwWindow];
     
-    [wm fetchEvent:[GlfwEvent characterEventWithType:GlfwCharacter timestamp:stm_ms(now) window:window character:(of_unichar_t)codepoint characterModifiers:0]];
+    [wm fetchEvent:[GlfwCharacterEvent characterEventWithTimestamp:stm_ms(now) window:window character:(of_unichar_t)codepoint]];
 }
 
 static void inputCharModCallback(GLFWwindow *glfwWindow, unsigned int codepoint, int mods) {
@@ -387,7 +387,7 @@ static void inputCharModCallback(GLFWwindow *glfwWindow, unsigned int codepoint,
     GlfwWindowManager *wm = (GlfwWindowManager *)glfwGetWindowUserPointer(glfwWindow);
     GlfwRawWindow *window = [wm findWindow:glfwWindow];
     
-    [wm fetchEvent:[GlfwEvent characterEventWithType:GlfwModifiedCharacter timestamp:stm_ms(now) window:window character:(of_unichar_t)codepoint characterModifiers:mods]];
+    [wm fetchEvent:[GlfwCharacterEvent characterEventWithTimestamp:stm_ms(now) window:window character:(of_unichar_t)codepoint modifiersFlags:mods]];
 }
 
 static void inputDropCallback(GLFWwindow *glfwWindow, int count, const char **paths) {
@@ -403,7 +403,7 @@ static void inputDropCallback(GLFWwindow *glfwWindow, int count, const char **pa
         [pathsArray addObject:[OFString stringWithUTF8String:paths[i]]];
     }
     
-    [wm fetchEvent:[GlfwEvent otherEventWithType:GlfwFilesDrop timestamp:stm_ms(now) window:window size:GlfwSizeZero() pos:GlfwPointZero() paths:pathsArray]];
+    [wm fetchEvent:[GlfwFileDropEvent fileDropEventWithTimestamp:stm_ms(now) window:window droppedFiles:pathsArray]];
     
     objc_autoreleasePoolPop(pool);
     
