@@ -179,7 +179,7 @@ OF_INLINE of_rectangle_t GlfwRectToOFRect(GlfwRect rect) {
     
     [description appendFormat:@" Pressed key %s", glfwGetKeyName(_event_data.key.glfwKey, _event_data.key.scancode)];
     
-    if (!isnan(_event_data.key.modifiers)) {
+    if (!isnan(_event_data.key.modifiers) && _event_data.key.modifiers != 0) {
         [description appendUTF8String:" Modifiers: "];
         
         bool multipleModifiers = false;
@@ -349,7 +349,7 @@ OF_INLINE of_rectangle_t GlfwRectToOFRect(GlfwRect rect) {
         case GlfwMouseOtherUp:
         case GlfwMouseOtherDown:
         {
-            if (!isnan(_event_data.mouse.modifiers)) {
+            if (!isnan(_event_data.mouse.modifiers) && _event_data.mouse.modifiers != 0) {
                 [description appendUTF8String:" Modifiers: "];
                 
                 bool multipleModifiers = false;
@@ -375,6 +375,7 @@ OF_INLINE of_rectangle_t GlfwRectToOFRect(GlfwRect rect) {
                     if (multipleModifiers) [description appendUTF8String:"+"];
                     [description appendUTF8String:"SUPER"];
                 }
+                
             }
         }
             break;
@@ -450,7 +451,7 @@ OF_INLINE of_rectangle_t GlfwRectToOFRect(GlfwRect rect) {
     
     [description appendFormat:@" Character: %C", _event_data.character.character];
     
-    if (!isnan(_event_data.character.modifiers)) {
+    if (!isnan(_event_data.character.modifiers) && _event_data.character.modifiers != 0) {
         [description appendUTF8String:" Modifiers: "];
         
         bool multipleModifiers = false;
@@ -476,6 +477,7 @@ OF_INLINE of_rectangle_t GlfwRectToOFRect(GlfwRect rect) {
             if (multipleModifiers) [description appendUTF8String:"+"];
             [description appendUTF8String:"SUPER"];
         }
+        
     }
     
     [description makeImmutable];

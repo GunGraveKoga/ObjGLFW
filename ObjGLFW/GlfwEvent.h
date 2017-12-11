@@ -71,6 +71,9 @@ enum {
     GlfwFilesDropMask = (1 << GlfwFilesDrop),
     GlfwAnyEventMask = 0xffffffffU,
     GlfwKeyEventMask = (GlfwKeyUpMask | GlfwKeyDownMask),
+    GlfwMouseButtonMask = (GlfwLeftMouseDownMask | GlfwLeftMouseUpMask | GlfwRightMouseDownMask
+                           | GlfwRightMouseUpMask | GlfwMouseMiddleDownMask | GlfwMouseMiddleUpMask
+                           | GlfwMouseOtherDownMask | GlfwMouseOtherUpMask),
     GlfwMouseEventMask = (GlfwMouseMovedMask | GlfwMouseEnteredMask | GlfwMouseExitedMask
                           | GlfwLeftMouseUpMask | GlfwLeftMouseDownMask | GlfwRightMouseUpMask
                           | GlfwRightMouseDownMask | GlfwMouseMiddleUpMask | GlfwMouseMiddleDownMask
@@ -98,7 +101,6 @@ OF_ASSUME_NONNULL_BEGIN
     
     union _event_data_u {
         struct {
-            bool repeat;
             of_point_t pos;
             int button;
             int modifiers;
@@ -106,7 +108,6 @@ OF_ASSUME_NONNULL_BEGIN
             double deltaY;
         } mouse;
         struct {
-            bool repeat;
             int glfwKey;
             int scancode;
             int modifiers;
