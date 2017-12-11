@@ -27,6 +27,9 @@
         bool visible = true;
         _maxSize = GlfwSizeNull();
         _minSize = GlfwSizeNull();
+#if defined(OF_HAVE_THREADS)
+        _lock = [[OFMutex alloc] init];
+#endif
         
         for (OFNumber *hint in windowHints) {
             OFNumber *hintValue = [windowHints objectForKey:hint];
@@ -363,6 +366,10 @@
     }
 }
 
+- (bool)isVisibleForUser {
+    return ([self isVisible] && ![self isIconified]);
+}
+
 - (bool)isOpen {
     @synchronized (self) {
         return (_windowHandle != NULL);
@@ -403,6 +410,8 @@
 
 - (void)makeContextCurrent {
     @synchronized(self) {
+        [_lock lock];
+        
         if (_windowHandle) {
             glfwMakeContextCurrent(_windowHandle);
         }
@@ -410,7 +419,9 @@
 }
 
 - (void)doneContext {
-    
+    @synchronized(self) {
+        [_lock unlock];
+    }
 }
 
 - (void)swapBuffers {
@@ -441,7 +452,9 @@
     }
     
     [_windowTitle release];
+#if defined(OF_HAVE_THREADS)
     [_lock release];
+#endif
     
     [super dealloc];
 }

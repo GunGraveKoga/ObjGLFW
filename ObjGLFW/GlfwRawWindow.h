@@ -19,6 +19,9 @@
     OFString *_windowTitle;
     GlfwSize _minSize;
     GlfwSize _maxSize;
+#if defined(OF_HAVE_THREADS)
+    OFMutex *_lock;
+#endif
 }
 
 @property (atomic, assign) GLFWwindow *windowHandle;
@@ -38,6 +41,7 @@
 @property (atomic, getter=isDecorated, readonly) bool decorated;
 @property (atomic, getter=isFloating, readonly) bool floating;
 @property (atomic, getter=isResizable, readonly) bool resizable;
+@property (nonatomic, getter=isVisibleForUser, readonly) bool visibleForUser;
 
 - (instancetype)init OF_UNAVAILABLE;
 
