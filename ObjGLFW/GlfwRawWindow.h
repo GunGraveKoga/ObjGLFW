@@ -12,6 +12,9 @@
 #include <GLFW/glfw3.h>
 
 @class GlfwEvent;
+@class GlfwMonitor;
+
+OF_ASSUME_NONNULL_BEGIN
 
 @interface GlfwRawWindow : OFObject <OFCopying>
 {
@@ -25,7 +28,7 @@
 }
 
 @property (atomic, assign) GLFWwindow *windowHandle;
-
+@property (nonatomic, retain, nullable) GlfwMonitor *monitor;
 @property (atomic, copy) OFString *title;
 @property (atomic) GlfwRect frame;
 @property (atomic) GlfwSize contentSize;
@@ -59,3 +62,5 @@
 - (void)swapBuffers;
 
 @end
+
+OF_ASSUME_NONNULL_END

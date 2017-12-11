@@ -9,6 +9,11 @@
 #import "GlfwRawWindow.h"
 #import "GlfwApplication.h"
 #import "GlfwWindowManager.h"
+#import "GlfwMonitor.h"
+
+@interface GlfwMonitor ()
++ (instancetype)glfw_findMonitor:(GLFWmonitor *)monitorHandle;
+@end
 
 @interface GlfwRawWindow ()
 
@@ -85,6 +90,25 @@
     }
     
     return self;
+}
+
+- (GlfwMonitor *)monitor {
+    @synchronized(self) {
+        if (_windowHandle) {
+            return [GlfwMonitor glfw_findMonitor:glfwGetWindowMonitor(_windowHandle)];
+        }
+    }
+    
+    return nil;
+}
+
+- (void)setMonitor:(GlfwMonitor *)monitor {
+    @synchronized(self) {
+        if (_windowHandle) {
+            const GLFWvidmode *vmode = [monitor videoMode];
+            glfwSetWindowMonitor(_windowHandle, [monitor monitorHandle], 0, 0, vmode->width, vmode->height, vmode->refreshRate);
+        }
+    }
 }
 
 - (OFString *)title {
