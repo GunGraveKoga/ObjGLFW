@@ -41,6 +41,7 @@
 		1407554B1FD8929A007BF8B0 /* GlfwDrawing.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GlfwDrawing.h; sourceTree = "<group>"; };
 		ED7DC50D1FDECBCC0057AE1D /* GlfwMonitor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GlfwMonitor.h; sourceTree = "<group>"; };
 		ED7DC50E1FDECBCC0057AE1D /* GlfwMonitor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GlfwMonitor.m; sourceTree = "<group>"; };
+		ED7DC5121FDEE0690057AE1D /* nuklear.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = nuklear.h; sourceTree = "<group>"; };
 		EDF8C8ED1FD70E16002CF9DC /* ObjGLFW */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ObjGLFW; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDF8C8F01FD70E16002CF9DC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		EDF8C8F81FD70F08002CF9DC /* ObjFW.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ObjFW.framework; path = ../../../Library/Frameworks/ObjFW.framework; sourceTree = "<group>"; };
@@ -65,9 +66,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		ED7DC5101FDEDFF80057AE1D /* Examples */ = {
+			isa = PBXGroup;
+			children = (
+				ED7DC5111FDEE0090057AE1D /* nuklear */,
+			);
+			name = Examples;
+			sourceTree = "<group>";
+		};
+		ED7DC5111FDEE0090057AE1D /* nuklear */ = {
+			isa = PBXGroup;
+			children = (
+				ED7DC5121FDEE0690057AE1D /* nuklear.h */,
+				EDF8C8F01FD70E16002CF9DC /* main.m */,
+			);
+			path = nuklear;
+			sourceTree = "<group>";
+		};
 		EDF8C8E41FD70E16002CF9DC = {
 			isa = PBXGroup;
 			children = (
+				ED7DC5101FDEDFF80057AE1D /* Examples */,
 				EDF8C8EF1FD70E16002CF9DC /* ObjGLFW */,
 				EDF8C8EE1FD70E16002CF9DC /* Products */,
 				EDF8C8F71FD70F07002CF9DC /* Frameworks */,
@@ -86,7 +105,6 @@
 			isa = PBXGroup;
 			children = (
 				EDF8C8FD1FD713BF002CF9DC /* sokol_time.h */,
-				EDF8C8F01FD70E16002CF9DC /* main.m */,
 				140755461FD74A38007BF8B0 /* GlfwGeometry.h */,
 				EDF8C8FA1FD70F2C002CF9DC /* GlfwApplication.h */,
 				EDF8C8FB1FD70F2C002CF9DC /* GlfwApplication.m */,
