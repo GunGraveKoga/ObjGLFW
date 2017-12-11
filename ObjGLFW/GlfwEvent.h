@@ -33,7 +33,9 @@ enum _GlfwEventType {
     GlfwWindowShouldRefresh,
     GlfwWindowShouldClose,
     GlfwWindowFocused,
+    GlfwWindowDefocused,
     GlfwWindowIconified,
+    GlfwWindowRestored,
     GlfwCharacter,
     GlfwModifiedCharacter,
     GlfwFilesDrop,
@@ -61,7 +63,9 @@ enum {
     GlfwWindowShouldRefreshMask = (1 << GlfwWindowShouldRefresh),
     GlfwWindowShouldCloseMask = (1 << GlfwWindowShouldClose),
     GlfwWindowFocusedMask = (1 << GlfwWindowFocused),
+    GlfwWindowDefocusedMask = (1 << GlfwWindowDefocused),
     GlfwWindowIconifiedMask = (1 << GlfwWindowIconified),
+    GlfwWindowRestoredMask = (1 << GlfwWindowRestored),
     GlfwCharacterMask = (1 << GlfwCharacter),
     GlfwModifiedCharacterMask = (1 << GlfwModifiedCharacter),
     GlfwFilesDropMask = (1 << GlfwFilesDrop),
@@ -74,7 +78,7 @@ enum {
     GlfwCharacterEventMask = (GlfwCharacterMask | GlfwModifiedCharacterMask),
     GlfwWindowEventMask = (GlfwWindowMovedMask | GlfwWindowResizedMask | GlfwWindowFramebuferResizedMask
                            | GlfwWindowShouldRefreshMask | GlfwWindowShouldCloseMask | GlfwWindowFocusedMask
-                           | GlfwWindowIconifiedMask)
+                           | GlfwWindowDefocusedMask | GlfwWindowIconifiedMask | GlfwWindowRestoredMask)
 };
 typedef unsigned long long GlfwEventMask;
 

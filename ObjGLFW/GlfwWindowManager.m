@@ -207,7 +207,7 @@ static GlfwWindowManager *defaultManager = nil;
         
         GlfwRawWindow *window = [event window];
         
-        if (![window shouldClose]) {
+        if (![window shouldClose] && [window isVisibleForUser]) {
             [window sendEvent:event];
         }
         
@@ -279,7 +279,7 @@ static void windowCloseCallback(GLFWwindow *glfwWindow) {
     GlfwWindowManager *wm = (GlfwWindowManager *)glfwGetWindowUserPointer(glfwWindow);
     GlfwRawWindow *window = [wm findWindow:glfwWindow];
     
-    [wm fetchEvent:[GlfwWindowEvent otherWindowEventWithType:GlfwWindowShouldClose timestamp:stm_ms(now) window:window]];
+    [window sendEvent:[GlfwWindowEvent otherWindowEventWithType:GlfwWindowShouldClose timestamp:stm_ms(now) window:window]];
 }
 
 static void windowRefreshCallback(GLFWwindow *glfwWindow) {
@@ -295,7 +295,7 @@ static void windowFocusCallback(GLFWwindow *glfwWindow, int hasFocus) {
     GlfwWindowManager *wm = (GlfwWindowManager *)glfwGetWindowUserPointer(glfwWindow);
     GlfwRawWindow *window = [wm findWindow:glfwWindow];
     
-    [wm fetchEvent:[GlfwWindowEvent otherWindowEventWithType:GlfwWindowFocused timestamp:stm_ms(now) window:window]];
+    [wm fetchEvent:[GlfwWindowEvent otherWindowEventWithType:(hasFocus == GL_TRUE) ? GlfwWindowFocused : GlfwWindowDefocused timestamp:stm_ms(now) window:window]];
 }
 
 static void windowIconifyCallback(GLFWwindow *glfwWindow, int toIconify) {
@@ -303,7 +303,7 @@ static void windowIconifyCallback(GLFWwindow *glfwWindow, int toIconify) {
     GlfwWindowManager *wm = (GlfwWindowManager *)glfwGetWindowUserPointer(glfwWindow);
     GlfwRawWindow *window = [wm findWindow:glfwWindow];
     
-    [wm fetchEvent:[GlfwWindowEvent otherWindowEventWithType:GlfwWindowIconified timestamp:stm_ms(now) window:window]];
+    [wm fetchEvent:[GlfwWindowEvent otherWindowEventWithType:(toIconify == GL_TRUE) ? GlfwWindowIconified : GlfwWindowResized timestamp:stm_ms(now) window:window]];
 }
 
 static void windowFramebufferSizeCallback(GLFWwindow *glfwWindow, int width, int height) {

@@ -56,7 +56,7 @@ OF_INLINE bool OFRectangleContainPoint(of_rectangle_t rect, of_point_t point) {
 }
 
 - (of_comparison_result_t)compare:(id<OFComparing>)object {
-    if (![(id<OFObject>)object isMemberOfClass:[self class]])
+    if (![(id<OFObject>)object isKindOfClass:[GlfwEvent class]])
         @throw [OFInvalidArgumentException exception];
     
     GlfwEvent *other = (GlfwEvent *)object;
@@ -81,6 +81,7 @@ OF_INLINE bool OFRectangleContainPoint(of_rectangle_t rect, of_point_t point) {
 - (OFString *)description {
     
     static const char *_typeNames[] = {
+        "GlfwUnknownEvent",
         "GlfwLeftMouseDown",
         "GlfwLeftMouseUp",
         "GlfwRightMouseDown",
@@ -101,7 +102,9 @@ OF_INLINE bool OFRectangleContainPoint(of_rectangle_t rect, of_point_t point) {
         "GlfwWindowShouldRefresh",
         "GlfwWindowShouldClose",
         "GlfwWindowFocused",
+        "GlfwWindowDefocused",
         "GlfwWindowIconified",
+        "GlfwWindowRestored",
         "GlfwCharacter",
         "GlfwModifiedCharacter",
         "GlfwFilesDrop"
@@ -170,6 +173,44 @@ OF_INLINE bool OFRectangleContainPoint(of_rectangle_t rect, of_point_t point) {
     return false;
 }
 
+- (OFString *)description {
+    OFMutableString *description = [[super description] mutableCopy];
+    
+    [description appendFormat:@" Pressed key %s", glfwGetKeyName(_event_data.key.glfwKey, _event_data.key.scancode)];
+    
+    if (!isnan(_event_data.key.modifiers)) {
+        [description appendUTF8String:" Modifiers: "];
+        
+        bool multipleModifiers = false;
+        
+        if ((_event_data.key.modifiers & GLFW_MOD_SHIFT) == GLFW_MOD_SHIFT) {
+            [description appendUTF8String:"SHIFT"];
+            multipleModifiers = true;
+        }
+        
+        if ((_event_data.key.modifiers & GLFW_MOD_ALT) == GLFW_MOD_ALT) {
+            if (multipleModifiers) [description appendUTF8String:"+"];
+            [description appendUTF8String:"ALT"];
+            multipleModifiers = true;
+        }
+        
+        if ((_event_data.key.modifiers & GLFW_MOD_CONTROL) == GLFW_MOD_CONTROL) {
+            if (multipleModifiers) [description appendUTF8String:"+"];
+            [description appendUTF8String:"CONTROL"];
+            multipleModifiers = true;
+        }
+        
+        if ((_event_data.key.modifiers & GLFW_MOD_SUPER) == GLFW_MOD_SUPER) {
+            if (multipleModifiers) [description appendUTF8String:"+"];
+            [description appendUTF8String:"SUPER"];
+        }
+    }
+    
+    [description makeImmutable];
+    
+    return [description autorelease];
+}
+
 @end
 
 @implementation GlfwMouseEvent
@@ -232,20 +273,26 @@ OF_INLINE bool OFRectangleContainPoint(of_rectangle_t rect, of_point_t point) {
 }
 
 - (of_point_t)locationInWindow {
-    GlfwRect windowRect = [_window frame];
+    of_rectangle_t windowRect = GlfwRectToOFRect([_window frame]);
     
-    if (OFRectangleContainPoint(GlfwRectToOFRect(windowRect), _event_data.mouse.pos))
-        return of_point((float)(_event_data.mouse.pos.x - windowRect.origin.x), (float)(_event_data.mouse.pos.y - windowRect.origin.y));
+    if (((_event_data.mouse.pos.x >= .0f) && (_event_data.mouse.pos.y >= .0f)) &&
+        ((_event_data.mouse.pos.x <= windowRect.size.width) && (_event_data.mouse.pos.y <= windowRect.size.height))) {
+        
+        return _event_data.mouse.pos;
+    }
     
     return of_point_null();
 }
 
 - (of_point_t)currentLocationInWindow {
-    GlfwRect windowRect = [_window frame];
+    of_rectangle_t windowRect = GlfwRectToOFRect([_window frame]);
     of_point_t currentLocation = [self currentLocation];
     
-    if (OFRectangleContainPoint(GlfwRectToOFRect(windowRect), currentLocation))
-        return of_point((float)(currentLocation.x - windowRect.origin.x), (float)(currentLocation.y - windowRect.origin.y));
+    if (((currentLocation.x >= .0f) && (currentLocation.y >= .0f)) &&
+        ((currentLocation.x <= windowRect.size.width) && (currentLocation.y <= windowRect.size.height))) {
+        
+        return currentLocation;
+    }
     
     return of_point_null();
 }
@@ -274,6 +321,68 @@ OF_INLINE bool OFRectangleContainPoint(of_rectangle_t rect, of_point_t point) {
     }
     
     return false;
+}
+
+- (OFString *)description {
+    OFMutableString *description = [[super description] mutableCopy];
+    
+    switch (_type) {
+        case GlfwMouseMoved: {
+            of_point_t posInWindow = [self locationInWindow];
+            [description appendFormat:@" Cursor position:%.2fx%.2f", _event_data.mouse.pos.x, _event_data.mouse.pos.y];
+            
+            if (!of_point_is_null(posInWindow))
+                [description appendFormat:@" in window:%.2fx%.2f", posInWindow.x, posInWindow.y];
+        }
+            break;
+        case GlfwLeftMouseUp:
+        case GlfwLeftMouseDown:
+        case GlfwRightMouseUp:
+        case GlfwRightMouseDown:
+        case GlfwMouseMiddleUp:
+        case GlfwMouseMiddleDown:
+        case GlfwMouseOtherUp:
+        case GlfwMouseOtherDown:
+        {
+            if (!isnan(_event_data.mouse.modifiers)) {
+                [description appendUTF8String:" Modifiers: "];
+                
+                bool multipleModifiers = false;
+                
+                if ((_event_data.mouse.modifiers & GLFW_MOD_SHIFT) == GLFW_MOD_SHIFT) {
+                    [description appendUTF8String:"SHIFT"];
+                    multipleModifiers = true;
+                }
+                
+                if ((_event_data.mouse.modifiers & GLFW_MOD_ALT) == GLFW_MOD_ALT) {
+                    if (multipleModifiers) [description appendUTF8String:"+"];
+                    [description appendUTF8String:"ALT"];
+                    multipleModifiers = true;
+                }
+                
+                if ((_event_data.mouse.modifiers & GLFW_MOD_CONTROL) == GLFW_MOD_CONTROL) {
+                    if (multipleModifiers) [description appendUTF8String:"+"];
+                    [description appendUTF8String:"CONTROL"];
+                    multipleModifiers = true;
+                }
+                
+                if ((_event_data.mouse.modifiers & GLFW_MOD_SUPER) == GLFW_MOD_SUPER) {
+                    if (multipleModifiers) [description appendUTF8String:"+"];
+                    [description appendUTF8String:"SUPER"];
+                }
+            }
+        }
+            break;
+        case GlfwScrollWheel:
+            [description appendFormat:@" Croll offset X:%f Y:%f", _event_data.mouse.deltaX, _event_data.mouse.deltaY];
+            break;
+        default:
+            break;
+    }
+    
+    [description makeImmutable];
+    
+    return [description autorelease];
 }
 
 @end
@@ -329,6 +438,44 @@ OF_INLINE bool OFRectangleContainPoint(of_rectangle_t rect, of_point_t point) {
     }
     
     return false;
+}
+
+- (OFString *)description {
+    OFMutableString *description = [[super description] mutableCopy];
+    
+    [description appendFormat:@" Character: %C", _event_data.character.character];
+    
+    if (!isnan(_event_data.character.modifiers)) {
+        [description appendUTF8String:" Modifiers: "];
+        
+        bool multipleModifiers = false;
+        
+        if ((_event_data.character.modifiers & GLFW_MOD_SHIFT)) {
+            [description appendUTF8String:"SHIFT"];
+            multipleModifiers = true;
+        }
+        
+        if ((_event_data.character.modifiers & GLFW_MOD_ALT)) {
+            if (multipleModifiers) [description appendUTF8String:"+"];
+            [description appendUTF8String:"ALT"];
+            multipleModifiers = true;
+        }
+        
+        if ((_event_data.character.modifiers & GLFW_MOD_CONTROL)) {
+            if (multipleModifiers) [description appendUTF8String:"+"];
+            [description appendUTF8String:"CONTROL"];
+            multipleModifiers = true;
+        }
+        
+        if ((_event_data.character.modifiers & GLFW_MOD_SUPER)) {
+            if (multipleModifiers) [description appendUTF8String:"+"];
+            [description appendUTF8String:"SUPER"];
+        }
+    }
+    
+    [description makeImmutable];
+    
+    return [description autorelease];
 }
 
 @end
@@ -400,6 +547,14 @@ OF_INLINE bool OFRectangleContainPoint(of_rectangle_t rect, of_point_t point) {
     return false;
 }
 
+- (OFString *)description {
+    OFMutableString *description = [[super description] mutableCopy];
+    
+    [description makeImmutable];
+    
+    return [description autorelease];
+}
+
 @end
 
 @implementation GlfwFileDropEvent
@@ -436,6 +591,19 @@ OF_INLINE bool OFRectangleContainPoint(of_rectangle_t rect, of_point_t point) {
     }
     
     return false;
+}
+
+- (OFString *)description {
+    OFMutableString *description = [[super description] mutableCopy];
+    
+    [description appendUTF8String:" Files:\n"];
+    
+    for (OFString *file in _filesPaths)
+        [description appendFormat:@"%@\n", file];
+    
+    [description makeImmutable];
+    
+    return [description autorelease];
 }
 
 - (void)dealloc {
