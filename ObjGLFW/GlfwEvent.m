@@ -13,13 +13,6 @@ OF_INLINE of_rectangle_t GlfwRectToOFRect(GlfwRect rect) {
     return of_rectangle((float)(rect.origin.x + .0f), (float)(rect.origin.y + .0f), (float)(rect.size.width + .0f), (float)(rect.size.height + .0f));
 }
 
-OF_INLINE bool OFRectangleContainPoint(of_rectangle_t rect, of_point_t point) {
-    return ((point.x >= rect.origin.x) &&
-            (point.y >= rect.origin.y) &&
-            (point.x <= (rect.origin.x + rect.size.width)) &&
-            (point.y <= (rect.origin.y + rect.size.height)));
-}
-
 @implementation GlfwEvent
 
 @synthesize type = _type;
@@ -47,6 +40,10 @@ OF_INLINE bool OFRectangleContainPoint(of_rectangle_t rect, of_point_t point) {
     memset(&_event_data, 0, sizeof(union _event_data_u));
     
     return self;
+}
+
+- (GlfwEventType)currentType {
+    return _type;
 }
 
 - (bool)isMatchEventMask:(GlfwEventMask)mask {
@@ -161,6 +158,10 @@ OF_INLINE bool OFRectangleContainPoint(of_rectangle_t rect, of_point_t point) {
 
 - (int)modifiersFlags {
     return _event_data.key.modifiers;
+}
+
+- (GlfwEventType)currentType {
+    return glfwGetKey([_window windowHandle], _event_data.key.glfwKey);
 }
 
 - (bool)isEqual:(id)object {
@@ -311,6 +312,10 @@ OF_INLINE bool OFRectangleContainPoint(of_rectangle_t rect, of_point_t point) {
 
 - (double)deltaY {
     return _event_data.mouse.deltaY;
+}
+
+- (GlfwEventType)currentType {
+    return glfwGetMouseButton([_window windowHandle], _event_data.mouse.button);
 }
 
 - (bool)isEqual:(id)object {

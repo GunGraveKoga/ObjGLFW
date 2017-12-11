@@ -126,6 +126,7 @@ OF_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, readonly) double timestamp;
 @property (nonatomic, readonly) GlfwEventType type;
+@property (nonatomic, readonly) GlfwEventType currentType;
 @property (nonatomic, readonly, retain) GlfwRawWindow *window;
 
 
