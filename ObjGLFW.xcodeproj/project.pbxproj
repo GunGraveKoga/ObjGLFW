@@ -11,6 +11,7 @@
 		140755431FD73453007BF8B0 /* GlfwEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 140755421FD73453007BF8B0 /* GlfwEvent.m */; };
 		140755451FD734DB007BF8B0 /* sokol_imp.m in Sources */ = {isa = PBXBuildFile; fileRef = 140755441FD734DB007BF8B0 /* sokol_imp.m */; };
 		ED7DC50F1FDECBCC0057AE1D /* GlfwMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = ED7DC50E1FDECBCC0057AE1D /* GlfwMonitor.m */; };
+		ED7DC5141FDEFBCA0057AE1D /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED7DC5131FDEFBB80057AE1D /* OpenGL.framework */; };
 		EDF8C8F11FD70E16002CF9DC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EDF8C8F01FD70E16002CF9DC /* main.m */; };
 		EDF8C8F91FD70F08002CF9DC /* ObjFW.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF8C8F81FD70F08002CF9DC /* ObjFW.framework */; };
 		EDF8C8FC1FD70F2C002CF9DC /* GlfwApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = EDF8C8FB1FD70F2C002CF9DC /* GlfwApplication.m */; };
@@ -42,6 +43,7 @@
 		ED7DC50D1FDECBCC0057AE1D /* GlfwMonitor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GlfwMonitor.h; sourceTree = "<group>"; };
 		ED7DC50E1FDECBCC0057AE1D /* GlfwMonitor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GlfwMonitor.m; sourceTree = "<group>"; };
 		ED7DC5121FDEE0690057AE1D /* nuklear.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = nuklear.h; sourceTree = "<group>"; };
+		ED7DC5131FDEFBB80057AE1D /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		EDF8C8ED1FD70E16002CF9DC /* ObjGLFW */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ObjGLFW; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDF8C8F01FD70E16002CF9DC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		EDF8C8F81FD70F08002CF9DC /* ObjFW.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ObjFW.framework; path = ../../../Library/Frameworks/ObjFW.framework; sourceTree = "<group>"; };
@@ -60,6 +62,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EDF8C8F91FD70F08002CF9DC /* ObjFW.framework in Frameworks */,
+				ED7DC5141FDEFBCA0057AE1D /* OpenGL.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -128,6 +131,7 @@
 		EDF8C8F71FD70F07002CF9DC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				ED7DC5131FDEFBB80057AE1D /* OpenGL.framework */,
 				EDF8C8F81FD70F08002CF9DC /* ObjFW.framework */,
 			);
 			name = Frameworks;
@@ -337,6 +341,10 @@
 					"$(inherited)",
 					"$(LOCAL_LIBRARY_DIR)/Frameworks",
 				);
+				OTHER_LDFLAGS = (
+					"-lglfw",
+					"-lGLEW",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -348,6 +356,10 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+				);
+				OTHER_LDFLAGS = (
+					"-lglfw",
+					"-lGLEW",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
