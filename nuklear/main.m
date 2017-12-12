@@ -63,7 +63,6 @@ struct nk_glfw_vertex {
     nk_byte col[4];
 };
 
-
 @interface AppDelegate: OFObject <OFApplicationDelegate, GlfwDrawing, GlfwEventHandling>
 {
     struct nk_glfw_device ogl;
@@ -276,6 +275,8 @@ GLFW_APPLICATION_DELEGATE(AppDelegate);
     [window swapBuffers];
     
     [window doneContext];
+    
+    nk_input_begin(&ctx);
 }
 
 - (void)renderAA:(enum nk_anti_aliasing)AA maxVertexBuffer:(int)maxVB maxElementBuffer:(int)maxEB size:(GlfwSize)size viewportSize:(GlfwSize)viewport {
@@ -380,9 +381,6 @@ GLFW_APPLICATION_DELEGATE(AppDelegate);
 }
 
 - (void)handleEvent:(GlfwEvent *)event fromWindow:(GlfwWindow *)window {
-    nk_input_begin(&ctx);
-    
-    of_log(@"%@", event);
     
     if ([event isMatchEventMask:GlfwCharacterEventMask]) {
         nk_input_unicode(&ctx, ((GlfwCharacterEvent *)event).character);
@@ -436,11 +434,12 @@ GLFW_APPLICATION_DELEGATE(AppDelegate);
         }
         
     }
-    
+    static of_point_t mouseLocation = (of_point_t){0, 0};
     if ([event isMatchEventMask:GlfwMouseMovedMask]) {
-        of_point_t mouseLocation = event.locationInWindow;
+        mouseLocation = event.locationInWindow;
         if (!of_point_is_null(mouseLocation))
             nk_input_motion(&ctx, mouseLocation.x, mouseLocation.y);
+        
     }
     
     if ([event isMatchEventMask:(GlfwLeftMouseDownMask | GlfwLeftMouseUpMask)]) {
@@ -461,26 +460,26 @@ GLFW_APPLICATION_DELEGATE(AppDelegate);
     }
     
     if ([event isMatchEventMask:(GlfwRightMouseDownMask | GlfwLeftMouseDownMask | GlfwMouseMiddleDownMask)]) {
-        of_point_t mouseLocation = event.currentLocationInWindow;
-        if (!of_point_is_null(mouseLocation)) {
-            switch (event.glfwMouseButton) {
-                case GLFW_MOUSE_BUTTON_LEFT:
-                    nk_input_button(&ctx, NK_BUTTON_LEFT, mouseLocation.x, mouseLocation.y, nk_true);
-                    break;
-                case GLFW_MOUSE_BUTTON_RIGHT:
-                    nk_input_button(&ctx, NK_BUTTON_RIGHT, mouseLocation.x, mouseLocation.y, nk_true);
-                    break;
-                case GLFW_MOUSE_BUTTON_MIDDLE:
-                    nk_input_button(&ctx, NK_BUTTON_MIDDLE, mouseLocation.x, mouseLocation.y, nk_true);
-                    break;
-                default:
-                    break;
+        if (!event.repeat) {
+            if (!of_point_is_null(mouseLocation)) {
+                switch (event.glfwMouseButton) {
+                    case GLFW_MOUSE_BUTTON_LEFT:
+                        nk_input_button(&ctx, NK_BUTTON_LEFT, mouseLocation.x, mouseLocation.y, nk_true);
+                        break;
+                    case GLFW_MOUSE_BUTTON_RIGHT:
+                        nk_input_button(&ctx, NK_BUTTON_RIGHT, mouseLocation.x, mouseLocation.y, nk_true);
+                        break;
+                    case GLFW_MOUSE_BUTTON_MIDDLE:
+                        nk_input_button(&ctx, NK_BUTTON_MIDDLE, mouseLocation.x, mouseLocation.y, nk_true);
+                        break;
+                    default:
+                        break;
+                }
             }
         }
     }
     
     if ([event isMatchEventMask:(GlfwRightMouseUpMask | GlfwLeftMouseUpMask | GlfwMouseMiddleUpMask)]) {
-        of_point_t mouseLocation = event.currentLocationInWindow;
         if (!of_point_is_null(mouseLocation)) {
             switch (event.glfwMouseButton) {
                 case GLFW_MOUSE_BUTTON_LEFT:
