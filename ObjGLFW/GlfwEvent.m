@@ -75,6 +75,10 @@ OF_INLINE of_rectangle_t GlfwRectToOFRect(GlfwRect rect) {
     return false;
 }
 
+- (bool)isRepeat {
+    return false;
+}
+
 - (OFString *)description {
     
     static const char *_typeNames[] = {
@@ -120,12 +124,12 @@ OF_INLINE of_rectangle_t GlfwRectToOFRect(GlfwRect rect) {
 
 @implementation GlfwKeyEvent
 
-+ (instancetype)keyEventWithType:(GlfwEventType)eventType timestamp:(double)timestamp window:(GlfwRawWindow *)window glfwKey:(int)glfwKey modifiers:(int)modifiersFlags systemScancode:(int)systemScancode
++ (instancetype)keyEventWithType:(GlfwEventType)eventType timestamp:(double)timestamp window:(GlfwRawWindow *)window glfwKey:(int)glfwKey modifiers:(int)modifiersFlags systemScancode:(int)systemScancode repeat:(bool)isRepeat
 {
-    return [[[self alloc] initWithType:eventType timestamp:timestamp window:window glfwKey:glfwKey modifiers:modifiersFlags systemScancode:systemScancode] autorelease];
+    return [[[self alloc] initWithType:eventType timestamp:timestamp window:window glfwKey:glfwKey modifiers:modifiersFlags systemScancode:systemScancode repeat:isRepeat] autorelease];
 }
 
-- (instancetype)initWithType:(GlfwEventType)eventType timestamp:(double)timestamp window:(GlfwRawWindow *)window glfwKey:(int)glfwKey modifiers:(int)modifiersFlags systemScancode:(int)systemScancode
+- (instancetype)initWithType:(GlfwEventType)eventType timestamp:(double)timestamp window:(GlfwRawWindow *)window glfwKey:(int)glfwKey modifiers:(int)modifiersFlags systemScancode:(int)systemScancode repeat:(bool)isRepeat
 {
     self = [super initWithType:eventType timestamp:timestamp window:window];
     
@@ -138,6 +142,7 @@ OF_INLINE of_rectangle_t GlfwRectToOFRect(GlfwRect rect) {
         _event_data.key.glfwKey = glfwKey;
         _event_data.key.scancode = systemScancode;
         _event_data.key.modifiers = modifiersFlags;
+        _event_data.key.repeat = isRepeat;
     }
     @catch (id e) {
         [self release];
@@ -158,6 +163,10 @@ OF_INLINE of_rectangle_t GlfwRectToOFRect(GlfwRect rect) {
 
 - (int)modifiersFlags {
     return _event_data.key.modifiers;
+}
+
+- (bool)isRepeat {
+    return _event_data.key.repeat;
 }
 
 - (GlfwEventType)currentType {
@@ -218,25 +227,25 @@ OF_INLINE of_rectangle_t GlfwRectToOFRect(GlfwRect rect) {
 
 + (instancetype)enterExitEventWithType:(GlfwEventType)eventType timestamp:(double)timestamp window:(GlfwRawWindow *)window
 {
-    return [[[self alloc] initWithType:eventType timestamp:timestamp window:window mouseButton:NAN modifiersFlags:NAN location:of_point_null() deltaX:NAN deltaY:NAN] autorelease];
+    return [[[self alloc] initWithType:eventType timestamp:timestamp window:window mouseButton:NAN modifiersFlags:NAN location:of_point_null() deltaX:NAN deltaY:NAN repeat:false] autorelease];
 }
 
 + (instancetype)mouseMoveEventWithTimestamp:(double)timestamp window:(GlfwRawWindow *)window loaction:(of_point_t)location
 {
-    return [[[self alloc] initWithType:GlfwMouseMoved timestamp:timestamp window:window mouseButton:0 modifiersFlags:0 location:location deltaX:NAN deltaY:NAN] autorelease];
+    return [[[self alloc] initWithType:GlfwMouseMoved timestamp:timestamp window:window mouseButton:0 modifiersFlags:0 location:location deltaX:NAN deltaY:NAN repeat:false] autorelease];
 }
 
 + (instancetype)scrollWheelEventWithTimestamp:(double)timestamp window:(GlfwRawWindow *)window deltaX:(double)deltaX deltaY:(double)deltaY
 {
-    return [[[self alloc] initWithType:GlfwScrollWheel timestamp:timestamp window:window mouseButton:NAN modifiersFlags:NAN location:of_point_null() deltaX:deltaX deltaY:deltaY] autorelease];
+    return [[[self alloc] initWithType:GlfwScrollWheel timestamp:timestamp window:window mouseButton:NAN modifiersFlags:NAN location:of_point_null() deltaX:deltaX deltaY:deltaY repeat:false] autorelease];
 }
 
-+ (instancetype)mouseButtonEventWithType:(GlfwEventType)eventType timestamp:(double)timestamp window:(GlfwRawWindow *)window mouseButton:(int)mouseButton modifiersFlags:(int)modifiersFlags
++ (instancetype)mouseButtonEventWithType:(GlfwEventType)eventType timestamp:(double)timestamp window:(GlfwRawWindow *)window mouseButton:(int)mouseButton modifiersFlags:(int)modifiersFlags repeat:(bool)isRepeat
 {
-    return [[[self alloc] initWithType:eventType timestamp:timestamp window:window mouseButton:mouseButton modifiersFlags:modifiersFlags location:of_point_null() deltaX:NAN deltaY:NAN] autorelease];
+    return [[[self alloc] initWithType:eventType timestamp:timestamp window:window mouseButton:mouseButton modifiersFlags:modifiersFlags location:of_point_null() deltaX:NAN deltaY:NAN repeat:isRepeat] autorelease];
 }
 
-- (instancetype)initWithType:(GlfwEventType)eventType timestamp:(double)timestamp window:(GlfwRawWindow *)window mouseButton:(int)mouseButton modifiersFlags:(int)modifiersFlags location:(of_point_t)location deltaX:(double)deltaX deltaY:(double)delraY
+- (instancetype)initWithType:(GlfwEventType)eventType timestamp:(double)timestamp window:(GlfwRawWindow *)window mouseButton:(int)mouseButton modifiersFlags:(int)modifiersFlags location:(of_point_t)location deltaX:(double)deltaX deltaY:(double)delraY repeat:(bool)isRepeat
 {
     self = [super initWithType:eventType timestamp:timestamp window:window];
     
@@ -251,6 +260,7 @@ OF_INLINE of_rectangle_t GlfwRectToOFRect(GlfwRect rect) {
         _event_data.mouse.pos = location;
         _event_data.mouse.deltaX = deltaX;
         _event_data.mouse.deltaY = delraY;
+        _event_data.mouse.repeat = isRepeat;
     }
     @catch (id e) {
         [self release];

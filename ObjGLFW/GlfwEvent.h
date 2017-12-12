@@ -106,11 +106,13 @@ OF_ASSUME_NONNULL_BEGIN
             int modifiers;
             double deltaX;
             double deltaY;
+            bool repeat;
         } mouse;
         struct {
             int glfwKey;
             int scancode;
             int modifiers;
+            bool repeat;
         } key;
         struct {
             of_unichar_t character;
@@ -145,6 +147,7 @@ OF_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign, readonly) of_unichar_t character;
 
 @property (nonatomic, assign, readonly) int modifiersFlags;
+@property (nonatomic, assign, getter=isRepeat, readonly) bool repeat;
 
 @property (nonatomic, assign, readonly) GlfwPoint windowPosition;
 @property (nonatomic, assign, readonly) GlfwSize windowSize;
@@ -170,14 +173,16 @@ OF_ASSUME_NONNULL_BEGIN
                           window:(GlfwRawWindow *)window
                          glfwKey:(int)glfwKey
                        modifiers:(int)modifiersFlags
-                  systemScancode:(int)systemScancode;
+                  systemScancode:(int)systemScancode
+                          repeat:(bool)isRepeat;
 
 - (instancetype)initWithType:(GlfwEventType)eventType
                    timestamp:(double)timestamp
                       window:(GlfwRawWindow *)window
                      glfwKey:(int)glfwKey
                    modifiers:(int)modifiersFlags
-              systemScancode:(int)systemScancode;
+              systemScancode:(int)systemScancode
+                      repeat:(bool)isRepeat;
 
 @end
 
@@ -201,7 +206,8 @@ OF_ASSUME_NONNULL_BEGIN
                                timestamp:(double)timestamp
                                   window:(GlfwRawWindow *)window
                              mouseButton:(int)mouseButton
-                          modifiersFlags:(int)modifiersFlags;
+                          modifiersFlags:(int)modifiersFlags
+                                  repeat:(bool)isRepeat;
 
 - (instancetype)initWithType:(GlfwEventType)eventType
                    timestamp:(double)timestamp
@@ -210,7 +216,8 @@ OF_ASSUME_NONNULL_BEGIN
               modifiersFlags:(int)modifiersFlags
                     location:(of_point_t)location
                       deltaX:(double)deltaX
-                      deltaY:(double)delraY;
+                      deltaY:(double)delraY
+                      repeat:(bool)isRepeat;
 
 @end
 
