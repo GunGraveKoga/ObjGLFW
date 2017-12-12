@@ -1,0 +1,3 @@
+[submodule "flextgl"]
+	path = flextgl
+	url = https://github.com/ginkgo/flextGL.git
