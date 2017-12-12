@@ -13,6 +13,7 @@
 
 @class GlfwEvent;
 @class GlfwMonitor;
+@class GlfwCursor;
 
 OF_ASSUME_NONNULL_BEGIN
 
@@ -30,10 +31,15 @@ OF_ASSUME_NONNULL_BEGIN
     OFString *_windowTitle;
     GlfwSize _minSize;
     GlfwSize _maxSize;
+    GlfwCursor *_cursor;
 #if defined(OF_HAVE_THREADS)
     OFMutex *_lock;
 #endif
 }
+
+#ifdef OF_HAVE_CLASS_PROPERTIES
+@property (class, readonly, copy) OF_KINDOF(GlfwRawWindow) *currentContextWindow;
+#endif
 
 @property (atomic, assign) GLFWwindow *windowHandle;
 @property (nonatomic, retain, nullable) GlfwMonitor *monitor;
@@ -53,6 +59,13 @@ OF_ASSUME_NONNULL_BEGIN
 @property (atomic, getter=isFloating, readonly) bool floating;
 @property (atomic, getter=isResizable, readonly) bool resizable;
 @property (nonatomic, getter=isVisibleForUser, readonly) bool visibleForUser;
+@property (nonatomic, readonly) of_point_t cursorPos;
+@property (atomic, copy, nullable) GlfwCursor *cursor;
+@property (nonatomic, copy, nullable) OFString *clipboardString;
+
++ (instancetype)currentContextWindow;
++ (instancetype)windowWithRect:(GlfwRect)windowRectangle title:(OFString *)windowTitle
+                         hints:(OFDictionary OF_GENERIC(OFNumber *, OFNumber *) *)windowHints;
 
 - (instancetype)init OF_UNAVAILABLE;
 
@@ -68,6 +81,12 @@ OF_ASSUME_NONNULL_BEGIN
 - (void)makeContextCurrent;
 - (void)doneContext;
 - (void)swapBuffers;
+
+- (void)setValue:(int)value forInputMode:(int)inputMode;
+- (int)valueForInputMode:(int)inputMode;
+
+- (int)stateOfMouseButton:(int)mouseButton;
+- (int)stateOfKey:(int)glfwKey;
 
 @end
 

@@ -10,6 +10,7 @@
 #import "GlfwApplication.h"
 #import "GlfwWindowManager.h"
 #import "GlfwMonitor.h"
+#import "GlfwCursor.h"
 
 @interface GlfwMonitor ()
 + (instancetype)glfw_findMonitor:(GLFWmonitor *)monitorHandle;
@@ -22,6 +23,15 @@
 @implementation GlfwRawWindow
 
 @synthesize windowHandle = _windowHandle;
+
++ (instancetype)currentContextWindow {
+    return [[GlfwWindowManager defaultManager] findWindow:glfwGetCurrentContext()];
+}
+
++ (instancetype)windowWithRect:(GlfwRect)windowRectangle title:(OFString *)windowTitle hints:(OFDictionary<OFNumber *,OFNumber *> *)windowHints {
+    
+    return [[[self alloc] initWithRect:windowRectangle title:windowTitle hints:windowHints] autorelease];
+}
 
 - (instancetype)initWithRect:(GlfwRect)windowRectangle title:(OFString *)windowTitle hints:(OFDictionary<OFNumber *,OFNumber *> *)windowHints
 {
@@ -62,10 +72,6 @@
         _windowTitle = [windowTitle copy];
         
 #if defined(OF_MACOS)
-        /* Poll for events once before starting a potentially
-         lengthy loading process. This is needed to be
-         classified as "interactive" by other software such
-         as iTerm2 */
         
         glfwPollEvents();
 #endif
@@ -394,6 +400,75 @@
     return ([self isVisible] && ![self isIconified]);
 }
 
+- (of_point_t)cursorPos {
+    @synchronized(self) {
+        if (_windowHandle) {
+            double x, y;
+            
+            glfwGetCursorPos(_windowHandle, &x, &y);
+            
+            return of_point(x, y);
+        }
+    }
+    
+    return of_point_null();
+}
+
+- (void)setCursorPos:(of_point_t)cursorPos {
+    @synchronized(self) {
+        if (_windowHandle) {
+            glfwSetCursorPos(_windowHandle, cursorPos.x, cursorPos.y);
+        }
+    }
+}
+
+- (GlfwCursor *)cursor {
+    @synchronized(self) {
+        if (_windowHandle) {
+            return _cursor;
+        }
+    }
+    
+    return nil;
+}
+
+- (void)setCursor:(GlfwCursor *)cursor {
+    @synchronized(self) {
+        if (_windowHandle) {
+            [_cursor release];
+            _cursor = nil;
+            
+            if (cursor != nil) {
+                _cursor = [cursor copy];
+                
+                glfwSetCursor(_windowHandle, [_cursor cursorHandle]);
+            }
+            else {
+                glfwSetCursor(_windowHandle, NULL);
+            }
+        }
+    }
+}
+
+- (OFString *)clipboardString {
+    @synchronized(self) {
+        if (_windowHandle) {
+            const char *clipboardString = glfwGetClipboardString(_windowHandle);
+            if (clipboardString != NULL)
+                return [OFString stringWithUTF8StringNoCopy:(char *)clipboardString freeWhenDone:false];
+        }
+    }
+    return nil;
+}
+
+-(void)setClipboardString:(OFString *)clipboardString {
+    @synchronized(self) {
+        if (_windowHandle) {
+            glfwSetClipboardString(_windowHandle, [clipboardString UTF8String]);
+        }
+    }
+}
+
 - (bool)isOpen {
     @synchronized (self) {
         return (_windowHandle != NULL);
@@ -455,6 +530,44 @@
             glfwSwapBuffers(_windowHandle);
         }
     }
+}
+
+- (void)setValue:(int)value forInputMode:(int)inputMode {
+    @synchronized(self) {
+        if (_windowHandle) {
+            glfwSetInputMode(_windowHandle, inputMode, value);
+        }
+    }
+}
+
+- (int)valueForInputMode:(int)inputMode {
+    @synchronized(self) {
+        if (_windowHandle) {
+            return glfwGetInputMode(_windowHandle, inputMode);
+        }
+    }
+    
+    return -1;
+}
+
+- (int)stateOfMouseButton:(int)mouseButton {
+    @synchronized(self) {
+        if (_windowHandle) {
+            return glfwGetMouseButton(_windowHandle, mouseButton);
+        }
+    }
+    
+    return -1;
+}
+
+- (int)stateOfKey:(int)glfwKey {
+    @synchronized(self) {
+        if (_windowHandle) {
+            return glfwGetKey(_windowHandle, glfwKey);
+        }
+    }
+    
+    return -1;
 }
 
 - (id)copy {
