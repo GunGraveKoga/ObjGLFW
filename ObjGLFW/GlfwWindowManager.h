@@ -27,16 +27,19 @@ OF_ASSUME_NONNULL_BEGIN
     OFMutex *_lock;
 #endif
 }
+#ifdef OF_HAVE_CLASS_PROPERTIES
+@property (class, nonatomic, readonly, copy) GlfwWindowManager *defaultManager;
+#endif
 
 - (instancetype)init OF_UNAVAILABLE;
 
 + (instancetype)defaultManager;
 
-- (void)attachWindow:(GlfwRawWindow *)window;
-- (void)detachWindow:(GlfwRawWindow *)window;
+- (void)attachWindow:(OF_KINDOF(GlfwRawWindow) *)window;
+- (void)detachWindow:(OF_KINDOF(GlfwRawWindow) *)window;
 
-- (void)fetchEvent:(GlfwEvent *)event;
-- (GlfwRawWindow * _Nullable)findWindow:(GLFWwindow *)windowHandle;
+- (void)fetchEvent:(OF_KINDOF(GlfwEvent) *)event;
+- (OF_KINDOF(GlfwRawWindow) * _Nullable)findWindow:(GLFWwindow *)windowHandle;
 - (void)dispatchEvents;
 - (void)drainEvents;
 - (void)drawAllWindows;

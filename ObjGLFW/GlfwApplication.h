@@ -26,11 +26,15 @@ OF_ASSUME_NONNULL_BEGIN
 
 @interface GlfwApplication : OFApplication
 {
-    bool _isActive;
     GlfwWindowManager *_windowManager;
 }
 
-@property (nonatomic, readonly, retain) GlfwWindowManager *windowManager;
+#ifdef OF_HAVE_CLASS_PROPERTIES
+@property (class, atomic) int refreshRate;
+#endif
+
++ (void)setRefreshRate:(int)refreshRate;
++ (int)refreshRate;
 
 @end
 

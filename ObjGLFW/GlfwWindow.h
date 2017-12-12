@@ -10,6 +10,8 @@
 #import "GlfwEventHandling.h"
 #import "GlfwDrawing.h"
 
+OF_ASSUME_NONNULL_BEGIN
+
 @interface GlfwWindow : GlfwRawWindow
 {
     OFSortedList OF_GENERIC(id<GlfwEventHandling>) *_eventHandlers;
@@ -22,3 +24,5 @@
 - (void)unbindDrawble:(id<GlfwDrawing>)drawble;
 
 @end
+
+OF_ASSUME_NONNULL_END

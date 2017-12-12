@@ -101,6 +101,9 @@ glfw_application_main(int *argc, char **argv[],
     return 0;
 }
 
+static bool _expectedLoopTime = 0.0; //expected loop time in ms
+static int _refreshRate = 0;
+
 @implementation GlfwApplication
 
 + (void)initialize {
@@ -111,6 +114,25 @@ glfw_application_main(int *argc, char **argv[],
 #ifdef OF_HAVE_SANDBOX
         [OFApplication replaceClassMethod:@selector(activateSandbox:) withMethodFromClass:self];
 #endif
+        
+        GLFWmonitor *mainMonitor = glfwGetPrimaryMonitor();
+        const GLFWvidmode *vmode = glfwGetVideoMode(mainMonitor);
+        
+        _refreshRate = vmode->refreshRate;
+        _expectedLoopTime = (1.0 / _refreshRate);
+    }
+}
+
++ (void)setRefreshRate:(int)refreshRate {
+    @synchronized(GlfwApp) {
+        _refreshRate = refreshRate;
+        _expectedLoopTime = (1.0 / refreshRate);
+    }
+}
+
++ (int)refreshRate {
+    @synchronized(GlfwApp) {
+        return _refreshRate;
     }
 }
 
@@ -128,6 +150,18 @@ glfw_application_main(int *argc, char **argv[],
 
 + (OFDictionary<OFString *,OFString *> *)environment {
     return [GlfwApp environment];
+}
+
++ (void)terminateWithStatus:(int)status {
+    _glfwTerminate();
+    
+#ifndef OF_PSP
+    exit(status);
+#else
+    sceKernelExitGame();
+    
+    OF_UNREACHABLE
+#endif
 }
 
 #ifdef OF_HAVE_SANDBOX
@@ -168,16 +202,9 @@ glfw_application_main(int *argc, char **argv[],
 #else
     [pool releaseObjects];
 #endif
-    
-    _isActive = true;
-    
-    GLFWmonitor *mainMonitor = glfwGetPrimaryMonitor();
-    const GLFWvidmode *vmode = glfwGetVideoMode(mainMonitor);
-    
-    const double expectedLooptTime = (1.0 / vmode->refreshRate); //expected loop time in ms
     uint64_t currentTime = 0;
     
-    while (_isActive) {
+    while (true) {
         stm_laptime(&currentTime);
         
         [_windowManager drawAllWindows];
@@ -191,15 +218,12 @@ glfw_application_main(int *argc, char **argv[],
 #endif
         uint64_t elapsedTime = stm_laptime(&currentTime);
         
-        double runloopTimeInterval = expectedLooptTime - stm_ms(elapsedTime);
+        double runloopTimeInterval = _expectedLoopTime - stm_ms(elapsedTime);
         OFDate *runloopDedline = [OFDate dateWithTimeIntervalSinceNow:runloopTimeInterval];
         
         [runLoop runUntilDate:runloopDedline];
 
     }
-    _glfwTerminate();
-    
-    [pool drain];
 }
 
 @end

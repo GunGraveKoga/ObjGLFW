@@ -130,7 +130,7 @@ OF_ASSUME_NONNULL_BEGIN
 @property (nonatomic, readonly) double timestamp;
 @property (nonatomic, readonly) GlfwEventType type;
 @property (nonatomic, readonly) GlfwEventType currentType;
-@property (nonatomic, readonly, retain) GlfwRawWindow *window;
+@property (nonatomic, readonly, retain) OF_KINDOF(GlfwRawWindow) *window;
 
 
 @property (nonatomic, assign, readonly) int glfwKey;
@@ -160,7 +160,7 @@ OF_ASSUME_NONNULL_BEGIN
 
 - (instancetype)initWithType:(GlfwEventType)eventType
                    timestamp:(double)timestamp
-                    window:(GlfwRawWindow *)window OF_DESIGNATED_INITIALIZER;
+                    window:(OF_KINDOF(GlfwRawWindow) *)window OF_DESIGNATED_INITIALIZER;
 
 - (bool)isMatchEventMask:(GlfwEventMask)mask;
 
@@ -170,7 +170,7 @@ OF_ASSUME_NONNULL_BEGIN
 
 + (instancetype)keyEventWithType:(GlfwEventType)eventType
                        timestamp:(double)timestamp
-                          window:(GlfwRawWindow *)window
+                          window:(OF_KINDOF(GlfwRawWindow) *)window
                          glfwKey:(int)glfwKey
                        modifiers:(int)modifiersFlags
                   systemScancode:(int)systemScancode
@@ -178,7 +178,7 @@ OF_ASSUME_NONNULL_BEGIN
 
 - (instancetype)initWithType:(GlfwEventType)eventType
                    timestamp:(double)timestamp
-                      window:(GlfwRawWindow *)window
+                      window:(OF_KINDOF(GlfwRawWindow) *)window
                      glfwKey:(int)glfwKey
                    modifiers:(int)modifiersFlags
               systemScancode:(int)systemScancode
@@ -191,27 +191,27 @@ OF_ASSUME_NONNULL_BEGIN
 
 + (instancetype)enterExitEventWithType:(GlfwEventType)eventType
                               timestamp:(double)timestamp
-                                 window:(GlfwRawWindow *)window;
+                                 window:(OF_KINDOF(GlfwRawWindow) *)window;
 
 + (instancetype)mouseMoveEventWithTimestamp:(double)timestamp
-                               window:(GlfwRawWindow *)window
+                               window:(OF_KINDOF(GlfwRawWindow) *)window
                              loaction:(of_point_t)location;
 
 + (instancetype)scrollWheelEventWithTimestamp:(double)timestamp
-                                  window:(GlfwRawWindow *)window
+                                  window:(OF_KINDOF(GlfwRawWindow) *)window
                                   deltaX:(double)deltaX
                                   deltaY:(double)deltaY;
 
 + (instancetype)mouseButtonEventWithType:(GlfwEventType)eventType
                                timestamp:(double)timestamp
-                                  window:(GlfwRawWindow *)window
+                                  window:(OF_KINDOF(GlfwRawWindow) *)window
                              mouseButton:(int)mouseButton
                           modifiersFlags:(int)modifiersFlags
                                   repeat:(bool)isRepeat;
 
 - (instancetype)initWithType:(GlfwEventType)eventType
                    timestamp:(double)timestamp
-                      window:(GlfwRawWindow *)window
+                      window:(OF_KINDOF(GlfwRawWindow) *)window
                  mouseButton:(int)mouseButton
               modifiersFlags:(int)modifiersFlags
                     location:(of_point_t)location
@@ -224,17 +224,17 @@ OF_ASSUME_NONNULL_BEGIN
 @interface GlfwCharacterEvent : GlfwEvent
 
 + (instancetype)characterEventWithTimestamp:(double)timestamp
-                                window:(GlfwRawWindow *)window
+                                window:(OF_KINDOF(GlfwRawWindow) *)window
                              character:(of_unichar_t)character
                         modifiersFlags:(int)modifiersFlags;
 
 + (instancetype)characterEventWithTimestamp:(double)timestamp
-                                window:(GlfwRawWindow *)window
+                                window:(OF_KINDOF(GlfwRawWindow) *)window
                              character:(of_unichar_t)character;
 
 - (instancetype)initWithType:(GlfwEventType)eventType
                    timestamp:(double)timestamp
-                      window:(GlfwRawWindow *)window
+                      window:(OF_KINDOF(GlfwRawWindow) *)window
                    character:(of_unichar_t)character
               modifiersFlags:(int)modifiersFlags;
 
@@ -244,24 +244,24 @@ OF_ASSUME_NONNULL_BEGIN
 @interface GlfwWindowEvent : GlfwEvent
 
 + (instancetype)windowMovedEventWithTimestamp:(double)timestamp
-                                  window:(GlfwRawWindow *)window
+                                  window:(OF_KINDOF(GlfwRawWindow) *)window
                                     windowPos:(GlfwPoint)newPos;
 
 + (instancetype)windowResizedEventWithTimestamp:(double)timestamp
-                                         window:(GlfwRawWindow *)window
+                                         window:(OF_KINDOF(GlfwRawWindow) *)window
                                      windowSize:(GlfwSize)newSize;
 
 + (instancetype)windowFramebuferResizedEventWithTimestamp:(double)timestamp
-                                                   window:(GlfwRawWindow *)window
+                                                   window:(OF_KINDOF(GlfwRawWindow) *)window
                                               contentSize:(GlfwSize)newContentSize;
 
 + (instancetype)otherWindowEventWithType:(GlfwEventType)eventType
                                timestamp:(double)timestamp
-                                  window:(GlfwRawWindow *)window;
+                                  window:(OF_KINDOF(GlfwRawWindow) *)window;
 
 - (instancetype)initWithType:(GlfwEventType)eventType
                    timestamp:(double)timestamp
-                      window:(GlfwRawWindow *)window
+                      window:(OF_KINDOF(GlfwRawWindow) *)window
                    windowPos:(GlfwPoint)newPos
                   windowSize:(GlfwSize)newSize
                  contentSize:(GlfwSize)newContentSize;
@@ -274,12 +274,12 @@ OF_ASSUME_NONNULL_BEGIN
 }
 
 + (instancetype)fileDropEventWithTimestamp:(double)timestamp
-                                    window:(GlfwRawWindow *)window
+                                    window:(OF_KINDOF(GlfwRawWindow) *)window
                               droppedFiles:(OFArray OF_GENERIC(OFString *) *)filesPaths;
 
 - (instancetype)initWithType:(GlfwEventType)eventType
                    timestamp:(double)timestamp
-                      window:(GlfwRawWindow *)window
+                      window:(OF_KINDOF(GlfwRawWindow) *)window
                 droppedFiles:(OFArray OF_GENERIC(OFString *) *)filesPaths;
 
 @end

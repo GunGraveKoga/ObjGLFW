@@ -15,6 +15,6 @@
 
 @required
 - (GlfwEventMask)handledEventsMask;
-- (void)handleEvent:(GlfwEvent *)event fromWindow:(GlfwWindow *)window;
+- (void)handleEvent:(OF_KINDOF(GlfwEvent) *)event fromWindow:(OF_KINDOF(GlfwWindow) *)window;
 
 @end

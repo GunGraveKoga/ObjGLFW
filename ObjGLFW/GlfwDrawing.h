@@ -11,9 +11,13 @@
 
 @class GlfwWindow;
 
+OF_ASSUME_NONNULL_BEGIN
+
 @protocol GlfwDrawing <OFObject, OFComparing>
 
 @required
-- (void)drawInWindow:(GlfwWindow *)window;
+- (void)drawInWindow:(OF_KINDOF(GlfwWindow) *)window;
 
 @end
+
+OF_ASSUME_NONNULL_END
