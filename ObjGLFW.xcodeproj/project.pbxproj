@@ -7,21 +7,33 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		140755401FD73434007BF8B0 /* GlfwRawWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 1407553F1FD73434007BF8B0 /* GlfwRawWindow.m */; };
-		140755431FD73453007BF8B0 /* GlfwEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 140755421FD73453007BF8B0 /* GlfwEvent.m */; };
-		140755451FD734DB007BF8B0 /* sokol_imp.m in Sources */ = {isa = PBXBuildFile; fileRef = 140755441FD734DB007BF8B0 /* sokol_imp.m */; };
-		ED7DC50F1FDECBCC0057AE1D /* GlfwMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = ED7DC50E1FDECBCC0057AE1D /* GlfwMonitor.m */; };
-		ED7DC5141FDEFBCA0057AE1D /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED7DC5131FDEFBB80057AE1D /* OpenGL.framework */; };
-		ED7DC5171FDFF3C70057AE1D /* GlfwCursor.m in Sources */ = {isa = PBXBuildFile; fileRef = ED7DC5161FDFF3C70057AE1D /* GlfwCursor.m */; };
-		EDF8C8F11FD70E16002CF9DC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EDF8C8F01FD70E16002CF9DC /* main.m */; };
-		EDF8C8F91FD70F08002CF9DC /* ObjFW.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF8C8F81FD70F08002CF9DC /* ObjFW.framework */; };
-		EDF8C8FC1FD70F2C002CF9DC /* GlfwApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = EDF8C8FB1FD70F2C002CF9DC /* GlfwApplication.m */; };
-		EDF8C9001FD7EB3F002CF9DC /* GlfwWindowManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EDF8C8FF1FD7EB3F002CF9DC /* GlfwWindowManager.m */; };
-		EDF8C90A1FD947FC002CF9DC /* GlfwWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = EDF8C9091FD947FC002CF9DC /* GlfwWindow.m */; };
+		ED7DC5281FE020720057AE1D /* GlfwApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = EDF8C8FB1FD70F2C002CF9DC /* GlfwApplication.m */; };
+		ED7DC5291FE020780057AE1D /* GlfwWindowManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EDF8C8FF1FD7EB3F002CF9DC /* GlfwWindowManager.m */; };
+		ED7DC52A1FE020830057AE1D /* GlfwMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = ED7DC50E1FDECBCC0057AE1D /* GlfwMonitor.m */; };
+		ED7DC52B1FE020860057AE1D /* GlfwRawWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 1407553F1FD73434007BF8B0 /* GlfwRawWindow.m */; };
+		ED7DC52C1FE0208B0057AE1D /* GlfwWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = EDF8C9091FD947FC002CF9DC /* GlfwWindow.m */; };
+		ED7DC52D1FE0208F0057AE1D /* GlfwCursor.m in Sources */ = {isa = PBXBuildFile; fileRef = ED7DC5161FDFF3C70057AE1D /* GlfwCursor.m */; };
+		ED7DC52E1FE020940057AE1D /* GlfwEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 140755421FD73453007BF8B0 /* GlfwEvent.m */; };
+		ED7DC5441FE021370057AE1D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EDF8C8F01FD70E16002CF9DC /* main.m */; };
+		ED7DC5451FE0213D0057AE1D /* liblibObjGLFW.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ED7DC5241FE020660057AE1D /* liblibObjGLFW.a */; };
+		ED7DC5471FE021570057AE1D /* ObjFW.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF8C8F81FD70F08002CF9DC /* ObjFW.framework */; };
+		ED7DC5491FE021B00057AE1D /* libglfw.3.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = ED7DC5481FE021B00057AE1D /* libglfw.3.3.dylib */; };
+		ED7DC54A1FE021BA0057AE1D /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED7DC5131FDEFBB80057AE1D /* OpenGL.framework */; };
+		ED7DC5581FE044610057AE1D /* sokol_imp.m in Sources */ = {isa = PBXBuildFile; fileRef = 140755441FD734DB007BF8B0 /* sokol_imp.m */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		ED7DC54B1FE021E20057AE1D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EDF8C8E51FD70E16002CF9DC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = ED7DC5231FE020660057AE1D;
+			remoteInfo = libObjGLFW;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXCopyFilesBuildPhase section */
-		EDF8C8EB1FD70E16002CF9DC /* CopyFiles */ = {
+		ED7DC53B1FE020F60057AE1D /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = /usr/share/man/man1/;
@@ -47,12 +59,11 @@
 		ED7DC5131FDEFBB80057AE1D /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		ED7DC5151FDFF3C70057AE1D /* GlfwCursor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GlfwCursor.h; sourceTree = "<group>"; };
 		ED7DC5161FDFF3C70057AE1D /* GlfwCursor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GlfwCursor.m; sourceTree = "<group>"; };
-		ED7DC51B1FE01E180057AE1D /* _sokol_gfx_gl.impl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _sokol_gfx_gl.impl.h; sourceTree = "<group>"; };
-		ED7DC51C1FE01E180057AE1D /* _sokol_gfx_metal.impl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _sokol_gfx_metal.impl.h; sourceTree = "<group>"; };
-		ED7DC51D1FE01E180057AE1D /* _sokol_gfx_d3d11.impl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _sokol_gfx_d3d11.impl.h; sourceTree = "<group>"; };
-		ED7DC51E1FE01E180057AE1D /* _sokol_gfx.impl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _sokol_gfx.impl.h; sourceTree = "<group>"; };
-		ED7DC51F1FE01E180057AE1D /* sokol_gfx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sokol_gfx.h; sourceTree = "<group>"; };
-		EDF8C8ED1FD70E16002CF9DC /* ObjGLFW */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ObjGLFW; sourceTree = BUILT_PRODUCTS_DIR; };
+		ED7DC5241FE020660057AE1D /* liblibObjGLFW.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = liblibObjGLFW.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		ED7DC53D1FE020F60057AE1D /* nuklear */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = nuklear; sourceTree = BUILT_PRODUCTS_DIR; };
+		ED7DC5481FE021B00057AE1D /* libglfw.3.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libglfw.3.3.dylib; path = ../../../usr/local/lib/libglfw.3.3.dylib; sourceTree = "<group>"; };
+		ED7DC54F1FE023D30057AE1D /* gen_flextgl.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = gen_flextgl.sh; sourceTree = "<group>"; };
+		ED7DC5571FE02BC90057AE1D /* ObjGLFW.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjGLFW.h; sourceTree = "<group>"; };
 		EDF8C8F01FD70E16002CF9DC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		EDF8C8F81FD70F08002CF9DC /* ObjFW.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ObjFW.framework; path = ../../../Library/Frameworks/ObjFW.framework; sourceTree = "<group>"; };
 		EDF8C8FA1FD70F2C002CF9DC /* GlfwApplication.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GlfwApplication.h; sourceTree = "<group>"; };
@@ -65,12 +76,21 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		EDF8C8EA1FD70E16002CF9DC /* Frameworks */ = {
+		ED7DC5211FE020660057AE1D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EDF8C8F91FD70F08002CF9DC /* ObjFW.framework in Frameworks */,
-				ED7DC5141FDEFBCA0057AE1D /* OpenGL.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ED7DC53A1FE020F60057AE1D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ED7DC5451FE0213D0057AE1D /* liblibObjGLFW.a in Frameworks */,
+				ED7DC5471FE021570057AE1D /* ObjFW.framework in Frameworks */,
+				ED7DC5491FE021B00057AE1D /* libglfw.3.3.dylib in Frameworks */,
+				ED7DC54A1FE021BA0057AE1D /* OpenGL.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -107,7 +127,8 @@
 		EDF8C8EE1FD70E16002CF9DC /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				EDF8C8ED1FD70E16002CF9DC /* ObjGLFW */,
+				ED7DC5241FE020660057AE1D /* liblibObjGLFW.a */,
+				ED7DC53D1FE020F60057AE1D /* nuklear */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -115,11 +136,7 @@
 		EDF8C8EF1FD70E16002CF9DC /* ObjGLFW */ = {
 			isa = PBXGroup;
 			children = (
-				ED7DC51D1FE01E180057AE1D /* _sokol_gfx_d3d11.impl.h */,
-				ED7DC51B1FE01E180057AE1D /* _sokol_gfx_gl.impl.h */,
-				ED7DC51C1FE01E180057AE1D /* _sokol_gfx_metal.impl.h */,
-				ED7DC51E1FE01E180057AE1D /* _sokol_gfx.impl.h */,
-				ED7DC51F1FE01E180057AE1D /* sokol_gfx.h */,
+				ED7DC5571FE02BC90057AE1D /* ObjGLFW.h */,
 				EDF8C8FD1FD713BF002CF9DC /* sokol_time.h */,
 				140755461FD74A38007BF8B0 /* GlfwGeometry.h */,
 				EDF8C8FA1FD70F2C002CF9DC /* GlfwApplication.h */,
@@ -139,6 +156,7 @@
 				140755411FD73453007BF8B0 /* GlfwEvent.h */,
 				140755421FD73453007BF8B0 /* GlfwEvent.m */,
 				140755441FD734DB007BF8B0 /* sokol_imp.m */,
+				ED7DC54F1FE023D30057AE1D /* gen_flextgl.sh */,
 			);
 			path = ObjGLFW;
 			sourceTree = "<group>";
@@ -146,6 +164,7 @@
 		EDF8C8F71FD70F07002CF9DC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				ED7DC5481FE021B00057AE1D /* libglfw.3.3.dylib */,
 				ED7DC5131FDEFBB80057AE1D /* OpenGL.framework */,
 				EDF8C8F81FD70F08002CF9DC /* ObjFW.framework */,
 			);
@@ -154,22 +173,51 @@
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		ED7DC5221FE020660057AE1D /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
-		EDF8C8EC1FD70E16002CF9DC /* ObjGLFW */ = {
+		ED7DC5231FE020660057AE1D /* libObjGLFW */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = EDF8C8F41FD70E16002CF9DC /* Build configuration list for PBXNativeTarget "ObjGLFW" */;
+			buildConfigurationList = ED7DC5251FE020660057AE1D /* Build configuration list for PBXNativeTarget "libObjGLFW" */;
 			buildPhases = (
-				EDF8C8E91FD70E16002CF9DC /* Sources */,
-				EDF8C8EA1FD70E16002CF9DC /* Frameworks */,
-				EDF8C8EB1FD70E16002CF9DC /* CopyFiles */,
+				ED7DC5591FE0446C0057AE1D /* ShellScript */,
+				ED7DC5201FE020660057AE1D /* Sources */,
+				ED7DC5211FE020660057AE1D /* Frameworks */,
+				ED7DC5221FE020660057AE1D /* Headers */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = ObjGLFW;
-			productName = ObjGLFW;
-			productReference = EDF8C8ED1FD70E16002CF9DC /* ObjGLFW */;
+			name = libObjGLFW;
+			productName = libObjGLFW;
+			productReference = ED7DC5241FE020660057AE1D /* liblibObjGLFW.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		ED7DC53C1FE020F60057AE1D /* nuklear */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ED7DC5411FE020F60057AE1D /* Build configuration list for PBXNativeTarget "nuklear" */;
+			buildPhases = (
+				ED7DC5391FE020F60057AE1D /* Sources */,
+				ED7DC53A1FE020F60057AE1D /* Frameworks */,
+				ED7DC53B1FE020F60057AE1D /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				ED7DC54C1FE021E20057AE1D /* PBXTargetDependency */,
+			);
+			name = nuklear;
+			productName = nuklear;
+			productReference = ED7DC53D1FE020F60057AE1D /* nuklear */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
@@ -181,7 +229,11 @@
 				LastUpgradeCheck = 0910;
 				ORGANIZATIONNAME = GunGraveKoga;
 				TargetAttributes = {
-					EDF8C8EC1FD70E16002CF9DC = {
+					ED7DC5231FE020660057AE1D = {
+						CreatedOnToolsVersion = 9.1;
+						ProvisioningStyle = Automatic;
+					};
+					ED7DC53C1FE020F60057AE1D = {
 						CreatedOnToolsVersion = 9.1;
 						ProvisioningStyle = Automatic;
 					};
@@ -199,31 +251,119 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				EDF8C8EC1FD70E16002CF9DC /* ObjGLFW */,
+				ED7DC5231FE020660057AE1D /* libObjGLFW */,
+				ED7DC53C1FE020F60057AE1D /* nuklear */,
 			);
 		};
 /* End PBXProject section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		ED7DC5591FE0446C0057AE1D /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = /Users/y.vovk/ObjGLFW/ObjGLFW/gen_flextgl.sh;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
-		EDF8C8E91FD70E16002CF9DC /* Sources */ = {
+		ED7DC5201FE020660057AE1D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EDF8C90A1FD947FC002CF9DC /* GlfwWindow.m in Sources */,
-				EDF8C9001FD7EB3F002CF9DC /* GlfwWindowManager.m in Sources */,
-				EDF8C8F11FD70E16002CF9DC /* main.m in Sources */,
-				EDF8C8FC1FD70F2C002CF9DC /* GlfwApplication.m in Sources */,
-				ED7DC50F1FDECBCC0057AE1D /* GlfwMonitor.m in Sources */,
-				140755451FD734DB007BF8B0 /* sokol_imp.m in Sources */,
-				140755401FD73434007BF8B0 /* GlfwRawWindow.m in Sources */,
-				ED7DC5171FDFF3C70057AE1D /* GlfwCursor.m in Sources */,
-				140755431FD73453007BF8B0 /* GlfwEvent.m in Sources */,
+				ED7DC5281FE020720057AE1D /* GlfwApplication.m in Sources */,
+				ED7DC5291FE020780057AE1D /* GlfwWindowManager.m in Sources */,
+				ED7DC52A1FE020830057AE1D /* GlfwMonitor.m in Sources */,
+				ED7DC52B1FE020860057AE1D /* GlfwRawWindow.m in Sources */,
+				ED7DC52C1FE0208B0057AE1D /* GlfwWindow.m in Sources */,
+				ED7DC52D1FE0208F0057AE1D /* GlfwCursor.m in Sources */,
+				ED7DC52E1FE020940057AE1D /* GlfwEvent.m in Sources */,
+				ED7DC5581FE044610057AE1D /* sokol_imp.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ED7DC5391FE020F60057AE1D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ED7DC5441FE021370057AE1D /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		ED7DC54C1FE021E20057AE1D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = ED7DC5231FE020660057AE1D /* libObjGLFW */;
+			targetProxy = ED7DC54B1FE021E20057AE1D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		ED7DC5261FE020660057AE1D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				EXECUTABLE_PREFIX = lib;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		ED7DC5271FE020660057AE1D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				EXECUTABLE_PREFIX = lib;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		ED7DC5421FE020F60057AE1D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "${SOURCE_ROOT}/ObjGLFW";
+			};
+			name = Debug;
+		};
+		ED7DC5431FE020F60057AE1D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "${SOURCE_ROOT}/ObjGLFW";
+			};
+			name = Release;
+		};
 		EDF8C8F21FD70E16002CF9DC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -285,7 +425,6 @@
 					"-fno-objc-arc",
 					"-fno-modules",
 				);
-				OTHER_LDFLAGS = "-lglfw";
 				SDKROOT = macosx;
 			};
 			name = Debug;
@@ -344,60 +483,36 @@
 					"-fno-objc-arc",
 					"-fno-modules",
 				);
-				OTHER_LDFLAGS = "-lglfw";
 				SDKROOT = macosx;
-			};
-			name = Release;
-		};
-		EDF8C8F51FD70E16002CF9DC /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(LOCAL_LIBRARY_DIR)/Frameworks",
-				);
-				OTHER_LDFLAGS = (
-					"-lglfw",
-					"-lGLEW",
-				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Debug;
-		};
-		EDF8C8F61FD70E16002CF9DC /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(LOCAL_LIBRARY_DIR)/Frameworks",
-				);
-				OTHER_LDFLAGS = (
-					"-lglfw",
-					"-lGLEW",
-				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		ED7DC5251FE020660057AE1D /* Build configuration list for PBXNativeTarget "libObjGLFW" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ED7DC5261FE020660057AE1D /* Debug */,
+				ED7DC5271FE020660057AE1D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		ED7DC5411FE020F60057AE1D /* Build configuration list for PBXNativeTarget "nuklear" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ED7DC5421FE020F60057AE1D /* Debug */,
+				ED7DC5431FE020F60057AE1D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		EDF8C8E81FD70E16002CF9DC /* Build configuration list for PBXProject "ObjGLFW" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				EDF8C8F21FD70E16002CF9DC /* Debug */,
 				EDF8C8F31FD70E16002CF9DC /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		EDF8C8F41FD70E16002CF9DC /* Build configuration list for PBXNativeTarget "ObjGLFW" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				EDF8C8F51FD70E16002CF9DC /* Debug */,
-				EDF8C8F61FD70E16002CF9DC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

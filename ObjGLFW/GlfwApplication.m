@@ -27,12 +27,21 @@ static void _glfwErrorCallbaack(int err, const char *description) {
     of_log(@"%s: Error - %d %s!", _glfwVersionString, err, description);
 }
 
+static bool _expectedLoopTime = 0.0; //expected loop time in ms
+static int _refreshRate = 0;
+
 void _glfwInit(void) {
     stm_setup();
     _glfwVersionString = glfwGetVersionString();
     glfwSetErrorCallback(&_glfwErrorCallbaack);
     
     glfwInit();
+    
+    GLFWmonitor *mainMonitor = glfwGetPrimaryMonitor();
+    const GLFWvidmode *vmode = glfwGetVideoMode(mainMonitor);
+    
+    _refreshRate = vmode->refreshRate;
+    _expectedLoopTime = (1.0 / _refreshRate);
 }
 
 void _glfwTerminate(void) {
@@ -101,9 +110,6 @@ glfw_application_main(int *argc, char **argv[],
     return 0;
 }
 
-static bool _expectedLoopTime = 0.0; //expected loop time in ms
-static int _refreshRate = 0;
-
 @implementation GlfwApplication
 
 + (void)initialize {
@@ -114,12 +120,6 @@ static int _refreshRate = 0;
 #ifdef OF_HAVE_SANDBOX
         [OFApplication replaceClassMethod:@selector(activateSandbox:) withMethodFromClass:self];
 #endif
-        
-        GLFWmonitor *mainMonitor = glfwGetPrimaryMonitor();
-        const GLFWvidmode *vmode = glfwGetVideoMode(mainMonitor);
-        
-        _refreshRate = vmode->refreshRate;
-        _expectedLoopTime = (1.0 / _refreshRate);
     }
 }
 
