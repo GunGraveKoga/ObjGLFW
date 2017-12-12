@@ -16,6 +16,14 @@
 
 OF_ASSUME_NONNULL_BEGIN
 
+@protocol GlfwWindow <OFObject>
+
+@optional
+- (void)prepareForEventsHandling;
+- (void)endEventsHandling;
+
+@end
+
 @interface GlfwRawWindow : OFObject <OFCopying>
 {
     GLFWwindow *_windowHandle;

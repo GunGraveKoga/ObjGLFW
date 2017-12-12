@@ -204,17 +204,34 @@ static GlfwWindowManager *defaultManager = nil;
     
     of_list_object_t *eventObject = [_eventsQueue firstListObject];
     
+    OFMutableSet *windows = [[OFMutableSet alloc] init];
+    
     while (eventObject != NULL) {
         void *pool = objc_autoreleasePoolPush();
         
         GlfwEvent *event = (GlfwEvent *)(eventObject->object);
+        GlfwRawWindow *window = [event window];
         
-        [[event window] sendEvent:event];
+        [window sendEvent:event];
+        
+        [windows addObject:window];
         
         objc_autoreleasePoolPop(pool);
         
         eventObject = eventObject->next;
     }
+    
+    for (GlfwRawWindow *window in windows) {
+        void *pool = objc_autoreleasePoolPush();
+        
+        if ([window conformsToProtocol:@protocol(GlfwWindow)] && [window respondsToSelector:@selector(endEventsHandling)])
+            [(id<GlfwWindow>)window endEventsHandling];
+        
+        objc_autoreleasePoolPop(pool);
+    }
+    
+    [windows removeAllObjects];
+    [windows release];
     
 #if defined(OF_HAVE_THREADS)
     [_lock unlock];
@@ -248,6 +265,9 @@ static GlfwWindowManager *defaultManager = nil;
         if (![window shouldClose] && [window isVisible] && ![window isIconified]) {
             [window draw];
         }
+        
+        if ([window conformsToProtocol:@protocol(GlfwWindow)] && [window respondsToSelector:@selector(prepareForEventsHandling)])
+            [(id<GlfwWindow>)window prepareForEventsHandling];
         
         objc_autoreleasePoolPop(pool);
     }
@@ -358,7 +378,7 @@ static void inputMouseButtonCallback(GLFWwindow *glfwWindow, int button, int act
             break;
     }
     
-    [wm fetchEvent:[GlfwMouseEvent mouseButtonEventWithType:mouseEventType timestamp:stm_ms(now) window:window mouseButton:button modifiersFlags:mods]];
+    [wm fetchEvent:[GlfwMouseEvent mouseButtonEventWithType:mouseEventType timestamp:stm_ms(now) window:window mouseButton:button modifiersFlags:mods repeat:(action == GLFW_REPEAT)]];
 }
 
 static void inputCursorPositionCallback(GLFWwindow *glfwWindow, double x, double y) {
@@ -394,7 +414,7 @@ static void inputKeyCallback(GLFWwindow *glfwWindow, int key, int scancode, int 
     
     GlfwEventType keyEventType = (action == GLFW_RELEASE) ? GlfwKeyUp : GlfwKeyDown;
     
-    [wm fetchEvent:[GlfwKeyEvent keyEventWithType:keyEventType timestamp:stm_ms(now) window:window glfwKey:key modifiers:mods systemScancode:scancode]];
+    [wm fetchEvent:[GlfwKeyEvent keyEventWithType:keyEventType timestamp:stm_ms(now) window:window glfwKey:key modifiers:mods systemScancode:scancode repeat:(action == GLFW_REPEAT)]];
 }
 
 static void inputCharCallback(GLFWwindow *glfwWindow, unsigned int codepoint) {

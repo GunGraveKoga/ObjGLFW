@@ -470,6 +470,25 @@
     return (self->_windowHandle == other->_windowHandle);
 }
 
+- (uint32_t)hash {
+    @synchronized(self) {
+        if (_windowHandle) {
+            uint32_t hash;
+            
+            OF_HASH_INIT(hash);
+            
+            for (size_t i = 0; i < sizeof(GLFWwindow *); i++)
+                OF_HASH_ADD(hash, ((uint8_t *)_windowHandle)[i]);
+            
+            OF_HASH_FINALIZE(hash);
+            
+            return hash;
+        }
+    }
+    
+    return [super hash];
+}
+
 - (void)dealloc {
     if (_windowHandle) {
         [self _destroy];
