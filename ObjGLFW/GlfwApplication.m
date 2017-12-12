@@ -19,6 +19,7 @@ extern void __wgetmainargs(int *, wchar_t ***, wchar_t ***, int, int *);
 #endif
 
 #include <GLFW/glfw3.h>
+#define SOKOL_IMPL
 #include "sokol_time.h"
 
 static const char *_glfwVersionString = NULL;

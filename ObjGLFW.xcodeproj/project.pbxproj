@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		140755571FE07E75007BF8B0 /* libObjGLFW.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ED7DC5241FE020660057AE1D /* libObjGLFW.a */; };
 		ED7DC5281FE020720057AE1D /* GlfwApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = EDF8C8FB1FD70F2C002CF9DC /* GlfwApplication.m */; };
 		ED7DC5291FE020780057AE1D /* GlfwWindowManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EDF8C8FF1FD7EB3F002CF9DC /* GlfwWindowManager.m */; };
 		ED7DC52A1FE020830057AE1D /* GlfwMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = ED7DC50E1FDECBCC0057AE1D /* GlfwMonitor.m */; };
@@ -15,11 +16,9 @@
 		ED7DC52D1FE0208F0057AE1D /* GlfwCursor.m in Sources */ = {isa = PBXBuildFile; fileRef = ED7DC5161FDFF3C70057AE1D /* GlfwCursor.m */; };
 		ED7DC52E1FE020940057AE1D /* GlfwEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 140755421FD73453007BF8B0 /* GlfwEvent.m */; };
 		ED7DC5441FE021370057AE1D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EDF8C8F01FD70E16002CF9DC /* main.m */; };
-		ED7DC5451FE0213D0057AE1D /* liblibObjGLFW.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ED7DC5241FE020660057AE1D /* liblibObjGLFW.a */; };
 		ED7DC5471FE021570057AE1D /* ObjFW.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF8C8F81FD70F08002CF9DC /* ObjFW.framework */; };
 		ED7DC5491FE021B00057AE1D /* libglfw.3.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = ED7DC5481FE021B00057AE1D /* libglfw.3.3.dylib */; };
 		ED7DC54A1FE021BA0057AE1D /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED7DC5131FDEFBB80057AE1D /* OpenGL.framework */; };
-		ED7DC5581FE044610057AE1D /* sokol_imp.m in Sources */ = {isa = PBXBuildFile; fileRef = 140755441FD734DB007BF8B0 /* sokol_imp.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,7 +48,6 @@
 		1407553F1FD73434007BF8B0 /* GlfwRawWindow.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GlfwRawWindow.m; sourceTree = "<group>"; };
 		140755411FD73453007BF8B0 /* GlfwEvent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GlfwEvent.h; sourceTree = "<group>"; };
 		140755421FD73453007BF8B0 /* GlfwEvent.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GlfwEvent.m; sourceTree = "<group>"; };
-		140755441FD734DB007BF8B0 /* sokol_imp.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = sokol_imp.m; sourceTree = "<group>"; };
 		140755461FD74A38007BF8B0 /* GlfwGeometry.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GlfwGeometry.h; sourceTree = "<group>"; };
 		1407554A1FD89271007BF8B0 /* GlfwEventHandling.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GlfwEventHandling.h; sourceTree = "<group>"; };
 		1407554B1FD8929A007BF8B0 /* GlfwDrawing.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GlfwDrawing.h; sourceTree = "<group>"; };
@@ -59,7 +57,7 @@
 		ED7DC5131FDEFBB80057AE1D /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		ED7DC5151FDFF3C70057AE1D /* GlfwCursor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GlfwCursor.h; sourceTree = "<group>"; };
 		ED7DC5161FDFF3C70057AE1D /* GlfwCursor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GlfwCursor.m; sourceTree = "<group>"; };
-		ED7DC5241FE020660057AE1D /* liblibObjGLFW.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = liblibObjGLFW.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		ED7DC5241FE020660057AE1D /* libObjGLFW.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libObjGLFW.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED7DC53D1FE020F60057AE1D /* nuklear */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = nuklear; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED7DC5481FE021B00057AE1D /* libglfw.3.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libglfw.3.3.dylib; path = ../../../usr/local/lib/libglfw.3.3.dylib; sourceTree = "<group>"; };
 		ED7DC54F1FE023D30057AE1D /* gen_flextgl.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = gen_flextgl.sh; sourceTree = "<group>"; };
@@ -87,7 +85,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ED7DC5451FE0213D0057AE1D /* liblibObjGLFW.a in Frameworks */,
+				140755571FE07E75007BF8B0 /* libObjGLFW.a in Frameworks */,
 				ED7DC5471FE021570057AE1D /* ObjFW.framework in Frameworks */,
 				ED7DC5491FE021B00057AE1D /* libglfw.3.3.dylib in Frameworks */,
 				ED7DC54A1FE021BA0057AE1D /* OpenGL.framework in Frameworks */,
@@ -127,7 +125,7 @@
 		EDF8C8EE1FD70E16002CF9DC /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				ED7DC5241FE020660057AE1D /* liblibObjGLFW.a */,
+				ED7DC5241FE020660057AE1D /* libObjGLFW.a */,
 				ED7DC53D1FE020F60057AE1D /* nuklear */,
 			);
 			name = Products;
@@ -155,7 +153,6 @@
 				ED7DC5161FDFF3C70057AE1D /* GlfwCursor.m */,
 				140755411FD73453007BF8B0 /* GlfwEvent.h */,
 				140755421FD73453007BF8B0 /* GlfwEvent.m */,
-				140755441FD734DB007BF8B0 /* sokol_imp.m */,
 				ED7DC54F1FE023D30057AE1D /* gen_flextgl.sh */,
 			);
 			path = ObjGLFW;
@@ -184,9 +181,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		ED7DC5231FE020660057AE1D /* libObjGLFW */ = {
+		ED7DC5231FE020660057AE1D /* ObjGLFW */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = ED7DC5251FE020660057AE1D /* Build configuration list for PBXNativeTarget "libObjGLFW" */;
+			buildConfigurationList = ED7DC5251FE020660057AE1D /* Build configuration list for PBXNativeTarget "ObjGLFW" */;
 			buildPhases = (
 				ED7DC5591FE0446C0057AE1D /* ShellScript */,
 				ED7DC5201FE020660057AE1D /* Sources */,
@@ -197,9 +194,9 @@
 			);
 			dependencies = (
 			);
-			name = libObjGLFW;
+			name = ObjGLFW;
 			productName = libObjGLFW;
-			productReference = ED7DC5241FE020660057AE1D /* liblibObjGLFW.a */;
+			productReference = ED7DC5241FE020660057AE1D /* libObjGLFW.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 		ED7DC53C1FE020F60057AE1D /* nuklear */ = {
@@ -251,7 +248,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				ED7DC5231FE020660057AE1D /* libObjGLFW */,
+				ED7DC5231FE020660057AE1D /* ObjGLFW */,
 				ED7DC53C1FE020F60057AE1D /* nuklear */,
 			);
 		};
@@ -269,7 +266,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = /Users/y.vovk/ObjGLFW/ObjGLFW/gen_flextgl.sh;
+			shellScript = "${SOURCE_ROOT}/ObjGLFW/gen_flextgl.sh";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -285,7 +282,6 @@
 				ED7DC52C1FE0208B0057AE1D /* GlfwWindow.m in Sources */,
 				ED7DC52D1FE0208F0057AE1D /* GlfwCursor.m in Sources */,
 				ED7DC52E1FE020940057AE1D /* GlfwEvent.m in Sources */,
-				ED7DC5581FE044610057AE1D /* sokol_imp.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -302,7 +298,7 @@
 /* Begin PBXTargetDependency section */
 		ED7DC54C1FE021E20057AE1D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = ED7DC5231FE020660057AE1D /* libObjGLFW */;
+			target = ED7DC5231FE020660057AE1D /* ObjGLFW */;
 			targetProxy = ED7DC54B1FE021E20057AE1D /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -490,7 +486,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		ED7DC5251FE020660057AE1D /* Build configuration list for PBXNativeTarget "libObjGLFW" */ = {
+		ED7DC5251FE020660057AE1D /* Build configuration list for PBXNativeTarget "ObjGLFW" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				ED7DC5261FE020660057AE1D /* Debug */,
