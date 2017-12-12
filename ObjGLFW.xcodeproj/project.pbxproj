@@ -47,6 +47,11 @@
 		ED7DC5131FDEFBB80057AE1D /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		ED7DC5151FDFF3C70057AE1D /* GlfwCursor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GlfwCursor.h; sourceTree = "<group>"; };
 		ED7DC5161FDFF3C70057AE1D /* GlfwCursor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GlfwCursor.m; sourceTree = "<group>"; };
+		ED7DC51B1FE01E180057AE1D /* _sokol_gfx_gl.impl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _sokol_gfx_gl.impl.h; sourceTree = "<group>"; };
+		ED7DC51C1FE01E180057AE1D /* _sokol_gfx_metal.impl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _sokol_gfx_metal.impl.h; sourceTree = "<group>"; };
+		ED7DC51D1FE01E180057AE1D /* _sokol_gfx_d3d11.impl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _sokol_gfx_d3d11.impl.h; sourceTree = "<group>"; };
+		ED7DC51E1FE01E180057AE1D /* _sokol_gfx.impl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _sokol_gfx.impl.h; sourceTree = "<group>"; };
+		ED7DC51F1FE01E180057AE1D /* sokol_gfx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sokol_gfx.h; sourceTree = "<group>"; };
 		EDF8C8ED1FD70E16002CF9DC /* ObjGLFW */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ObjGLFW; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDF8C8F01FD70E16002CF9DC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		EDF8C8F81FD70F08002CF9DC /* ObjFW.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ObjFW.framework; path = ../../../Library/Frameworks/ObjFW.framework; sourceTree = "<group>"; };
@@ -110,6 +115,11 @@
 		EDF8C8EF1FD70E16002CF9DC /* ObjGLFW */ = {
 			isa = PBXGroup;
 			children = (
+				ED7DC51D1FE01E180057AE1D /* _sokol_gfx_d3d11.impl.h */,
+				ED7DC51B1FE01E180057AE1D /* _sokol_gfx_gl.impl.h */,
+				ED7DC51C1FE01E180057AE1D /* _sokol_gfx_metal.impl.h */,
+				ED7DC51E1FE01E180057AE1D /* _sokol_gfx.impl.h */,
+				ED7DC51F1FE01E180057AE1D /* sokol_gfx.h */,
 				EDF8C8FD1FD713BF002CF9DC /* sokol_time.h */,
 				140755461FD74A38007BF8B0 /* GlfwGeometry.h */,
 				EDF8C8FA1FD70F2C002CF9DC /* GlfwApplication.h */,
