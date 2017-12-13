@@ -475,28 +475,10 @@
     }
 }
 
-- (void)requestWindowAttention {
-    @synchronized (self) {
-        if (_windowHandle) {
-            glfwRequestWindowAttention(_windowHandle);
-        }
-    }
-}
-
 - (void)_destroy {
     glfwDestroyWindow(_windowHandle);
     
     _windowHandle = NULL;
-}
-
-- (void)destroy {
-    @synchronized (self) {
-        if (_windowHandle) {
-            [[GlfwWindowManager defaultManager] detachWindow:self];
-            
-            [self _destroy];
-        }
-    }
 }
 
 - (void)draw {

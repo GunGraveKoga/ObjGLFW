@@ -138,7 +138,6 @@ static GlfwWindowManager *defaultManager = nil;
 #if defined(OF_HAVE_THREADS)
     if ( [_lock tryLock] ) {
 #endif
-        
         if ([window isOpen]) {
             GLFWwindow *handle = [window windowHandle];
             
@@ -212,9 +211,11 @@ static GlfwWindowManager *defaultManager = nil;
         GlfwEvent *event = (GlfwEvent *)(eventObject->object);
         GlfwRawWindow *window = [event window];
         
-        [window sendEvent:event];
-        
-        [windows addObject:window];
+        if (![window shouldClose]) {
+            [window sendEvent:event];
+            
+            [windows addObject:window];
+        }
         
         objc_autoreleasePoolPop(pool);
         
@@ -314,7 +315,7 @@ static void windowSizeCallback(GLFWwindow *glfwWindow, int width, int height) {
     GlfwWindowManager *wm = (GlfwWindowManager *)glfwGetWindowUserPointer(glfwWindow);
     GlfwRawWindow *window = [wm findWindow:glfwWindow];
     
-    [wm fetchEvent:[GlfwWindowEvent windowResizedEventWithTimestamp:stm_ms(now) window:window windowSize:GlfwSizeNew(width, height)]];
+    [window sendEvent:[GlfwWindowEvent windowResizedEventWithTimestamp:stm_ms(now) window:window windowSize:GlfwSizeNew(width, height)]];
 }
 
 static void windowCloseCallback(GLFWwindow *glfwWindow) {

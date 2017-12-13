@@ -16,7 +16,6 @@ OF_INLINE of_rectangle_t GlfwRectToOFRect(GlfwRect rect) {
 @implementation GlfwEvent
 
 @synthesize type = _type;
-@synthesize window = _window;
 @synthesize timestamp = _timestamp;
 
 @dynamic glfwKey, systemScancode, modifiersFlags, glfwMouseButton;
@@ -44,6 +43,10 @@ OF_INLINE of_rectangle_t GlfwRectToOFRect(GlfwRect rect) {
 
 - (GlfwEventType)currentType {
     return _type;
+}
+
+- (GlfwRawWindow *)window {
+    return _window;
 }
 
 - (bool)isMatchEventMask:(GlfwEventMask)mask {

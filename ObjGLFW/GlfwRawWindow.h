@@ -75,7 +75,6 @@ OF_ASSUME_NONNULL_BEGIN
 
 - (bool)isOpen;
 - (void)requestWindowAttention;
-- (void)destroy;
 - (void)draw;
 - (void)sendEvent:(GlfwEvent *)event;
 - (void)makeContextCurrent;
