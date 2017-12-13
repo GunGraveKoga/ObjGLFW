@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		140755571FE07E75007BF8B0 /* libObjGLFW.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ED7DC5241FE020660057AE1D /* libObjGLFW.a */; };
+		1407555D1FE08854007BF8B0 /* _sokol_gfx_metal.impl.h in Headers */ = {isa = PBXBuildFile; fileRef = 140755581FE08853007BF8B0 /* _sokol_gfx_metal.impl.h */; };
+		1407555E1FE08854007BF8B0 /* _sokol_gfx.impl.h in Headers */ = {isa = PBXBuildFile; fileRef = 140755591FE08853007BF8B0 /* _sokol_gfx.impl.h */; };
+		1407555F1FE08854007BF8B0 /* sokol_gfx.h in Headers */ = {isa = PBXBuildFile; fileRef = 1407555A1FE08854007BF8B0 /* sokol_gfx.h */; };
+		140755601FE08854007BF8B0 /* _sokol_gfx_gl.impl.h in Headers */ = {isa = PBXBuildFile; fileRef = 1407555B1FE08854007BF8B0 /* _sokol_gfx_gl.impl.h */; };
+		140755611FE08854007BF8B0 /* _sokol_gfx_d3d11.impl.h in Headers */ = {isa = PBXBuildFile; fileRef = 1407555C1FE08854007BF8B0 /* _sokol_gfx_d3d11.impl.h */; };
 		ED7DC5281FE020720057AE1D /* GlfwApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = EDF8C8FB1FD70F2C002CF9DC /* GlfwApplication.m */; };
 		ED7DC5291FE020780057AE1D /* GlfwWindowManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EDF8C8FF1FD7EB3F002CF9DC /* GlfwWindowManager.m */; };
 		ED7DC52A1FE020830057AE1D /* GlfwMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = ED7DC50E1FDECBCC0057AE1D /* GlfwMonitor.m */; };
@@ -51,6 +56,11 @@
 		140755461FD74A38007BF8B0 /* GlfwGeometry.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GlfwGeometry.h; sourceTree = "<group>"; };
 		1407554A1FD89271007BF8B0 /* GlfwEventHandling.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GlfwEventHandling.h; sourceTree = "<group>"; };
 		1407554B1FD8929A007BF8B0 /* GlfwDrawing.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GlfwDrawing.h; sourceTree = "<group>"; };
+		140755581FE08853007BF8B0 /* _sokol_gfx_metal.impl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _sokol_gfx_metal.impl.h; sourceTree = "<group>"; };
+		140755591FE08853007BF8B0 /* _sokol_gfx.impl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _sokol_gfx.impl.h; sourceTree = "<group>"; };
+		1407555A1FE08854007BF8B0 /* sokol_gfx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sokol_gfx.h; sourceTree = "<group>"; };
+		1407555B1FE08854007BF8B0 /* _sokol_gfx_gl.impl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _sokol_gfx_gl.impl.h; sourceTree = "<group>"; };
+		1407555C1FE08854007BF8B0 /* _sokol_gfx_d3d11.impl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _sokol_gfx_d3d11.impl.h; sourceTree = "<group>"; };
 		ED7DC50D1FDECBCC0057AE1D /* GlfwMonitor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GlfwMonitor.h; sourceTree = "<group>"; };
 		ED7DC50E1FDECBCC0057AE1D /* GlfwMonitor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GlfwMonitor.m; sourceTree = "<group>"; };
 		ED7DC5121FDEE0690057AE1D /* nuklear.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = nuklear.h; sourceTree = "<group>"; };
@@ -106,6 +116,11 @@
 		ED7DC5111FDEE0090057AE1D /* nuklear */ = {
 			isa = PBXGroup;
 			children = (
+				1407555C1FE08854007BF8B0 /* _sokol_gfx_d3d11.impl.h */,
+				1407555B1FE08854007BF8B0 /* _sokol_gfx_gl.impl.h */,
+				140755581FE08853007BF8B0 /* _sokol_gfx_metal.impl.h */,
+				140755591FE08853007BF8B0 /* _sokol_gfx.impl.h */,
+				1407555A1FE08854007BF8B0 /* sokol_gfx.h */,
 				ED7DC5121FDEE0690057AE1D /* nuklear.h */,
 				EDF8C8F01FD70E16002CF9DC /* main.m */,
 			);
@@ -175,6 +190,11 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1407555E1FE08854007BF8B0 /* _sokol_gfx.impl.h in Headers */,
+				1407555F1FE08854007BF8B0 /* sokol_gfx.h in Headers */,
+				1407555D1FE08854007BF8B0 /* _sokol_gfx_metal.impl.h in Headers */,
+				140755601FE08854007BF8B0 /* _sokol_gfx_gl.impl.h in Headers */,
+				140755611FE08854007BF8B0 /* _sokol_gfx_d3d11.impl.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
