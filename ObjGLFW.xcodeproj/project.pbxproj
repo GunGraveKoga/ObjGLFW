@@ -20,10 +20,16 @@
 		ED7DC52C1FE0208B0057AE1D /* GlfwWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = EDF8C9091FD947FC002CF9DC /* GlfwWindow.m */; };
 		ED7DC52D1FE0208F0057AE1D /* GlfwCursor.m in Sources */ = {isa = PBXBuildFile; fileRef = ED7DC5161FDFF3C70057AE1D /* GlfwCursor.m */; };
 		ED7DC52E1FE020940057AE1D /* GlfwEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 140755421FD73453007BF8B0 /* GlfwEvent.m */; };
-		ED7DC5441FE021370057AE1D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EDF8C8F01FD70E16002CF9DC /* main.m */; };
 		ED7DC5471FE021570057AE1D /* ObjFW.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF8C8F81FD70F08002CF9DC /* ObjFW.framework */; };
 		ED7DC5491FE021B00057AE1D /* libglfw.3.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = ED7DC5481FE021B00057AE1D /* libglfw.3.3.dylib */; };
 		ED7DC54A1FE021BA0057AE1D /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED7DC5131FDEFBB80057AE1D /* OpenGL.framework */; };
+		ED7DC55B1FE166330057AE1D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = ED7DC55A1FE166330057AE1D /* main.m */; };
+		ED7DC55D1FE175890057AE1D /* libGLEW.2.1.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = ED7DC55C1FE175890057AE1D /* libGLEW.2.1.0.dylib */; };
+		ED7DC5691FE187240057AE1D /* main_sokol.m in Sources */ = {isa = PBXBuildFile; fileRef = EDF8C8F01FD70E16002CF9DC /* main_sokol.m */; };
+		ED7DC56A1FE1872D0057AE1D /* ObjFW.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF8C8F81FD70F08002CF9DC /* ObjFW.framework */; };
+		ED7DC56B1FE187310057AE1D /* libglfw.3.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = ED7DC5481FE021B00057AE1D /* libglfw.3.3.dylib */; };
+		ED7DC56C1FE187350057AE1D /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED7DC5131FDEFBB80057AE1D /* OpenGL.framework */; };
+		ED7DC56D1FE188160057AE1D /* libObjGLFW.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ED7DC5241FE020660057AE1D /* libObjGLFW.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +44,15 @@
 
 /* Begin PBXCopyFilesBuildPhase section */
 		ED7DC53B1FE020F60057AE1D /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+		ED7DC5601FE187110057AE1D /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = /usr/share/man/man1/;
@@ -72,7 +87,10 @@
 		ED7DC5481FE021B00057AE1D /* libglfw.3.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libglfw.3.3.dylib; path = ../../../usr/local/lib/libglfw.3.3.dylib; sourceTree = "<group>"; };
 		ED7DC54F1FE023D30057AE1D /* gen_flextgl.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = gen_flextgl.sh; sourceTree = "<group>"; };
 		ED7DC5571FE02BC90057AE1D /* ObjGLFW.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjGLFW.h; sourceTree = "<group>"; };
-		EDF8C8F01FD70E16002CF9DC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		ED7DC55A1FE166330057AE1D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		ED7DC55C1FE175890057AE1D /* libGLEW.2.1.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libGLEW.2.1.0.dylib; path = ../../../usr/local/Cellar/glew/2.1.0/lib/libGLEW.2.1.0.dylib; sourceTree = "<group>"; };
+		ED7DC5621FE187110057AE1D /* nuklear_sokol */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = nuklear_sokol; sourceTree = BUILT_PRODUCTS_DIR; };
+		EDF8C8F01FD70E16002CF9DC /* main_sokol.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main_sokol.m; sourceTree = "<group>"; };
 		EDF8C8F81FD70F08002CF9DC /* ObjFW.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ObjFW.framework; path = ../../../Library/Frameworks/ObjFW.framework; sourceTree = "<group>"; };
 		EDF8C8FA1FD70F2C002CF9DC /* GlfwApplication.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GlfwApplication.h; sourceTree = "<group>"; };
 		EDF8C8FB1FD70F2C002CF9DC /* GlfwApplication.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GlfwApplication.m; sourceTree = "<group>"; };
@@ -99,6 +117,18 @@
 				ED7DC5471FE021570057AE1D /* ObjFW.framework in Frameworks */,
 				ED7DC5491FE021B00057AE1D /* libglfw.3.3.dylib in Frameworks */,
 				ED7DC54A1FE021BA0057AE1D /* OpenGL.framework in Frameworks */,
+				ED7DC55D1FE175890057AE1D /* libGLEW.2.1.0.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ED7DC55F1FE187110057AE1D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ED7DC56D1FE188160057AE1D /* libObjGLFW.a in Frameworks */,
+				ED7DC56A1FE1872D0057AE1D /* ObjFW.framework in Frameworks */,
+				ED7DC56B1FE187310057AE1D /* libglfw.3.3.dylib in Frameworks */,
+				ED7DC56C1FE187350057AE1D /* OpenGL.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -122,7 +152,8 @@
 				140755591FE08853007BF8B0 /* _sokol_gfx.impl.h */,
 				1407555A1FE08854007BF8B0 /* sokol_gfx.h */,
 				ED7DC5121FDEE0690057AE1D /* nuklear.h */,
-				EDF8C8F01FD70E16002CF9DC /* main.m */,
+				EDF8C8F01FD70E16002CF9DC /* main_sokol.m */,
+				ED7DC55A1FE166330057AE1D /* main.m */,
 			);
 			path = nuklear;
 			sourceTree = "<group>";
@@ -142,6 +173,7 @@
 			children = (
 				ED7DC5241FE020660057AE1D /* libObjGLFW.a */,
 				ED7DC53D1FE020F60057AE1D /* nuklear */,
+				ED7DC5621FE187110057AE1D /* nuklear_sokol */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -176,6 +208,7 @@
 		EDF8C8F71FD70F07002CF9DC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				ED7DC55C1FE175890057AE1D /* libGLEW.2.1.0.dylib */,
 				ED7DC5481FE021B00057AE1D /* libglfw.3.3.dylib */,
 				ED7DC5131FDEFBB80057AE1D /* OpenGL.framework */,
 				EDF8C8F81FD70F08002CF9DC /* ObjFW.framework */,
@@ -237,6 +270,23 @@
 			productReference = ED7DC53D1FE020F60057AE1D /* nuklear */;
 			productType = "com.apple.product-type.tool";
 		};
+		ED7DC5611FE187110057AE1D /* nuklear_sokol */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ED7DC5661FE187110057AE1D /* Build configuration list for PBXNativeTarget "nuklear_sokol" */;
+			buildPhases = (
+				ED7DC55E1FE187110057AE1D /* Sources */,
+				ED7DC55F1FE187110057AE1D /* Frameworks */,
+				ED7DC5601FE187110057AE1D /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = nuklear_sokol;
+			productName = nuklear_sokol;
+			productReference = ED7DC5621FE187110057AE1D /* nuklear_sokol */;
+			productType = "com.apple.product-type.tool";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -251,6 +301,10 @@
 						ProvisioningStyle = Automatic;
 					};
 					ED7DC53C1FE020F60057AE1D = {
+						CreatedOnToolsVersion = 9.1;
+						ProvisioningStyle = Automatic;
+					};
+					ED7DC5611FE187110057AE1D = {
 						CreatedOnToolsVersion = 9.1;
 						ProvisioningStyle = Automatic;
 					};
@@ -270,6 +324,7 @@
 			targets = (
 				ED7DC5231FE020660057AE1D /* ObjGLFW */,
 				ED7DC53C1FE020F60057AE1D /* nuklear */,
+				ED7DC5611FE187110057AE1D /* nuklear_sokol */,
 			);
 		};
 /* End PBXProject section */
@@ -309,7 +364,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ED7DC5441FE021370057AE1D /* main.m in Sources */,
+				ED7DC55B1FE166330057AE1D /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ED7DC55E1FE187110057AE1D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ED7DC5691FE187240057AE1D /* main_sokol.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -358,7 +421,11 @@
 					"$(inherited)",
 					"$(LOCAL_LIBRARY_DIR)/Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/Cellar/glew/2.1.0/lib,
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				USER_HEADER_SEARCH_PATHS = "${SOURCE_ROOT}/ObjGLFW";
 			};
@@ -374,7 +441,43 @@
 					"$(inherited)",
 					"$(LOCAL_LIBRARY_DIR)/Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/Cellar/glew/2.1.0/lib,
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "${SOURCE_ROOT}/ObjGLFW";
+			};
+			name = Release;
+		};
+		ED7DC5671FE187110057AE1D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "${SOURCE_ROOT}/ObjGLFW";
+			};
+			name = Debug;
+		};
+		ED7DC5681FE187110057AE1D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				USER_HEADER_SEARCH_PATHS = "${SOURCE_ROOT}/ObjGLFW";
 			};
@@ -520,6 +623,15 @@
 			buildConfigurations = (
 				ED7DC5421FE020F60057AE1D /* Debug */,
 				ED7DC5431FE020F60057AE1D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		ED7DC5661FE187110057AE1D /* Build configuration list for PBXNativeTarget "nuklear_sokol" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ED7DC5671FE187110057AE1D /* Debug */,
+				ED7DC5681FE187110057AE1D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
