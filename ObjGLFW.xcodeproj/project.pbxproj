@@ -30,6 +30,17 @@
 		ED7DC56B1FE187310057AE1D /* libglfw.3.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = ED7DC5481FE021B00057AE1D /* libglfw.3.3.dylib */; };
 		ED7DC56C1FE187350057AE1D /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED7DC5131FDEFBB80057AE1D /* OpenGL.framework */; };
 		ED7DC56D1FE188160057AE1D /* libObjGLFW.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ED7DC5241FE020660057AE1D /* libObjGLFW.a */; };
+		ED7DC6011FE2C81A0057AE1D /* ObjGLFW.h in Headers */ = {isa = PBXBuildFile; fileRef = ED7DC5571FE02BC90057AE1D /* ObjGLFW.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ED7DC6021FE2C81A0057AE1D /* sokol_time.h in Headers */ = {isa = PBXBuildFile; fileRef = EDF8C8FD1FD713BF002CF9DC /* sokol_time.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ED7DC6031FE2C81A0057AE1D /* GlfwGeometry.h in Headers */ = {isa = PBXBuildFile; fileRef = 140755461FD74A38007BF8B0 /* GlfwGeometry.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ED7DC6041FE2C81A0057AE1D /* GlfwApplication.h in Headers */ = {isa = PBXBuildFile; fileRef = EDF8C8FA1FD70F2C002CF9DC /* GlfwApplication.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ED7DC6051FE2C81A0057AE1D /* GlfwEventHandling.h in Headers */ = {isa = PBXBuildFile; fileRef = 1407554A1FD89271007BF8B0 /* GlfwEventHandling.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ED7DC6061FE2C81A0057AE1D /* GlfwWindowManager.h in Headers */ = {isa = PBXBuildFile; fileRef = EDF8C8FE1FD7EB3F002CF9DC /* GlfwWindowManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ED7DC6071FE2C81A0057AE1D /* GlfwMonitor.h in Headers */ = {isa = PBXBuildFile; fileRef = ED7DC50D1FDECBCC0057AE1D /* GlfwMonitor.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ED7DC6081FE2C81A0057AE1D /* GlfwRawWindow.h in Headers */ = {isa = PBXBuildFile; fileRef = 1407553E1FD73434007BF8B0 /* GlfwRawWindow.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ED7DC6091FE2C81A0057AE1D /* GlfwWindow.h in Headers */ = {isa = PBXBuildFile; fileRef = EDF8C9081FD947FC002CF9DC /* GlfwWindow.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ED7DC60A1FE2C81A0057AE1D /* GlfwCursor.h in Headers */ = {isa = PBXBuildFile; fileRef = ED7DC5151FDFF3C70057AE1D /* GlfwCursor.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ED7DC60B1FE2C81A0057AE1D /* GlfwEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 140755411FD73453007BF8B0 /* GlfwEvent.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -223,11 +234,22 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ED7DC6031FE2C81A0057AE1D /* GlfwGeometry.h in Headers */,
 				1407555E1FE08854007BF8B0 /* _sokol_gfx.impl.h in Headers */,
 				1407555F1FE08854007BF8B0 /* sokol_gfx.h in Headers */,
+				ED7DC60B1FE2C81A0057AE1D /* GlfwEvent.h in Headers */,
+				ED7DC6061FE2C81A0057AE1D /* GlfwWindowManager.h in Headers */,
+				ED7DC6091FE2C81A0057AE1D /* GlfwWindow.h in Headers */,
+				ED7DC6011FE2C81A0057AE1D /* ObjGLFW.h in Headers */,
+				ED7DC60A1FE2C81A0057AE1D /* GlfwCursor.h in Headers */,
 				1407555D1FE08854007BF8B0 /* _sokol_gfx_metal.impl.h in Headers */,
+				ED7DC6041FE2C81A0057AE1D /* GlfwApplication.h in Headers */,
+				ED7DC6071FE2C81A0057AE1D /* GlfwMonitor.h in Headers */,
 				140755601FE08854007BF8B0 /* _sokol_gfx_gl.impl.h in Headers */,
+				ED7DC6081FE2C81A0057AE1D /* GlfwRawWindow.h in Headers */,
 				140755611FE08854007BF8B0 /* _sokol_gfx_d3d11.impl.h in Headers */,
+				ED7DC6051FE2C81A0057AE1D /* GlfwEventHandling.h in Headers */,
+				ED7DC6021FE2C81A0057AE1D /* sokol_time.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -238,7 +260,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = ED7DC5251FE020660057AE1D /* Build configuration list for PBXNativeTarget "ObjGLFW" */;
 			buildPhases = (
-				ED7DC5591FE0446C0057AE1D /* ShellScript */,
 				ED7DC5201FE020660057AE1D /* Sources */,
 				ED7DC5211FE020660057AE1D /* Frameworks */,
 				ED7DC5221FE020660057AE1D /* Headers */,
@@ -328,22 +349,6 @@
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		ED7DC5591FE0446C0057AE1D /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "${SOURCE_ROOT}/ObjGLFW/gen_flextgl.sh";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		ED7DC5201FE020660057AE1D /* Sources */ = {
