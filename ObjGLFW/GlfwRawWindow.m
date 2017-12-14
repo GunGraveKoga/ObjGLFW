@@ -12,6 +12,17 @@
 #import "GlfwMonitor.h"
 #import "GlfwCursor.h"
 
+#if defined(OF_WINDOWS)
+extern HWND glfwGetWin32Window(GLFWwindow *window);
+#define _nativeWindowHandle(window) glfwGetWin32Window(window)
+#elif defined(OF_MACOS)
+extern id glfwGetCocoaWindow(GLFWwindow *window);
+#define _nativeWindowHandle(window) glfwGetCocoaWindow(window)
+#elif defined(OF_LINUX)
+extern Window glfwGetX11Window(GLFWwindow * window);
+#define _nativeWindowHandle(window) glfwGetX11Window(window)
+#endif
+
 @interface GlfwMonitor ()
 + (instancetype)glfw_findMonitor:(GLFWmonitor *)monitorHandle;
 @end
@@ -97,6 +108,25 @@
     
     return self;
 }
+
+#if defined(OF_WINDOWS) || defined(OF_MACOS) || defined(OF_LINUX)
+#if defined(OF_WINDOWS)
+- (HWND)nativeWindowHandle
+#elif defined(OF_MACOS)
+- (id)nativeWindowHandle
+#elif defined(OF_LINUX)
+- (Window)nativeWindowHandle
+#endif
+{
+    @synchronized(self) {
+        if (_windowHandle) {
+            return _nativeWindowHandle(_windowHandle);
+        }
+    }
+    
+    return NULL;
+}
+#endif
 
 - (GlfwMonitor *)monitor {
     @synchronized(self) {

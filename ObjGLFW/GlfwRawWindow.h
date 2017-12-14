@@ -17,14 +17,6 @@
 
 OF_ASSUME_NONNULL_BEGIN
 
-@protocol GlfwWindow <OFObject>
-
-@optional
-- (void)prepareForEventsHandling;
-- (void)endEventsHandling;
-
-@end
-
 @interface GlfwRawWindow : OFObject <OFCopying>
 {
     GLFWwindow *_windowHandle;
@@ -42,6 +34,13 @@ OF_ASSUME_NONNULL_BEGIN
 #endif
 
 @property (atomic, assign) GLFWwindow *windowHandle;
+#if defined(OF_WINDOWS)
+@property (atomic, assign, readonly) HWND nativeWindowHandle;
+#elif defined(OF_MACOS)
+@property (atomic, assign, readonly) id nativeWindowHandle;
+#elif defined(OF_LINUX)
+@property (atomic, assign, readonly) Window nativeWindowHandle;
+#endif
 @property (nonatomic, retain, nullable) GlfwMonitor *monitor;
 @property (atomic, copy) OFString *title;
 @property (atomic) GlfwRect frame;
