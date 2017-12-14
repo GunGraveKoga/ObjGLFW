@@ -33,13 +33,13 @@ OF_ASSUME_NONNULL_BEGIN
 @property (class, readonly, copy) OF_KINDOF(GlfwRawWindow) *currentContextWindow;
 #endif
 
-@property (atomic, assign) GLFWwindow *windowHandle;
+@property (atomic, assign) GLFWwindow *windowHandle OF_RETURNS_INNER_POINTER;
 #if defined(OF_WINDOWS)
-@property (atomic, assign, readonly) HWND nativeWindowHandle;
+@property (atomic, assign, readonly) HWND nativeWindowHandle OF_RETURNS_INNER_POINTER;
 #elif defined(OF_MACOS)
-@property (atomic, assign, readonly) id nativeWindowHandle;
+@property (atomic, assign, readonly) id nativeWindowHandle OF_RETURNS_INNER_POINTER;
 #elif defined(OF_LINUX)
-@property (atomic, assign, readonly) Window nativeWindowHandle;
+@property (atomic, assign, readonly) Window nativeWindowHandle OF_RETURNS_INNER_POINTER;
 #endif
 @property (nonatomic, retain, nullable) GlfwMonitor *monitor;
 @property (atomic, copy) OFString *title;
